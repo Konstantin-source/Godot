@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://2lqydtio56jj"]
+
+[ext_resource type="Texture2D" uid="uid://cv0jbjgj6m2jf" path="res://icon.svg" id="1_oj1hy"]
+
+[node name="Siehst du das Timo?" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(591, 352)
+texture = ExtResource("1_oj1hy")
