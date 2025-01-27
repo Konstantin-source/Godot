@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1evxkflc3rsh"]
+
+[ext_resource type="Texture2D" uid="uid://cp4pdin7wqmpa" path="res://ground_shaker_asset/Blue/Bodies/body_tracks.png" id="1_hbkid"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42hqq"]
+size = Vector2(78.5, 81)
+
+[node name="Panzer" type="RigidBody2D"]
+position = Vector2(397, 267)
+gravity_scale = 0.0
+metadata/_edit_group_ = true
+
+texture = ExtResource("1_hbkid")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.75, 3.5)
+shape = SubResource("RectangleShape2D_42hqq")
