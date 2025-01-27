@@ -3,6 +3,7 @@
 
 .idea/
 
+
 # Godot-specific ignores
 .import/
 export.cfg
