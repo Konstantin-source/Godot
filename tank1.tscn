@@ -10,7 +10,6 @@ position = Vector2(397, 267)
 gravity_scale = 0.0
 metadata/_edit_group_ = true
 
-[node name="Körper" type="Sprite2D" parent="."]
 texture = ExtResource("1_hbkid")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
