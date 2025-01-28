@@ -1,25 +1,39 @@
-extends RigidBody2D
-var velocity = 400
+extends CharacterBody2D
+var speed = 400
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-	
+
 func _physics_process(delta: float) -> void:
-	var direction = Vector2()
+	velocity = Vector2() # Reset velocity
+
 	if Input.is_action_pressed("right"):
-		direction.x += 1
+		velocity.x += 1
+		$"body".rotation = PI/2
 	if Input.is_action_pressed("left"):
-		direction.x -= 1
+		velocity.x -= 1
+		$"body".rotation = 3*PI/2
 	if Input.is_action_pressed("down"):
-		direction.y += 1
+		velocity.y += 1
+		$"body".rotation = PI
 	if Input.is_action_pressed("up"):
-		direction.y -= 1
-	direction = direction.normalized()
-	velocity = direction * velocity
-	velocity = move_and_slide(velocity)
+		velocity.y -= 1
+		$"body".rotation = 0
+		
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * speed
+		var angle = velocity.angle()
+		$"body".rotation = angle + PI/2	
+
+	var mouse_pos = get_global_mouse_position()
+	var angle = (mouse_pos - global_position).angle()
+	
+	$"tower".rotation = angle + PI/2
+	print($".".rotation)
+	velocity = velocity.normalized() * speed
+	move_and_slide()
