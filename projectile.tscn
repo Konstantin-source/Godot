@@ -1,0 +1,145 @@
+[gd_scene load_steps=31 format=3 uid="uid://cne8jaqvo8oc3"]
+
+[ext_resource type="Script" path="res://projectile.gd" id="1_hgce2"]
+[ext_resource type="Texture2D" uid="uid://djn8aswjj7p1u" path="res://Sprites/bullet.png" id="2_b1o3j"]
+[ext_resource type="Texture2D" uid="uid://whclqfifmjbv" path="res://Sprites/PixelSimulations/Explosion4/0001.png" id="3_o6gdg"]
+[ext_resource type="Texture2D" uid="uid://yj0wcoxr83ry" path="res://Sprites/PixelSimulations/Explosion4/0002.png" id="4_ujhv4"]
+[ext_resource type="Texture2D" uid="uid://b6sk34md6fdo6" path="res://Sprites/PixelSimulations/Explosion4/0003.png" id="5_ndje6"]
+[ext_resource type="Texture2D" uid="uid://d0uetre6k8scb" path="res://Sprites/PixelSimulations/Explosion4/0004.png" id="6_m6rp7"]
+[ext_resource type="Texture2D" uid="uid://dwrgkmkolxi55" path="res://Sprites/PixelSimulations/Explosion4/0005.png" id="7_eb4ys"]
+[ext_resource type="Texture2D" uid="uid://cwg1m80t0u1kn" path="res://Sprites/PixelSimulations/Explosion4/0006.png" id="8_si82d"]
+[ext_resource type="Texture2D" uid="uid://bqh2g3obnmvom" path="res://Sprites/PixelSimulations/Explosion4/0007.png" id="9_cv6yd"]
+[ext_resource type="Texture2D" uid="uid://d2q00ev3o1m22" path="res://Sprites/PixelSimulations/Explosion4/0008.png" id="10_8mn3h"]
+[ext_resource type="Texture2D" uid="uid://4hognr4352n1" path="res://Sprites/PixelSimulations/Explosion4/0009.png" id="11_bccji"]
+[ext_resource type="Texture2D" uid="uid://1e7iex212jkm" path="res://Sprites/PixelSimulations/Explosion4/0010.png" id="12_8fd7s"]
+[ext_resource type="Texture2D" uid="uid://lh7go7wfrk0j" path="res://Sprites/PixelSimulations/Explosion4/0011.png" id="13_dcq5r"]
+[ext_resource type="Texture2D" uid="uid://bf7nch5mutmxl" path="res://Sprites/PixelSimulations/Explosion4/0012.png" id="14_dc1dh"]
+[ext_resource type="Texture2D" uid="uid://c74i2da3t0vvn" path="res://Sprites/PixelSimulations/Explosion4/0013.png" id="15_ruh0x"]
+[ext_resource type="Texture2D" uid="uid://dpmt6nbvaan2x" path="res://Sprites/PixelSimulations/Explosion4/0014.png" id="16_y8uvw"]
+[ext_resource type="Texture2D" uid="uid://co3wepi02v0pq" path="res://Sprites/PixelSimulations/Explosion4/0015.png" id="17_fadwu"]
+[ext_resource type="Texture2D" uid="uid://d2ywekjf612uv" path="res://Sprites/PixelSimulations/Explosion4/0016.png" id="18_m8su5"]
+[ext_resource type="Texture2D" uid="uid://dpo8tnu42lsfr" path="res://Sprites/PixelSimulations/Explosion4/0017.png" id="19_vmnkd"]
+[ext_resource type="Texture2D" uid="uid://d2i5qrqpvv05e" path="res://Sprites/PixelSimulations/Explosion4/0018.png" id="20_5pqcs"]
+[ext_resource type="Texture2D" uid="uid://bgwonhqrv6fgn" path="res://Sprites/PixelSimulations/Explosion4/0019.png" id="21_cexr0"]
+[ext_resource type="Texture2D" uid="uid://mt7ka26ifdif" path="res://Sprites/PixelSimulations/Explosion4/0020.png" id="22_use0n"]
+[ext_resource type="Texture2D" uid="uid://bsum4jyyepvso" path="res://Sprites/PixelSimulations/Explosion4/0021.png" id="23_ooxlc"]
+[ext_resource type="Texture2D" uid="uid://drm3i74ovj04x" path="res://Sprites/PixelSimulations/Explosion4/0022.png" id="24_30io3"]
+[ext_resource type="Texture2D" uid="uid://bsbth73ums180" path="res://Sprites/PixelSimulations/Explosion4/0023.png" id="25_o4bbq"]
+[ext_resource type="Texture2D" uid="uid://dhisnyus1sc87" path="res://Sprites/PixelSimulations/Explosion4/0024.png" id="26_4gloo"]
+[ext_resource type="Texture2D" uid="uid://ci2g17aykroip" path="res://Sprites/PixelSimulations/Explosion4/0025.png" id="27_5am2h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxrim"]
+size = Vector2(12, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k6rno"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_o6gdg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ujhv4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ndje6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_m6rp7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_eb4ys")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_si82d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_cv6yd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8mn3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bccji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8fd7s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_dcq5r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_dc1dh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ruh0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_y8uvw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_fadwu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_m8su5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_vmnkd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_5pqcs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_cexr0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_use0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_ooxlc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_30io3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_o4bbq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_4gloo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_5am2h")
+}],
+"loop": false,
+"name": &"default",
+"speed": 50.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qty0p"]
+height = 40.0
+
+[node name="projectile" type="CharacterBody2D"]
+script = ExtResource("1_hgce2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(31, -21)
+rotation = -1.5708
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2_b1o3j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -4.5)
+shape = SubResource("RectangleShape2D_bxrim")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.835, 1.835)
+sprite_frames = SubResource("SpriteFrames_k6rno")
+speed_scale = 0.7
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, -5)
+shape = SubResource("CapsuleShape2D_qty0p")
