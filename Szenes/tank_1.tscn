@@ -338,6 +338,7 @@ animations = [{
 
 [node name="tank1" type="CharacterBody2D"]
 position = Vector2(437, 292)
+scale = Vector2(0.865, 0.865)
 script = ExtResource("1_2vi20")
 bulletScene = ExtResource("2_7ygv3")
 recoilDistance = 15
@@ -357,7 +358,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
 
 [node name="rohr_Ende" type="Marker2D" parent="tower"]
-position = Vector2(0, -55)
+position = Vector2(0, -59)
 
 [node name="Animation" type="AnimatedSprite2D" parent="tower"]
 position = Vector2(0, -80)

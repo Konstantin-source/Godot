@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://3uudxlmajpyp"]
+[gd_scene load_steps=12 format=3 uid="uid://b4hooddqsnusb"]
 
 [ext_resource type="Texture2D" uid="uid://tjsh0vjq3ru" path="res://Sprites/ground_shaker_asset/Red/Weapons/turret_01_mk2.png" id="1_yqc8j"]
 
@@ -63,7 +63,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mycwx")
 }],
-"loop": true,
+"loop": false,
 "name": &"shooting",
 "speed": 20.0
 }]
@@ -80,4 +80,3 @@ scale = Vector2(1.38469, 0.859375)
 sprite_frames = SubResource("SpriteFrames_q00uc")
 animation = &"shooting"
 autoplay = "shooting"
-frame_progress = 0.766453

@@ -1,6 +1,5 @@
-[gd_scene load_steps=31 format=3 uid="uid://cne8jaqvo8oc3"]
+[gd_scene load_steps=31 format=3 uid="uid://csjs5ynpn0u8v"]
 
-[ext_resource type="Script" path="res://projectile.gd" id="1_hgce2"]
 [ext_resource type="Texture2D" uid="uid://djn8aswjj7p1u" path="res://Sprites/bullet.png" id="2_b1o3j"]
 [ext_resource type="Texture2D" uid="uid://whclqfifmjbv" path="res://Sprites/PixelSimulations/Explosion4/0001.png" id="3_o6gdg"]
 [ext_resource type="Texture2D" uid="uid://yj0wcoxr83ry" path="res://Sprites/PixelSimulations/Explosion4/0002.png" id="4_ujhv4"]
@@ -27,6 +26,42 @@
 [ext_resource type="Texture2D" uid="uid://bsbth73ums180" path="res://Sprites/PixelSimulations/Explosion4/0023.png" id="25_o4bbq"]
 [ext_resource type="Texture2D" uid="uid://dhisnyus1sc87" path="res://Sprites/PixelSimulations/Explosion4/0024.png" id="26_4gloo"]
 [ext_resource type="Texture2D" uid="uid://ci2g17aykroip" path="res://Sprites/PixelSimulations/Explosion4/0025.png" id="27_5am2h"]
+
+[sub_resource type="GDScript" id="GDScript_bmwrt"]
+script/source = "extends CharacterBody2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	$\".\".lock_rotation = true
+	$AnimatedSprite2D.hide()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+	var slide_count = get_slide_collision_count()
+	if slide_count:
+		var collision = get_slide_collision(slide_count - 1)
+		var collider = collision.collider
+		if collider.is_in_group(\"barrier\"):
+			$AnimatedSprite2D.show()
+			$Sprite2D.hide()
+			
+			queue_free()
+	
+	
+
+func _on_body_entered(body: Node) -> void:
+	pass
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	$AnimatedSprite2D.show()
+	$AnimatedSprite2D.play(\"default\")
+	$Sprite2D.hide()
+	queue_free()
+	
+	
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxrim"]
 size = Vector2(12, 33)
@@ -117,8 +152,8 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qty0p"]
 height = 40.0
 
-[node name="projectile" type="CharacterBody2D"]
-script = ExtResource("1_hgce2")
+[node name="projectile" type="CharacterBody2D" groups=["barrier"]]
+script = SubResource("GDScript_bmwrt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(31, -21)

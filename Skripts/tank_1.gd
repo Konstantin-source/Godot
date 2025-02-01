@@ -1,6 +1,5 @@
 extends CharacterBody2D
 var speed = 400
-@export var Bulletspeed = 1400
 @export var shoot_duration = 1
 @export var bulletScene: PackedScene
 @export var recoilDistance = 10
@@ -57,25 +56,25 @@ func _physics_process(delta: float) -> void:
 	
 	
 func shoot():
-	var shoooot : RigidBody2D = bulletScene.instantiate()
+	var shoooot : RigidBody2D = bulletScene.instantiate() as Node2D
 	$tower/Animation.show()
 	$tower/Animation.play("default")
 	
 	shoooot.position = $"tower/rohr_Ende".global_position 
+	
+	
 	print("Shoottt: ", shoooot.position)
 	print("Global Tank Pos: ", $".".global_position)
 	#print("Position vom Geschoss: ", shoooot.position)
 
-	
 	shoooot.rotation = $tower.rotation 
-	#print("Angel: ",rad_to_deg(angleInRad))
-	
-	var velocity = Vector2(Bulletspeed,0) 
-	
-	shoooot.linear_velocity = velocity.rotated($tower.rotation-PI/2)
+	shoooot.initial_scale = self.scale-Vector2(0.65,0.65)
 	get_tree().current_scene.add_child(shoooot)
-	#$tower/AnimatedSprite2D.hide()
 	
+	print("Bullet Scale: ", shoooot.scale)
+	print("Self scale: ", self.scale)
+
+
 	var recoil_vector = Vector2(recoilDistance, 0).rotated($tower.rotation - PI/2)
 	$tower.global_position -= recoil_vector
 	await get_tree().create_timer(recoilDuration).timeout
