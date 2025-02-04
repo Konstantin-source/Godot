@@ -336,7 +336,7 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="tank1" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 position = Vector2(437, 292)
 scale = Vector2(0.865, 0.865)
 script = ExtResource("1_2vi20")
