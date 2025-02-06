@@ -1,7 +1,8 @@
-[gd_scene load_steps=87 format=3 uid="uid://d4mjliv138hwl"]
+[gd_scene load_steps=89 format=3 uid="uid://d4mjliv138hwl"]
 
 [ext_resource type="Script" path="res://Skripts/enemy_1.gd" id="1_fmgl7"]
 [ext_resource type="Texture2D" uid="uid://kvtx63jk4bjl" path="res://Sprites/ground_shaker_asset/Purple/Bodies/body_tracks.png" id="2_j0sa3"]
+[ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Szenes/bullet1.tscn" id="2_xjdv8"]
 [ext_resource type="Texture2D" uid="uid://c2d2k3ixfxgu4" path="res://Sprites/ground_shaker_asset/Purple/Weapons/turret_01_mk1.png" id="3_hnvm1"]
 [ext_resource type="Texture2D" uid="uid://b2x4ydm81qat7" path="res://Sprites/PixelSimulations/Flame1/0001.png" id="4_b5brj"]
 [ext_resource type="Texture2D" uid="uid://bthcln4cxeptq" path="res://Sprites/PixelSimulations/Flame1/0002.png" id="5_thwvm"]
@@ -83,6 +84,7 @@
 [ext_resource type="Texture2D" uid="uid://ddr2ct2opyaix" path="res://Sprites/PixelSimulations/Flame1/0078.png" id="81_s1n4b"]
 [ext_resource type="Texture2D" uid="uid://mo78wahcwyoy" path="res://Sprites/PixelSimulations/Flame1/0079.png" id="82_vr6uj"]
 [ext_resource type="Texture2D" uid="uid://y4iwwullv5ah" path="res://Sprites/PixelSimulations/Flame1/0080.png" id="83_a8xhn"]
+[ext_resource type="PackedScene" uid="uid://ce5bfynevh5ws" path="res://Szenes/enemy_interface.tscn" id="85_iejyj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5esf"]
 size = Vector2(67, 78)
@@ -345,7 +347,9 @@ collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_fmgl7")
 detection_radius = 500
-metadata/_edit_group_ = true
+chase_Plaser_radius = 600
+damage_tank = 50
+bulletScene = ExtResource("2_xjdv8")
 
 [node name="body" type="Sprite2D" parent="."]
 texture = ExtResource("2_j0sa3")
@@ -376,6 +380,10 @@ collision_mask = 0
 
 [node name="scanarea" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_ionxi")
+
+[node name="enemyInterface" parent="." instance=ExtResource("85_iejyj")]
+position = Vector2(-69.3642, 60.1156)
+scale = Vector2(0.385, 0.385)
 
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]

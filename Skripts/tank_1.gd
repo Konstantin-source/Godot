@@ -5,14 +5,18 @@ var speed = 400
 @export var recoilDistance = 10
 @export var recoilDuration = 0.1
 var time_since_last_shot: float = 0.0
+@export var damage_tank = 10
 
 signal shoot_signal
+signal new_health(health)
 var angleInRad
 var shootPos
+var current_health = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$tower/Animation.hide()
+	$death.hide()
 	time_since_last_shot = 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -61,21 +65,41 @@ func shoot():
 	$tower/Animation.play("default")
 	
 	shoooot.position = $"tower/rohr_Ende".global_position 
+	shoooot.shooter_tank = self
 	
-	
-	print("Shoottt: ", shoooot.position)
-	print("Global Tank Pos: ", $".".global_position)
+	#print("Shoottt: ", shoooot.position)
+	#print("Global Tank Pos: ", $".".global_position)
 	#print("Position vom Geschoss: ", shoooot.position)
 
 	shoooot.rotation = $tower.rotation 
 	shoooot.initial_scale = self.scale-Vector2(0.65,0.65)
 	get_tree().current_scene.add_child(shoooot)
 	
-	print("Bullet Scale: ", shoooot.scale)
-	print("Self scale: ", self.scale)
+	#print("Bullet Scale: ", shoooot.scale)
+	#print("Self scale: ", self.scale)
 
 
 	var recoil_vector = Vector2(recoilDistance, 0).rotated($tower.rotation - PI/2)
 	$tower.global_position -= recoil_vector
 	await get_tree().create_timer(recoilDuration).timeout
 	$tower.global_position += recoil_vector
+	
+	
+func health(variance: int):
+	current_health -= variance
+	new_health.emit(current_health)
+	if current_health <= 0:
+		$death.show()
+		$death.play("death")
+		
+
+
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if "damage" in body:
+		health(body.damage)
+
+
+func _on_death_animation_finished() -> void:
+	queue_free()

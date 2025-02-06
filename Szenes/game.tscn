@@ -9326,7 +9326,4 @@ layer_0/tile_data = PackedInt32Array(131077, 393217, 7, 196613, 393217, 8, 26214
 [node name="Player" parent="." instance=ExtResource("3_sdh8v")]
 position = Vector2(0, 0)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.74, 0.74)
-
 [node name="enemy_1" parent="." instance=ExtResource("7_icb4k")]
