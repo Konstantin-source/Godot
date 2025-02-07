@@ -1,18 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://ce5bfynevh5ws"]
+[gd_scene load_steps=6 format=3 uid="uid://dbfhw33ccpft0"]
 
-[ext_resource type="Script" path="res://Skripts/ui.gd" id="1_e8xo7"]
-[ext_resource type="Script" path="res://Skripts/healthbar.gd" id="2_xkidr"]
+[ext_resource type="Script" path="res://healthbar_enemy.gd" id="1_o67ms"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5hdj8"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_02lwe"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_psjsh"]
-bg_color = Color(0.92813, 0.26828, 0.412603, 0.662745)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y66f2"]
+bg_color = Color(0.713558, 0.153026, 0.288572, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uo625"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wdtfc"]
 bg_color = Color(0.165657, 0.165656, 0.165656, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -25,25 +24,24 @@ expand_margin_bottom = 4.0
 shadow_color = Color(0, 0, 0, 0.27451)
 shadow_offset = Vector2(0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jp5py"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lrfa"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="enemyInterface" type="Node2D"]
-script = ExtResource("1_e8xo7")
+[node name="enemyHealth" type="Node2D"]
 
 [node name="healthbar" type="ProgressBar" parent="."]
 z_index = 1
 offset_right = 400.0
 offset_bottom = 25.0
-theme_override_styles/background = SubResource("StyleBoxEmpty_5hdj8")
-theme_override_styles/fill = SubResource("StyleBoxFlat_psjsh")
+theme_override_styles/background = SubResource("StyleBoxEmpty_02lwe")
+theme_override_styles/fill = SubResource("StyleBoxFlat_y66f2")
 value = 60.0
 show_percentage = false
-script = ExtResource("2_xkidr")
+script = ExtResource("1_o67ms")
 
 [node name="damageBar" type="ProgressBar" parent="healthbar"]
 z_index = -1
@@ -53,8 +51,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_uo625")
-theme_override_styles/fill = SubResource("StyleBoxFlat_jp5py")
+theme_override_styles/background = SubResource("StyleBoxFlat_wdtfc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6lrfa")
 value = 80.0
 show_percentage = false
 

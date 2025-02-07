@@ -8,13 +8,17 @@ var time_since_last_change = 0.0
 var time_since_last_shoot = 0.0
 var idle_rotation_time = 3.0
 var target_angle = 0.0
+var current_health = 100
+var can_take_damage = true
 @export var bulletScene: PackedScene
 
 var player: CharacterBody2D = null
+signal new_health(health)
 
 
 func _ready() -> void:
 	player = get_parent().get_node("Player")
+	$Node2D/healthbar.init_health(current_health)
 	
 	
 func _physics_process(delta: float) -> void:
@@ -41,7 +45,16 @@ func _physics_process(delta: float) -> void:
 				
 		$tower.rotation = lerp_angle($tower.rotation, target_angle, delta)
 			
-	
+
+
+func health(variance: int):
+	current_health -= variance
+	$Node2D/healthbar._set_health(current_health)
+	if current_health <= 0:
+		$death.show()
+		$death.play("death")
+		$body.hide()
+		$tower.hide()
 	
 	
 func shoot():
@@ -63,10 +76,16 @@ func shoot():
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.has_method("get_global_position"):
-		var body_position = body.global_position
-		$tower.rotation = (global_position - body_position).angle()
-		
+	if "damage" in body and can_take_damage:
+		health(body.damage)
+		start_damage_cooldown()
 	
 	
-	
+func start_damage_cooldown():
+	can_take_damage = false
+	await get_tree().create_timer(0.2).timeout
+	can_take_damage = true
+
+
+func _on_death_animation_finished() -> void:
+	queue_free()

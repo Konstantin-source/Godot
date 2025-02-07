@@ -18,6 +18,7 @@ func _ready() -> void:
 	$tower/Animation.hide()
 	$death.hide()
 	time_since_last_shot = 1
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -91,6 +92,8 @@ func health(variance: int):
 	if current_health <= 0:
 		$death.show()
 		$death.play("death")
+		$body.hide()
+		$tower.hide()
 		
 
 
