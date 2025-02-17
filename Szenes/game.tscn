@@ -64,6 +64,12 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
 agent_radius = 0.0
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_owkft"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_o7emy"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -1789,11 +1795,17 @@ texture = ExtResource("1_8texu")
 6:28/0 = 0
 6:28/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_au08b")
 7:28/0 = 0
+7:28/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_owkft")
 8:28/0 = 0
+8:28/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_owkft")
 9:28/0 = 0
+9:28/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_owkft")
 10:28/0 = 0
+10:28/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_owkft")
 11:28/0 = 0
+11:28/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_owkft")
 12:28/0 = 0
+12:28/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_owkft")
 13:28/0 = 0
 14:28/0 = 0
 15:28/0 = 0
@@ -9526,11 +9538,6 @@ texture = ExtResource("2_k380a")
 sources/0 = SubResource("TileSetAtlasSource_0jxqf")
 sources/1 = SubResource("TileSetAtlasSource_x74w2")
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_oa7ks"]
-vertices = PackedVector2Array(619.172, -251.031, 1936.89, -137.906, 1858.16, 552.219, -375.523, 363.188, -96.5469, -310.422)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(620, -261, 1948, -147, 1867, 563, -390, 372, -103, -321)])
-
 [node name="Game" type="Node2D"]
 
 [node name="TilemapKonsti" type="TileMap" parent="."]
@@ -9559,7 +9566,3 @@ layer_0/tile_data = PackedInt32Array(131077, 393217, 7, 196613, 393217, 8, 26214
 position = Vector2(0, 0)
 
 [node name="enemy_1" parent="." instance=ExtResource("7_icb4k")]
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_oa7ks")
-navigation_layers = 3

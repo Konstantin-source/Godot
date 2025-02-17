@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 		#print(nav_Agent.get_next_path_position())
 		if distance_to_player <= chase_Plaser_radius and distance_to_player >= 100:
 			$body.rotation = direction.angle() - PI/2
-			velocity = direction * SPEED * delta
+			velocity = direction * SPEED
 			move_and_slide()
 		
 		
@@ -43,7 +43,6 @@ func _physics_process(delta: float) -> void:
 			$tower.rotation = lerp_angle($tower.rotation, target_angle, delta * 5)
 			if time_since_last_shoot >= shoot_speed and can_shoot:
 				shoot()
-			
 		else:
 			time_since_last_change +=delta
 			if time_since_last_change >= idle_rotation_time:
