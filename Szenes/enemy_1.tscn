@@ -290,7 +290,7 @@
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="288_n82yk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5esf"]
-size = Vector2(77.4566, 84.3931)
+size = Vector2(69.3642, 78.6127)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_53yy2"]
 animations = [{
@@ -541,7 +541,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3w67"]
-size = Vector2(78.6127, 85.5491)
+size = Vector2(76.3006, 84.3931)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qrjnu"]
 
@@ -1194,9 +1194,11 @@ position = Vector2(437, 292)
 scale = Vector2(0.865, 0.865)
 collision_layer = 3
 collision_mask = 3
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_fmgl7")
 detection_radius = 500
-chase_Plaser_radius = 600
+chase_Plaser_radius = 500
 damage_tank = 50
 bulletScene = ExtResource("2_xjdv8")
 
@@ -1204,7 +1206,7 @@ bulletScene = ExtResource("2_xjdv8")
 texture = ExtResource("2_j0sa3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.578064, 1.7341)
+position = Vector2(0, 2.31213)
 shape = SubResource("RectangleShape2D_o5esf")
 
 [node name="tower" type="Sprite2D" parent="."]
@@ -1213,7 +1215,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
 
 [node name="rohr_Ende" type="Marker2D" parent="tower"]
-position = Vector2(0, -59)
+position = Vector2(0, -61.145)
 
 [node name="Animation" type="AnimatedSprite2D" parent="tower"]
 position = Vector2(0, -80)
@@ -1228,7 +1230,7 @@ collision_layer = 0
 collision_mask = 3
 
 [node name="scanarea" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-3.05176e-05, 0)
+position = Vector2(-1.1561, 1.7341)
 shape = SubResource("RectangleShape2D_h3w67")
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -1271,8 +1273,21 @@ sprite_frames = SubResource("SpriteFrames_x2x3v")
 animation = &"death"
 speed_scale = 2.5
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_max_distance = 300.0
+navigation_layers = 3
+avoidance_enabled = true
+avoidance_layers = 3
+avoidance_mask = 3
+debug_enabled = true
+
+[node name="pathfinding_Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Node2D/healthbar/Timer" to="Node2D/healthbar" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
+[connection signal="timeout" from="pathfinding_Timer" to="." method="_on_pathfinding_timer_timeout"]

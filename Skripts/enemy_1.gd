@@ -4,16 +4,19 @@ extends CharacterBody2D
 @export var chase_Plaser_radius = 300
 @export var shoot_speed = 3.0
 @export var damage_tank = 10
+
 var time_since_last_change = 0.0
 var time_since_last_shoot = 0.0
 var idle_rotation_time = 3.0
 var target_angle = 0.0
 var current_health = 100
 var can_take_damage = true
+var can_shoot = true
 @export var bulletScene: PackedScene
 
+@onready var nav_Agent := $NavigationAgent2D as NavigationAgent2D
+
 var player: CharacterBody2D = null
-signal new_health(health)
 
 
 func _ready() -> void:
@@ -24,17 +27,21 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(player):
 		var distance_to_player = (player.global_position - global_position).length()
-		var direction = Vector2(player.global_position - global_position).normalized()
+		var direction = to_local(nav_Agent.get_next_path_position()).normalized()
+		#print(nav_Agent.get_next_path_position())
 		if distance_to_player <= chase_Plaser_radius and distance_to_player >= 100:
-			$body.rotation = direction.angle() +PI/2
-			move_and_collide(direction * SPEED * delta)
+			$body.rotation = direction.angle() - PI/2
+			velocity = direction * SPEED * delta
+			move_and_slide()
+		
+		
 	
 	
 		time_since_last_shoot+=delta
 		if player and detection_radius >= distance_to_player:
 			target_angle = (player.global_position - global_position).angle() +PI/2
 			$tower.rotation = lerp_angle($tower.rotation, target_angle, delta * 5)
-			if time_since_last_shoot >= shoot_speed:
+			if time_since_last_shoot >= shoot_speed and can_shoot:
 				shoot()
 			
 		else:
@@ -55,6 +62,7 @@ func health(variance: int):
 		$death.play("death")
 		$body.hide()
 		$tower.hide()
+		can_shoot = false
 	
 	
 func shoot():
@@ -79,13 +87,24 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if "damage" in body and can_take_damage:
 		health(body.damage)
 		start_damage_cooldown()
-	
+		
 	
 func start_damage_cooldown():
 	can_take_damage = false
 	await get_tree().create_timer(0.2).timeout
 	can_take_damage = true
 
+func make_Path() -> void:
+	nav_Agent.target_position = player.global_position
+	nav_Agent.path_changed
+	print(nav_Agent.target_position)
+	print(nav_Agent.get_next_path_position())
+
 
 func _on_death_animation_finished() -> void:
 	queue_free()
+
+
+func _on_pathfinding_timer_timeout() -> void:
+	print("haii")
+	make_Path()
