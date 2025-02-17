@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bdt4dmy328xje" path="res://Szenes/tank_1.tscn" id="3_sdh8v"]
 [ext_resource type="Texture2D" uid="uid://dat2uri0fcq8c" path="res://Sprites/ground_shaker_asset/GB_banner.jpg" id="5_774f3"]
 [ext_resource type="Texture2D" uid="uid://dj83tnq6iyny0" path="res://Sprites/ground_shaker_asset/Red/Towers/towers_walls_grass_dark_1.png" id="6_3mx0s"]
-[ext_resource type="PackedScene" uid="uid://d4mjliv138hwl" path="res://Szenes/enemy_1.tscn" id="7_icb4k"]
+[ext_resource type="PackedScene" path="res://Szenes/enemy_1.tscn" id="7_icb4k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nifs7"]
 
