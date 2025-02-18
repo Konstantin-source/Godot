@@ -1198,8 +1198,8 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_fmgl7")
 SPEED = 150.0
-detection_radius = 500
-chase_Plaser_radius = 500
+detection_radius = 900
+chase_Plaser_radius = 900
 damage_tank = 50
 bulletScene = ExtResource("2_xjdv8")
 
@@ -1275,8 +1275,10 @@ animation = &"death"
 speed_scale = 2.5
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
 path_max_distance = 300.0
 navigation_layers = 3
+path_postprocessing = 1
 avoidance_enabled = true
 avoidance_layers = 3
 avoidance_mask = 3

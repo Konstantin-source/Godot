@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 		var direction = to_local(nav_Agent.get_next_path_position()).normalized()
 		#print(nav_Agent.get_next_path_position())
 		if distance_to_player <= chase_Plaser_radius and distance_to_player >= 100:
-			$body.rotation = direction.angle() - PI/2
+			$body.rotation = direction.angle() + PI/2
 			velocity = direction * SPEED
 			move_and_slide()
 		
@@ -57,6 +57,7 @@ func health(variance: int):
 	current_health -= variance
 	$Node2D/healthbar._set_health(current_health)
 	if current_health <= 0:
+		player = null
 		$death.show()
 		$death.play("death")
 		$body.hide()
@@ -105,5 +106,5 @@ func _on_death_animation_finished() -> void:
 
 
 func _on_pathfinding_timer_timeout() -> void:
-	print("haii")
-	make_Path()
+	if is_instance_valid(player):
+		make_Path()
