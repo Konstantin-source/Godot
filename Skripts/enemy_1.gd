@@ -12,6 +12,7 @@ var target_angle = 0.0
 var current_health = 100
 var can_take_damage = true
 var can_shoot = true
+var player_in_radius = false
 @export var bulletScene: PackedScene
 
 @onready var nav_Agent := $NavigationAgent2D as NavigationAgent2D
@@ -29,9 +30,9 @@ func _physics_process(delta: float) -> void:
 		var distance_to_player = (player.global_position - global_position).length()
 		var direction = to_local(nav_Agent.get_next_path_position()).normalized()
 		#print(nav_Agent.get_next_path_position())
-		if distance_to_player <= chase_Plaser_radius and distance_to_player >= 100:
-			$body.rotation = direction.angle() - PI/2
-			velocity = direction * SPEED * delta
+		if distance_to_player <= chase_Plaser_radius and distance_to_player >= 300:
+			$body.rotation = direction.angle() + PI/2
+			velocity = direction * SPEED
 			move_and_slide()
 		
 		
@@ -43,8 +44,10 @@ func _physics_process(delta: float) -> void:
 			$tower.rotation = lerp_angle($tower.rotation, target_angle, delta * 5)
 			if time_since_last_shoot >= shoot_speed and can_shoot:
 				shoot()
+				player_in_radius = true
 			
 		else:
+			player_in_radius = false
 			time_since_last_change +=delta
 			if time_since_last_change >= idle_rotation_time:
 				time_since_last_change = 0.0
@@ -66,6 +69,8 @@ func health(variance: int):
 	
 	
 func shoot():
+	if ! player_in_radius:
+		await get_tree().create_timer(1)
 	time_since_last_shoot = 0.0
 	var shoooot : RigidBody2D = bulletScene.instantiate() as Node2D
 	shoooot.shooter_tank = self

@@ -1197,8 +1197,9 @@ collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_fmgl7")
-detection_radius = 500
-chase_Plaser_radius = 500
+SPEED = 170.0
+detection_radius = 700
+chase_Plaser_radius = 700
 damage_tank = 50
 bulletScene = ExtResource("2_xjdv8")
 
@@ -1279,7 +1280,6 @@ navigation_layers = 3
 avoidance_enabled = true
 avoidance_layers = 3
 avoidance_mask = 3
-debug_enabled = true
 
 [node name="pathfinding_Timer" type="Timer" parent="."]
 wait_time = 0.5

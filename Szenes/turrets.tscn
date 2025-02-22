@@ -69,6 +69,7 @@ animations = [{
 }]
 
 [node name="turrets" type="Node2D"]
+metadata/_edit_group_ = true
 
 [node name="Turret01Mk2" type="Sprite2D" parent="."]
 position = Vector2(529, 333)
