@@ -97,8 +97,6 @@ func start_damage_cooldown():
 func make_Path() -> void:
 	nav_Agent.target_position = player.global_position
 	nav_Agent.path_changed
-	print(nav_Agent.target_position)
-	print(nav_Agent.get_next_path_position())
 
 
 func _on_death_animation_finished() -> void:
