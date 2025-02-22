@@ -70,7 +70,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6lul"]
-size = Vector2(87, 85)
+size = Vector2(87, 70)
 
 [node name="turrets" type="Node2D"]
 script = ExtResource("1_0dksx")
@@ -90,6 +90,7 @@ frame = 7
 frame_progress = 1.0
 
 [node name="rohr_Ende" type="Marker2D" parent="tower"]
+position = Vector2(0, -50)
 
 [node name="base" type="Sprite2D" parent="."]
 show_behind_parent = true
@@ -98,5 +99,5 @@ region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="base"]
-position = Vector2(-0.5, 9.5)
+position = Vector2(-0.5, 2)
 shape = SubResource("RectangleShape2D_k6lul")

@@ -70,7 +70,7 @@ func health(variance: int):
 	
 func shoot():
 	if ! player_in_radius:
-		await get_tree().create_timer(1)
+		await get_tree().create_timer(0.5)
 	time_since_last_shoot = 0.0
 	var shoooot : RigidBody2D = bulletScene.instantiate() as Node2D
 	shoooot.shooter_tank = self
