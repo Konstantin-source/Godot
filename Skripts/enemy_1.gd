@@ -54,15 +54,16 @@ func _physics_process(delta: float) -> void:
 
 
 func health(variance: int):
-	current_health -= variance
-	$Node2D/healthbar._set_health(current_health)
-	if current_health <= 0:
-		player = null
-		$death.show()
-		$death.play("death")
-		$body.hide()
-		$tower.hide()
-		can_shoot = false
+	if $".":
+		current_health -= variance
+		$Node2D/healthbar._set_health(current_health)
+		if current_health <= 0:
+			player = null
+			$death.show()
+			$death.play("death")
+			$body.hide()
+			$tower.hide()
+			can_shoot = false
 	
 	
 func shoot():

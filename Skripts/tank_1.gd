@@ -9,6 +9,7 @@ var speed_scale = 0
 @export var acc_curve : Curve
 @export var acceleration_duration = 0.5
 @export var deceleration_duration = 1.5
+@export var reload_time = 2
 @onready var rotation_degree = $body.rotation
 signal shoot_signal
 signal new_health(health)
@@ -19,6 +20,10 @@ var time_since_last_shot: float = 0.0
 var acceleration_time = 0.0
 var deceleration_time = 0.0
 var moving_var = false
+var max_shoots = 3
+var current_shoots = 0
+var reload_time_over = true
+
 
 
 
@@ -27,6 +32,7 @@ func _ready() -> void:
 	$tower/Animation.hide()
 	$death.hide()
 	time_since_last_shot = 1
+	$CanvasLayer/user_UI.max_shoots_ui = max_shoots
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -62,12 +68,18 @@ func _physics_process(delta: float) -> void:
 	
 	$"tower".rotation = angle + PI/2
 	
-	
+	if current_shoots >= max_shoots:
+		current_shoots = 0
+		print("TEST")
+		reload_time_over = false
+		await get_tree().create_timer(reload_time).timeout
+		$CanvasLayer/user_UI.reset_bullets()
+		reload_time_over = true
 	
 	#Schießen
-	if Input.is_action_just_pressed("fire") and time_since_last_shot >= shoot_duration:
-		time_since_last_shot = 0
+	if Input.is_action_just_pressed("fire") and reload_time_over and time_since_last_shot >= 0.15:
 		shoot()
+		$CanvasLayer/user_UI.just_shoot()
 		
 		
 	#Beschleunigen
@@ -90,9 +102,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func shoot():
+	time_since_last_shot = 0
+	current_shoots += 1
+	print(current_shoots)
 	var shoooot : RigidBody2D = bulletScene.instantiate() as Node2D
 	$tower/Animation.show()
 	$tower/Animation.play("default")
+	
+	shoooot.collision_layer = 0b0100
 	
 	shoooot.position = $"tower/rohr_Ende".global_position 
 	shoooot.shooter_tank = self
