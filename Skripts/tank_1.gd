@@ -70,7 +70,6 @@ func _physics_process(delta: float) -> void:
 	
 	if current_shoots >= max_shoots:
 		current_shoots = 0
-		print("TEST")
 		reload_time_over = false
 		await get_tree().create_timer(reload_time).timeout
 		$CanvasLayer/user_UI.reset_bullets()
@@ -89,7 +88,6 @@ func _physics_process(delta: float) -> void:
 		acceleration_time = min(acceleration_time+delta, acceleration_duration)
 		speed_scale = acceleration_time / acceleration_duration
 		var speed_factor = acc_curve.sample(speed_scale)
-		print("Speed: ",speed_factor)
 		moving(speed_factor)
 		
 	else:
@@ -104,7 +102,6 @@ func _physics_process(delta: float) -> void:
 func shoot():
 	time_since_last_shot = 0
 	current_shoots += 1
-	print(current_shoots)
 	var shoooot : RigidBody2D = bulletScene.instantiate() as Node2D
 	$tower/Animation.show()
 	$tower/Animation.play("default")

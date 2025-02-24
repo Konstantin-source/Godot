@@ -23,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = -11
 
-[node name="TextureRect" type="TextureRect" parent="Reload_Bullets"]
+[node name="bullet" type="TextureRect" parent="Reload_Bullets"]
 layout_mode = 2
 texture = ExtResource("2_on5st")
 expand_mode = 5
