@@ -70,6 +70,7 @@ func shoot():
 	time_since_last_shoot = 0.0
 	var shoooot : RigidBody2D = bulletScene.instantiate() as Node2D
 	shoooot.shooter_tank = self
+	shoooot.collision_layer = 0b0010
 	$tower/Animation.show()
 	$tower/Animation.play("default")
 	shoooot.position = $"tower/rohr_Ende".global_position 

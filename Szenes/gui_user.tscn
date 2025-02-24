@@ -15,9 +15,9 @@ script = ExtResource("1_wsgyo")
 [node name="Reload_Bullets" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.078
+anchor_right = 0.057
 anchor_bottom = 0.599
-offset_right = 0.143997
+offset_right = 0.335999
 offset_bottom = -0.152039
 grow_horizontal = 2
 grow_vertical = 2
