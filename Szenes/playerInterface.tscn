@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bsnn5owen8gqq"]
+[gd_scene load_steps=8 format=3 uid="uid://bsnn5owen8gqq"]
 
 [ext_resource type="Script" path="res://Skripts/ui.gd" id="1_hi7w3"]
 [ext_resource type="Script" path="res://Skripts/healthbar.gd" id="2_vd4rb"]
+[ext_resource type="PackedScene" uid="uid://b114e77a7auee" path="res://Szenes/gui_user.tscn" id="3_57c5g"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5hdj8"]
 
@@ -66,5 +67,9 @@ show_percentage = false
 [node name="Timer" type="Timer" parent="healthbar"]
 wait_time = 0.4
 one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="user_UI" parent="CanvasLayer" instance=ExtResource("3_57c5g")]
 
 [connection signal="timeout" from="healthbar/Timer" to="healthbar" method="_on_timer_timeout"]

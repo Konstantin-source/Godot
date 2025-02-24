@@ -1,4 +1,4 @@
-[gd_scene load_steps=295 format=3 uid="uid://bdt4dmy328xje"]
+[gd_scene load_steps=294 format=3 uid="uid://bdt4dmy328xje"]
 
 [ext_resource type="Script" path="res://Skripts/tank_1.gd" id="1_2vi20"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Szenes/bullet1.tscn" id="2_7ygv3"]
@@ -287,7 +287,6 @@
 [ext_resource type="Texture2D" uid="uid://cupt5t4itndcj" path="res://Sprites/PixelSimulations/Explosion6/0201.png" id="285_5ec5p"]
 [ext_resource type="Texture2D" uid="uid://pqjmdy65hmem" path="res://Sprites/PixelSimulations/Explosion6/0202.png" id="286_hylt5"]
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="287_cikdl"]
-[ext_resource type="PackedScene" uid="uid://b114e77a7auee" path="res://Szenes/gui_user.tscn" id="289_i6d44"]
 [ext_resource type="PackedScene" uid="uid://bsnn5owen8gqq" path="res://Szenes/playerInterface.tscn" id="330_82slw"]
 
 [sub_resource type="Curve" id="Curve_i5428"]
@@ -1218,14 +1217,6 @@ frame_progress = 1.0
 speed_scale = 2.0
 
 [node name="playerInterface" parent="." instance=ExtResource("330_82slw")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="user_UI" parent="CanvasLayer" instance=ExtResource("289_i6d44")]
-offset_left = -1.0
-offset_top = 2.0
-offset_right = -1.0
-offset_bottom = 2.0
 
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]

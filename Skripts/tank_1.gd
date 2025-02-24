@@ -23,7 +23,7 @@ var moving_var = false
 var max_shoots = 3
 var current_shoots = 0
 var reload_time_over = true
-
+@onready var user_ui = $playerInterface.get_node("CanvasLayer/user_UI")
 
 
 
@@ -32,7 +32,7 @@ func _ready() -> void:
 	$tower/Animation.hide()
 	$death.hide()
 	time_since_last_shot = 1
-	$CanvasLayer/user_UI.max_shoots_ui = max_shoots
+	user_ui.max_shoots_ui = max_shoots
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	moving_var = false
-	var input_direction = Vector2.ZERO	
+	var input_direction = Vector2.ZERO
 	time_since_last_shot += delta
 	shootPos = $"tower/rohr_Ende".position
 	velocity = Vector2() # Reset velocity
@@ -78,7 +78,7 @@ func _physics_process(delta: float) -> void:
 	#Schießen
 	if Input.is_action_just_pressed("fire") and reload_time_over and time_since_last_shot >= 0.15:
 		shoot()
-		$CanvasLayer/user_UI.just_shoot()
+		user_ui.just_shoot()
 		
 		
 	#Beschleunigen
