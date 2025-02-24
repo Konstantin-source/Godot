@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cuf4jiqjdcs1d"]
+[gd_scene load_steps=38 format=3 uid="uid://cuf4jiqjdcs1d"]
 
 [ext_resource type="Script" path="res://Skripts/bullet_1.gd" id="1_s2gru"]
 [ext_resource type="Texture2D" uid="uid://djn8aswjj7p1u" path="res://Sprites/bullet.png" id="2_4shcs"]
@@ -27,8 +27,6 @@
 [ext_resource type="Texture2D" uid="uid://bsbth73ums180" path="res://Sprites/PixelSimulations/Explosion4/0023.png" id="25_ky8kk"]
 [ext_resource type="Texture2D" uid="uid://dhisnyus1sc87" path="res://Sprites/PixelSimulations/Explosion4/0024.png" id="26_iugu5"]
 [ext_resource type="Texture2D" uid="uid://ci2g17aykroip" path="res://Sprites/PixelSimulations/Explosion4/0025.png" id="27_kryph"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ibt7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iyxp0"]
 size = Vector2(12, 33)
@@ -157,8 +155,9 @@ turbulence_enabled = true
 turbulence_noise_scale = 1.319
 
 [node name="bullet1" type="RigidBody2D"]
+collision_layer = 0
 collision_mask = 2
-physics_material_override = SubResource("PhysicsMaterial_ibt7e")
+mass = 0.001
 gravity_scale = 0.0
 script = ExtResource("1_s2gru")
 Bulletspeed = 800

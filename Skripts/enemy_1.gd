@@ -12,7 +12,6 @@ var target_angle = 0.0
 var current_health = 100
 var can_take_damage = true
 var can_shoot = true
-var player_in_radius = false
 @export var bulletScene: PackedScene
 
 @onready var nav_Agent := $NavigationAgent2D as NavigationAgent2D
@@ -30,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		var distance_to_player = (player.global_position - global_position).length()
 		var direction = to_local(nav_Agent.get_next_path_position()).normalized()
 		#print(nav_Agent.get_next_path_position())
-		if distance_to_player <= chase_Plaser_radius and distance_to_player >= 300:
+		if distance_to_player <= chase_Plaser_radius and distance_to_player >= 100:
 			$body.rotation = direction.angle() + PI/2
 			velocity = direction * SPEED
 			move_and_slide()
@@ -44,10 +43,7 @@ func _physics_process(delta: float) -> void:
 			$tower.rotation = lerp_angle($tower.rotation, target_angle, delta * 5)
 			if time_since_last_shoot >= shoot_speed and can_shoot:
 				shoot()
-				player_in_radius = true
-			
 		else:
-			player_in_radius = false
 			time_since_last_change +=delta
 			if time_since_last_change >= idle_rotation_time:
 				time_since_last_change = 0.0
@@ -58,19 +54,19 @@ func _physics_process(delta: float) -> void:
 
 
 func health(variance: int):
-	current_health -= variance
-	$Node2D/healthbar._set_health(current_health)
-	if current_health <= 0:
-		$death.show()
-		$death.play("death")
-		$body.hide()
-		$tower.hide()
-		can_shoot = false
+	if $".":
+		current_health -= variance
+		$Node2D/healthbar._set_health(current_health)
+		if current_health <= 0:
+			player = null
+			$death.show()
+			$death.play("death")
+			$body.hide()
+			$tower.hide()
+			can_shoot = false
 	
 	
 func shoot():
-	if ! player_in_radius:
-		await get_tree().create_timer(0.5)
 	time_since_last_shoot = 0.0
 	var shoooot : RigidBody2D = bulletScene.instantiate() as Node2D
 	shoooot.shooter_tank = self
@@ -102,8 +98,6 @@ func start_damage_cooldown():
 func make_Path() -> void:
 	nav_Agent.target_position = player.global_position
 	nav_Agent.path_changed
-	print(nav_Agent.target_position)
-	print(nav_Agent.get_next_path_position())
 
 
 func _on_death_animation_finished() -> void:
@@ -111,5 +105,5 @@ func _on_death_animation_finished() -> void:
 
 
 func _on_pathfinding_timer_timeout() -> void:
-	print("haii")
-	make_Path()
+	if is_instance_valid(player):
+		make_Path()
