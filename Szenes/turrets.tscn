@@ -70,26 +70,29 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6lul"]
-size = Vector2(87, 85)
+size = Vector2(73, 71)
 
-[node name="turrets" type="Node2D"]
+[node name="StaticBody2D" type="StaticBody2D"]
+collision_layer = 3
 script = ExtResource("1_0dksx")
 
 [node name="tower" type="Sprite2D" parent="."]
-scale = Vector2(1.26563, 1.0625)
+position = Vector2(0, -2.75)
+scale = Vector2(1.26563, 1.13125)
 texture = ExtResource("1_0mwr1")
 region_enabled = true
 region_rect = Rect2(113, 0, 64, 80)
 
 [node name="schuss" type="AnimatedSprite2D" parent="tower"]
-position = Vector2(-1.32435, 7.99999)
-scale = Vector2(0.979307, 1.04297)
+position = Vector2(-1.32435, 4.90444)
+scale = Vector2(0.979307, 1.09134)
 sprite_frames = SubResource("SpriteFrames_q00uc")
 animation = &"shooting"
 frame = 7
 frame_progress = 1.0
 
 [node name="rohr_Ende" type="Marker2D" parent="tower"]
+position = Vector2(0, -45)
 
 [node name="base" type="Sprite2D" parent="."]
 show_behind_parent = true
@@ -97,6 +100,7 @@ texture = ExtResource("4_8mfmy")
 region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="base"]
-position = Vector2(-0.5, 9.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 3
+position = Vector2(-1.5, 0.5)
 shape = SubResource("RectangleShape2D_k6lul")
