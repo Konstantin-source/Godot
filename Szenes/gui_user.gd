@@ -9,7 +9,6 @@ var children_array = []
 
 func _ready() -> void:
 	for i in range(max_shoots_ui-1):
-		print(i)
 		var clone = template.duplicate()
 		clone.visible = true
 		$Reload_Bullets.add_child(clone)
@@ -17,8 +16,6 @@ func _ready() -> void:
 
 func just_shoot():
 	current_shoots +=1
-	print(max_shoots_ui - current_shoots-1)
-	print(children_array)
 	var current_child = children_array[max_shoots_ui - current_shoots]
 	current_child.modulate = Color(0,0,0,1)
 	
