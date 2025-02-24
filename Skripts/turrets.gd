@@ -51,8 +51,9 @@ func shoot() -> void:
 	bullet.shooter_tank = self
 	
 	# Spiele die Schussanimation
+
 	$tower/schuss.show()
-	$tower/schuss.play("default")
+	$tower/schuss.play("shooting")
 	
 	# Setze die Position des Projektils an den Marker des Rohrendes
 	bullet.position = $tower/rohr_Ende.global_position
