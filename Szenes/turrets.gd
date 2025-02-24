@@ -32,11 +32,12 @@ func _physics_process(delta):
 					shoot()
 
 func shoot():
-	print("pew	")
-	var bullet: Node2D = bulletScene.instantiate()
+	var bullet: RigidBody2D = bulletScene.instantiate()
 	get_tree().current_scene.add_child(bullet)
-	bullet.global_position = global_position
+	
+	bullet.global_position = $tower/rohr_Ende.global_position
 	bullet.global_rotation = rayCast.global_rotation
+	bullet.collision_layer = 0b0010
 	
 	rayCast.enabled = false
 	reloadTimer.start()

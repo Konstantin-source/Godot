@@ -72,7 +72,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6lul"]
 size = Vector2(73, 71)
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[node name="turret_1" type="StaticBody2D"]
 collision_layer = 3
 script = ExtResource("1_0dksx")
 
@@ -92,15 +92,17 @@ frame = 7
 frame_progress = 1.0
 
 [node name="rohr_Ende" type="Marker2D" parent="tower"]
-position = Vector2(0, -45)
+position = Vector2(0, -60)
 
 [node name="base" type="Sprite2D" parent="."]
+visible = false
 show_behind_parent = true
 texture = ExtResource("4_8mfmy")
 region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 light_mask = 3
 position = Vector2(-1.5, 0.5)
 shape = SubResource("RectangleShape2D_k6lul")

@@ -1,30 +1,42 @@
-[gd_scene load_steps=2 format=3 uid="uid://djdnmoracqumc"]
+[gd_scene load_steps=2 format=3 uid="uid://beg6e2kgsorik"]
 
 [ext_resource type="Script" path="res://Skripts/loading_screen.gd" id="1_217f6"]
 
 [node name="LoadingScreen" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_217f6")
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Lädt..."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ProgressBar" type="TextureProgressBar" parent="."]
 modulate = Color(0, 1, 1, 1)
 top_level = true
 light_mask = 15
 visibility_layer = 15
-layout_mode = 0
-offset_left = 30.0
-offset_top = 23.0
-offset_right = 366.0
-offset_bottom = 263.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 88.0
+grow_horizontal = 2
+grow_vertical = 2
 rounded = true
 tint_under = Color(0, 1, 1, 1)
 tint_over = Color(0.826889, 0.408828, 0.980272, 1)

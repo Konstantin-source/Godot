@@ -71,7 +71,7 @@ func _physics_process(delta: float) -> void:
 	if current_shoots >= max_shoots:
 		current_shoots = 0
 		reload_time_over = false
-		await get_tree().create_timer(reload_time).timeout
+		await get_tree().create_timer(reload_time+0.3).timeout
 		user_ui.reset_bullets()
 		reload_time_over = true
 	
