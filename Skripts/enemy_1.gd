@@ -20,7 +20,7 @@ var player: CharacterBody2D = null
 
 
 func _ready() -> void:
-	player = get_parent().get_node("Player")
+	player = get_tree().get_first_node_in_group("player")
 	$Node2D/healthbar.init_health(current_health)
 	
 	
@@ -56,7 +56,8 @@ func _physics_process(delta: float) -> void:
 func health(variance: int):
 	if $".":
 		current_health -= variance
-		$Node2D/healthbar._set_health(current_health)
+		if $Node2D/healthbar:
+			$Node2D/healthbar._set_health(current_health)
 		if current_health <= 0:
 			player = null
 			$death.show()
@@ -73,7 +74,7 @@ func shoot():
 	$tower/Animation.show()
 	$tower/Animation.play("default")
 	shoooot.position = $"tower/rohr_Ende".global_position 
-	
+	shoooot.collision_layer = 0b0010
 	shoooot.rotation = $tower.rotation 
 	shoooot.initial_scale = self.scale-Vector2(0.65,0.65)
 	get_tree().current_scene.add_child(shoooot)

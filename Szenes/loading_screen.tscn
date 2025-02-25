@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://djdnmoracqumc"]
+[gd_scene load_steps=3 format=3 uid="uid://beg6e2kgsorik"]
 
 [ext_resource type="Script" path="res://Skripts/loading_screen.gd" id="1_217f6"]
+[ext_resource type="Texture2D" uid="uid://b6om663es154w" path="res://Sprites/wallpaper/DALL·E 2025-02-25 22.29.39 - A small, damaged pixel-art tank with rounded but angular elements and a classic caterpillar drive stands in the foreground on solid, bomb-scarred grou.webp" id="2_5i7bj"]
 
 [node name="LoadingScreen" type="Control"]
 layout_mode = 3
@@ -12,6 +13,20 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_217f6")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.162066, 0.162066, 0.162066, 0.431373)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -307.0
+offset_right = 68.0
+offset_bottom = 317.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5i7bj")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

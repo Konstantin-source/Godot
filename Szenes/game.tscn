@@ -1,18 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://0a75l3ffy34p"]
+[gd_scene load_steps=3 format=3 uid="uid://0a75l3ffy34p"]
 
 [ext_resource type="PackedScene" uid="uid://cn86yyho52j7d" path="res://Szenes/Level/lvl_1.tscn" id="1_w0d3u"]
-[ext_resource type="PackedScene" uid="uid://bdt4dmy328xje" path="res://Szenes/tank_1.tscn" id="3_sdh8v"]
-[ext_resource type="PackedScene" uid="uid://b4hooddqsnusb" path="res://Szenes/turrets.tscn" id="4_v8u3e"]
 [ext_resource type="PackedScene" uid="uid://d4mjliv138hwl" path="res://Szenes/enemy_1.tscn" id="7_icb4k"]
 
 [node name="Game" type="Node2D"]
 
 [node name="Lvl_1" parent="." instance=ExtResource("1_w0d3u")]
 
-[node name="Player" parent="." instance=ExtResource("3_sdh8v")]
-position = Vector2(0, 0)
-
 [node name="enemy_1" parent="." instance=ExtResource("7_icb4k")]
-
-[node name="turret_1" parent="." instance=ExtResource("4_v8u3e")]
-position = Vector2(-829, -448)

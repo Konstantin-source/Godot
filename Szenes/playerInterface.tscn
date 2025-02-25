@@ -41,10 +41,14 @@ zoom = Vector2(0.74, 0.74)
 
 [node name="healthbar" type="ProgressBar" parent="."]
 z_index = 1
-offset_left = 356.0
-offset_top = -422.0
-offset_right = 756.0
-offset_bottom = -397.0
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 460.0
+offset_top = -414.0
+offset_right = 760.0
+offset_bottom = -394.0
+grow_horizontal = 0
 theme_override_styles/background = SubResource("StyleBoxEmpty_5hdj8")
 theme_override_styles/fill = SubResource("StyleBoxFlat_psjsh")
 value = 60.0
