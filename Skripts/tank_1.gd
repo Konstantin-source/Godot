@@ -114,7 +114,6 @@ func shoot():
 	
 	shoooot.collision_layer = 0b0100
 	shoooot.collision_mask = 0b0100
-	shoooot.collision_mask = 0b0010
 	
 	shoooot.position = $"tower/rohr_Ende".global_position 
 	shoooot.shooter_tank = self
@@ -132,9 +131,9 @@ func shoot():
 
 
 	var recoil_vector = Vector2(recoilDistance, 0).rotated($tower.rotation - PI/2)
-	$tower.global_position -= recoil_vector
-	await get_tree().create_timer(recoilDuration).timeout
-	$tower.global_position += recoil_vector
+	$tower.global_position = lerp($tower.global_position, $tower.global_position-recoil_vector, 0.2)
+	await  get_tree().create_timer(0.2).timeout
+	$tower.global_position = lerp($tower.global_position, $tower.global_position+recoil_vector, 0.2)
 	
 	
 func health(variance: int):

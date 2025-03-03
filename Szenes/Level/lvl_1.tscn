@@ -197,6 +197,5 @@ position = Vector2(2629, -715)
 position = Vector2(575, -715)
 
 [node name="Node2D" parent="." instance=ExtResource("5_v21ci")]
-visible = false
-position = Vector2(-945, -481)
-scale = Vector2(2.485, 2.485)
+position = Vector2(-524, -96)
+scale = Vector2(4.755, 4.755)

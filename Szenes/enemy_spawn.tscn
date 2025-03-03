@@ -12,6 +12,7 @@ point_count = 6
 [node name="enemy_spawn1" type="Node2D"]
 script = ExtResource("1_y6cvl")
 enemy_scene = ExtResource("2_w3wxr")
+spawn_interval = 10.0
 
 [node name="EnemySpawn" type="Node" parent="."]
 

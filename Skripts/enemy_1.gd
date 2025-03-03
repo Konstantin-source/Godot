@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		var distance_to_player = (player.global_position - global_position).length()
 		var direction = to_local(nav_Agent.get_next_path_position()).normalized()
 		#print(nav_Agent.get_next_path_position())
-		if distance_to_player <= chase_Plaser_radius and distance_to_player >= 100:
+		if distance_to_player <= chase_Plaser_radius and distance_to_player >= 300:
 			$body.rotation = direction.angle() + PI/2
 			velocity = direction * SPEED
 			move_and_slide()
@@ -58,6 +58,8 @@ func health(variance: int):
 			$Node2D/healthbar._set_health(current_health)
 		if current_health <= 0:
 			player = null
+			$CollisionShape2D.queue_free()
+			$Area2D.queue_free()
 			$death.show()
 			SPEED = 0
 			$death.play("death")

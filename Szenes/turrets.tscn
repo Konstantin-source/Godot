@@ -75,6 +75,7 @@ size = Vector2(73, 71)
 [node name="turret_1" type="StaticBody2D"]
 collision_layer = 3
 script = ExtResource("1_0dksx")
+range = 800.0
 
 [node name="tower" type="Sprite2D" parent="."]
 position = Vector2(0, -2.75)

@@ -29,12 +29,15 @@ func _physics_process(delta):
 		$GPUParticles2D.hide()
 		$Sprite2D.hide()
 		$AnimatedSprite2D.play("default")
+		
+	await get_tree().create_timer(.2).timeout
+	$".".collision_mask = 0b0010
 
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	$CollisionShape2D.queue_free()
-	$Area2D/CollisionShape2D.queue_free()
+	$Area2D.queue_free()
 	$AnimatedSprite2D.show()
 	$AnimatedSprite2D.play("default")
 	$Sprite2D.hide()
