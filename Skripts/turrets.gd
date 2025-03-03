@@ -3,7 +3,7 @@ extends Node2D
 @export var bullet_scene: PackedScene = preload("res://Szenes/bullet1.tscn")  # Projektilszene
 @export var range: float = 500.0       # Erkennungs- und Schussreichweite
 @export var shoot_speed: float = 0.5  # Zeit zwischen den Schüssen
-@export var damage_tank: int = 40
+@export var damage_tank: int = 10
 
 var time_since_last_shoot: float = 0.0
 var time_since_last_change: float = 0.0
@@ -47,8 +47,9 @@ func shoot() -> void:
 	# Erstelle ein Projektil
 	var bullet = bullet_scene.instantiate() as RigidBody2D
 	bullet.Bulletspeed = 1000
-	bullet.initial_scale = self.scale-Vector2(0.8,0.8)
+	bullet.initial_scale = self.scale-Vector2(0.9,0.9)
 	bullet.collision_layer = 0b0010
+	bullet.collision_mask = 0b0010
 	# Setze Referenz zurück auf dieses Turret (falls im Projektil benötigt)
 	bullet.shooter_tank = self
 	

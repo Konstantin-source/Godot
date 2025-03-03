@@ -37,10 +37,12 @@ func shoot():
 	
 	bullet.global_position = $tower/rohr_Ende.global_position
 	bullet.global_rotation = rayCast.global_rotation
+	
 	bullet.collision_layer = 0b0010
 	
 	rayCast.enabled = false
 	reloadTimer.start()
+
 
 func find_target():
 	var players = get_tree().get_nodes_in_group("Player")

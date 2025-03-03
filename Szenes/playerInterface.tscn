@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsnn5owen8gqq"]
+[gd_scene load_steps=10 format=3 uid="uid://bsnn5owen8gqq"]
 
 [ext_resource type="Script" path="res://Skripts/ui.gd" id="1_hi7w3"]
 [ext_resource type="Script" path="res://Skripts/healthbar.gd" id="2_vd4rb"]
 [ext_resource type="PackedScene" uid="uid://b114e77a7auee" path="res://Szenes/gui_user.tscn" id="3_57c5g"]
+[ext_resource type="Script" path="res://Szenes/minimap.gd" id="4_dq1gv"]
+[ext_resource type="Texture2D" uid="uid://ciwxajqxl3hv2" path="res://Sprites/Interface/PNG/Outline/Default/pointer_b_shaded.png" id="5_1s6n5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5hdj8"]
 
@@ -37,17 +39,21 @@ corner_radius_bottom_left = 10
 script = ExtResource("1_hi7w3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.74, 0.74)
+zoom = Vector2(0.78, 0.78)
 
-[node name="healthbar" type="ProgressBar" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="user_UI" parent="CanvasLayer" instance=ExtResource("3_57c5g")]
+
+[node name="healthbar" type="ProgressBar" parent="CanvasLayer"]
 z_index = 1
 anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 460.0
-offset_top = -414.0
-offset_right = 760.0
-offset_bottom = -394.0
+anchor_left = 0.941
+anchor_top = 0.025
+anchor_right = 0.941
+anchor_bottom = 0.025
+offset_left = -300.0
+offset_bottom = 20.0
 grow_horizontal = 0
 theme_override_styles/background = SubResource("StyleBoxEmpty_5hdj8")
 theme_override_styles/fill = SubResource("StyleBoxFlat_psjsh")
@@ -55,7 +61,7 @@ value = 60.0
 show_percentage = false
 script = ExtResource("2_vd4rb")
 
-[node name="damageBar" type="ProgressBar" parent="healthbar"]
+[node name="damageBar" type="ProgressBar" parent="CanvasLayer/healthbar"]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -68,12 +74,40 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_jp5py")
 value = 80.0
 show_percentage = false
 
-[node name="Timer" type="Timer" parent="healthbar"]
+[node name="Timer" type="Timer" parent="CanvasLayer/healthbar"]
 wait_time = 0.4
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -250.0
+grow_horizontal = 0
+grow_vertical = 0
+stretch = true
 
-[node name="user_UI" parent="CanvasLayer" instance=ExtResource("3_57c5g")]
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(250, 250)
+render_target_update_mode = 4
+script = ExtResource("4_dq1gv")
 
-[connection signal="timeout" from="healthbar/Timer" to="healthbar" method="_on_timer_timeout"]
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+zoom = Vector2(0.1, 0.1)
+
+[node name="Line2D" type="Line2D" parent="CanvasLayer/SubViewportContainer"]
+points = PackedVector2Array(2, 2, 2, 250, 250, 250, 250, 2, 16, 2)
+closed = true
+width = 5.0
+
+[node name="player_map" type="Sprite2D" parent="CanvasLayer/SubViewportContainer"]
+position = Vector2(130, 122)
+rotation = 0.424115
+scale = Vector2(1.355, 1.355)
+texture = ExtResource("5_1s6n5")
+
+[connection signal="timeout" from="CanvasLayer/healthbar/Timer" to="CanvasLayer/healthbar" method="_on_timer_timeout"]

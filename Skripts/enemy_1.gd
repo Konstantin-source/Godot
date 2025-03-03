@@ -33,10 +33,8 @@ func _physics_process(delta: float) -> void:
 			$body.rotation = direction.angle() + PI/2
 			velocity = direction * SPEED
 			move_and_slide()
-		
-		
-	
-	
+
+
 		time_since_last_shoot+=delta
 		if player and detection_radius >= distance_to_player:
 			target_angle = (player.global_position - global_position).angle() +PI/2
@@ -61,6 +59,7 @@ func health(variance: int):
 		if current_health <= 0:
 			player = null
 			$death.show()
+			SPEED = 0
 			$death.play("death")
 			$body.hide()
 			$tower.hide()
@@ -75,6 +74,7 @@ func shoot():
 	$tower/Animation.play("default")
 	shoooot.position = $"tower/rohr_Ende".global_position 
 	shoooot.collision_layer = 0b0010
+	shoooot.collision_mask = 0b0010
 	shoooot.rotation = $tower.rotation 
 	shoooot.initial_scale = self.scale-Vector2(0.65,0.65)
 	get_tree().current_scene.add_child(shoooot)

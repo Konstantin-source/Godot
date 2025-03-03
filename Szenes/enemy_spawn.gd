@@ -20,9 +20,8 @@ func _process(delta: float) -> void:
 		
 func spawn_enemy():
 	if enemy_scene:
-		print("joa")
 		var enemy = enemy_scene.instantiate()
-		var temp_path_follow = PathFollow2D.new()
+		var temp_path_follow = $Path2D/PathFollow2D
 		temp_path_follow.progress_ratio =  randf()
-		enemy.position = temp_path_follow.position
+		enemy.global_position = temp_path_follow.global_position
 		get_tree().current_scene.add_child(enemy)

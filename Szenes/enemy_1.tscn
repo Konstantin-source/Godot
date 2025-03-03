@@ -1201,7 +1201,7 @@ script = ExtResource("1_fmgl7")
 SPEED = 150.0
 detection_radius = 900
 chase_Plaser_radius = 900
-damage_tank = 50
+damage_tank = 30
 bulletScene = ExtResource("2_xjdv8")
 
 [node name="body" type="Sprite2D" parent="."]
@@ -1228,8 +1228,8 @@ frame_progress = 1.0
 speed_scale = 3.5
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 7
+collision_layer = 4
+collision_mask = 4
 
 [node name="scanarea" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-1.1561, 1.7341)

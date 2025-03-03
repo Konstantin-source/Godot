@@ -1,6 +1,6 @@
 extends Control
 
-var max_shoots_ui = 3
+var max_shoots_ui = 0
 var current_shoots = 0
 var children_array = []
 
@@ -8,6 +8,7 @@ var children_array = []
 @onready var template := $Reload_Bullets/bullet
 
 func _ready() -> void:
+	await  get_tree().process_frame
 	for i in range(max_shoots_ui-1):
 		var clone = template.duplicate()
 		clone.visible = true
@@ -23,4 +24,4 @@ func reset_bullets():
 	current_shoots = 0
 	for i in range(max_shoots_ui):
 		children_array[i].modulate = Color(1,1,1,1)
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.05).timeout
