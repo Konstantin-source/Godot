@@ -83,7 +83,6 @@ func shoot() -> void:
 func turret_health(variance: int):
 	current_health -= variance
 	turret_health_ui._set_health(current_health)
-	print(turret_health_ui.get_children())
 	if current_health <= 0:
 		$death.show()
 		$death.play("death")
