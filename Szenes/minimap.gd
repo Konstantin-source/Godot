@@ -10,5 +10,4 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	
 	camera.position = get_tree().get_first_node_in_group("player").position
-	print(player.get_current_rotation())
 	icon_map.rotation = player.get_current_rotation() + deg_to_rad(24.0)

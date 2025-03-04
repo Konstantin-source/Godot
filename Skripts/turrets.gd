@@ -4,19 +4,24 @@ extends Node2D
 @export var range: float = 500.0       # Erkennungs- und Schussreichweite
 @export var shoot_speed: float = 0.5  # Zeit zwischen den Schüssen
 @export var damage_tank: int = 10
+@export var health = 100
+@onready var turret_health_ui = $enemyHealth.get_node("healthbar")
 
 var time_since_last_shoot: float = 0.0
 var time_since_last_change: float = 0.0
 var idle_rotation_time: float = 3.0
 var target_angle: float = 0.0
-var current_health: int = 100
+var current_health: int = 0
 var can_take_damage: bool = true
 var can_shoot: bool = true
+signal new_health(health)
 
 var player: CharacterBody2D = null
 
 func _ready() -> void:
 	# Hole den Spieler (stelle sicher, dass der Pfad korrekt ist)
+	current_health = health
+	turret_health_ui._set_health(health)
 	player = get_parent().get_node("Player")
 	
 func _physics_process(delta: float) -> void:
@@ -72,3 +77,27 @@ func shoot() -> void:
 	$tower.global_position -= recoil_vector
 	await get_tree().create_timer(0.3).timeout
 	$tower.global_position += recoil_vector
+
+
+
+func turret_health(variance: int):
+	current_health -= variance
+	turret_health_ui._set_health(current_health)
+	print(turret_health_ui.get_children())
+	if current_health <= 0:
+		$death.show()
+		$death.play("death")
+		$tower.hide()
+		$base.hide()
+		
+		
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if "damage" in body:
+		if is_instance_valid(turret_health_ui):
+			turret_health(body.damage)
+
+
+func _on_death_animation_finished() -> void:
+	queue_free()

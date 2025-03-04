@@ -1,4 +1,4 @@
-[gd_scene load_steps=298 format=3 uid="uid://d4mjliv138hwl"]
+[gd_scene load_steps=297 format=3 uid="uid://d4mjliv138hwl"]
 
 [ext_resource type="Script" path="res://Skripts/enemy_1.gd" id="1_fmgl7"]
 [ext_resource type="Texture2D" uid="uid://kvtx63jk4bjl" path="res://Sprites/ground_shaker_asset/Purple/Bodies/body_tracks.png" id="2_j0sa3"]
@@ -288,7 +288,6 @@
 [ext_resource type="Texture2D" uid="uid://cupt5t4itndcj" path="res://Sprites/PixelSimulations/Explosion6/0201.png" id="286_7nam4"]
 [ext_resource type="Texture2D" uid="uid://pqjmdy65hmem" path="res://Sprites/PixelSimulations/Explosion6/0202.png" id="287_r288c"]
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="288_n82yk"]
-[ext_resource type="PackedScene" uid="uid://b114e77a7auee" path="res://Szenes/gui_user.tscn" id="289_gqflu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5esf"]
 size = Vector2(69.3642, 78.6127)
@@ -1288,14 +1287,6 @@ debug_enabled = true
 [node name="pathfinding_Timer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
-
-[node name="user_UI" parent="." instance=ExtResource("289_gqflu")]
-offset_left = -505.202
-offset_top = -337.572
-offset_right = -505.202
-offset_bottom = -337.572
-size_flags_horizontal = 0
-size_flags_vertical = 0
 
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]

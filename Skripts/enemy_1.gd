@@ -63,8 +63,8 @@ func health(variance: int):
 			$death.show()
 			SPEED = 0
 			$death.play("death")
-			$body.hide()
-			$tower.hide()
+			$body.queue_free()
+			$tower.queue_free()
 			can_shoot = false
 	
 	
@@ -91,8 +91,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if "damage" in body and can_take_damage:
 		health(body.damage)
 		start_damage_cooldown()
-		
-	
+
+
 func start_damage_cooldown():
 	can_take_damage = false
 	await get_tree().create_timer(0.2).timeout

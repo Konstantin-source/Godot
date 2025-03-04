@@ -76,7 +76,6 @@ func _physics_process(delta: float) -> void:
 		var reload_timer :float = max_shoots/20.0
 		await get_tree().create_timer(reload_time).timeout
 		user_ui.reset_bullets()
-		print(reload_timer)
 		await get_tree().create_timer(reload_timer).timeout
 		reload_time_over = true
 	
@@ -84,6 +83,14 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("fire") and reload_time_over and time_since_last_shot >= 0.15:
 		shoot()
 		user_ui.just_shoot()
+		
+	if Input.is_action_just_pressed("reload"):
+		reload_time_over = false
+		var reload_timer :float = (max_shoots-current_shoots)/20.0
+		await get_tree().create_timer(reload_time).timeout
+		user_ui.reset_bullets()
+		await get_tree().create_timer(reload_timer).timeout
+		
 		
 		
 	#Beschleunigen

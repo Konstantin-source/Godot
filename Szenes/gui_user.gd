@@ -20,7 +20,7 @@ func just_shoot():
 	var current_child = children_array[max_shoots_ui - current_shoots]
 	current_child.modulate = Color(0,0,0,1)
 	
-func reset_bullets():
+func reset_bullets(bullet_count = 0):
 	current_shoots = 0
 	for i in range(max_shoots_ui):
 		children_array[i].modulate = Color(1,1,1,1)
