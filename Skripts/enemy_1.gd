@@ -52,7 +52,9 @@ func _physics_process(delta: float) -> void:
 
 
 func health(variance: int):
+
 	if $".":
+		print(current_health)
 		current_health -= variance
 		if $Node2D/healthbar:
 			$Node2D/healthbar._set_health(current_health)

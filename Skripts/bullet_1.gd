@@ -29,9 +29,7 @@ func _physics_process(delta):
 		$GPUParticles2D.hide()
 		$Sprite2D.hide()
 		$AnimatedSprite2D.play("default")
-		
-	await get_tree().create_timer(.2).timeout
-	$".".collision_mask = 0b0010
+		$Area2D/CollisionShape2D.disabled = true
 
 
 

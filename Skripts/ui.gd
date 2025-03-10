@@ -15,5 +15,5 @@ func _process(delta: float) -> void:
 	pass
 
 func _health_changed(changed_health):
-	if changed_health > 0:
+	if changed_health >= 0:
 		$CanvasLayer/healthbar._set_health(changed_health)

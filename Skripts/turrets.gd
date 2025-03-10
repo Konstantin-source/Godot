@@ -53,8 +53,8 @@ func shoot() -> void:
 	var bullet = bullet_scene.instantiate() as RigidBody2D
 	bullet.Bulletspeed = 1000
 	bullet.initial_scale = self.scale-Vector2(0.9,0.9)
-	bullet.collision_layer = 0b0010
-	bullet.collision_mask = 0b0010
+	bullet.collision_layer = 0b10000
+	bullet.collision_mask = 0b10000
 	# Setze Referenz zurück auf dieses Turret (falls im Projektil benötigt)
 	bullet.shooter_tank = self
 	

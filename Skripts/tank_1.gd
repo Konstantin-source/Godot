@@ -9,7 +9,7 @@ var speed_scale = 0
 @export var acc_curve : Curve
 @export var acceleration_duration = 0.5
 @export var deceleration_duration = 1.5
-@export var reload_time = 2
+@export var reload_time :float = 2
 @export var max_shoots = 5
 @onready var rotation_degree = $body.rotation
 signal shoot_signal
@@ -86,10 +86,12 @@ func _physics_process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("reload"):
 		reload_time_over = false
+		current_shoots = 0
 		var reload_timer :float = (max_shoots-current_shoots)/20.0
 		await get_tree().create_timer(reload_time).timeout
 		user_ui.reset_bullets()
 		await get_tree().create_timer(reload_timer).timeout
+		reload_time_over = true
 		
 		
 		
@@ -120,7 +122,7 @@ func shoot():
 	$tower/Animation.play("default")
 	
 	shoooot.collision_layer = 0b0100
-	shoooot.collision_mask = 0b0100
+	shoooot.collision_mask = 0b0110
 	
 	shoooot.position = $"tower/rohr_Ende".global_position 
 	shoooot.shooter_tank = self
@@ -139,11 +141,12 @@ func shoot():
 
 	var recoil_vector = Vector2(recoilDistance, 0).rotated($tower.rotation - PI/2)
 	$tower.global_position = lerp($tower.global_position, $tower.global_position-recoil_vector, 0.2)
-	await  get_tree().create_timer(0.2).timeout
+	await  get_tree().create_timer(0.1).timeout
 	$tower.global_position = lerp($tower.global_position, $tower.global_position+recoil_vector, 0.2)
 	
 	
 func health(variance: int):
+	
 	current_health -= variance
 	new_health.emit(current_health)
 	if current_health <= 0:
@@ -152,6 +155,8 @@ func health(variance: int):
 		$death.play("death")
 		$body.hide()
 		$tower.hide()
+		$CollisionShape2D.disabled = true
+		$body/Area2D/scanarea.disabled = true
 		
 
 func moving(rightspeed: float):

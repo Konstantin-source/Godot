@@ -7,8 +7,12 @@ func _set_health(new_health):
 	var previous_health = health
 	health = min(max_value, new_health)
 	value = health
+	print(value)
 	
 	if health <= 0:
+		print("TEST")
+		$damageBar.value = health
+		await get_tree().create_timer(.2).timeout
 		queue_free()
 		
 	if health < previous_health:
