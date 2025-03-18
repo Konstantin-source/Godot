@@ -79,6 +79,8 @@ func shoot():
 	shoooot.position = $"tower/rohr_Ende".global_position 
 	shoooot.collision_layer = 0b0010
 	shoooot.collision_mask = 0b0010
+	shoooot.collision_layer = 0b10000
+	shoooot.collision_mask = 0b10000
 	shoooot.rotation = $tower.rotation 
 	shoooot.initial_scale = self.scale-Vector2(0.65,0.65)
 	get_tree().current_scene.add_child(shoooot)

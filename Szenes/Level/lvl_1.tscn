@@ -202,7 +202,7 @@ position = Vector2(3394, 3391)
 [node name="Node2D" parent="." instance=ExtResource("5_v21ci")]
 position = Vector2(-524, -96)
 scale = Vector2(4.755, 4.755)
-spawn_interval = 15.0
+spawn_interval = 5.0
 
 [node name="turret_11" parent="." instance=ExtResource("3_msake")]
 position = Vector2(3011, 1726)

@@ -2,6 +2,7 @@ extends Node2D
 
 @export var enemy_scene: PackedScene
 @export var spawn_interval: float = 2.0
+@export var howManyEnemys: int = 10
 
 var current_time :float = 0.0
 
@@ -13,8 +14,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	current_time += delta
-	if current_time >= spawn_interval:
+	if current_time >= spawn_interval and howManyEnemys > 0:
 		spawn_enemy()
+		howManyEnemys -= 1
 		current_time = 0.0
 		
 		

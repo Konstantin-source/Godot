@@ -14,7 +14,12 @@ func _ready() -> void:
 		clone.visible = true
 		$Reload_Bullets.add_child(clone)
 	children_array = bullet_tree.get_children()
-
+	
+	await get_tree().create_timer(4).timeout
+	$"../VBoxContainer/Ziel".visible = false
+	$"../VBoxContainer/gegner".visible = false
+	
+	
 func just_shoot():
 	current_shoots +=1
 	var current_child = children_array[max_shoots_ui - current_shoots]
