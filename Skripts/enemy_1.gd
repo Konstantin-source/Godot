@@ -68,8 +68,8 @@ func health(variance: int):
 			$body.queue_free()
 			$tower.queue_free()
 			can_shoot = false
-	
-	
+
+
 func shoot():
 	time_since_last_shoot = 0.0
 	var shoooot : RigidBody2D = bulletScene.instantiate() as Node2D

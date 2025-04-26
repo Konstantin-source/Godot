@@ -1,4 +1,5 @@
 extends CharacterBody2D
+
 var speed = 400
 var speed_scale = 0
 @export var shoot_duration = 1
