@@ -13,6 +13,7 @@ var current_health = 100
 var can_take_damage = true
 var can_shoot = true
 @export var bulletScene: PackedScene
+signal isInRange(shoot)
 
 @onready var nav_Agent := $NavigationAgent2D as NavigationAgent2D
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 	
 	
 func _physics_process(delta: float) -> void:
+	pass
 	if is_instance_valid(player):
 		var distance_to_player = (player.global_position - global_position).length()
 		var direction = to_local(nav_Agent.get_next_path_position()).normalized()
@@ -35,19 +37,20 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 
 
-		time_since_last_shoot+=delta
-		if player and detection_radius >= distance_to_player:
-			target_angle = (player.global_position - global_position).angle() +PI/2
-			$tower.rotation = lerp_angle($tower.rotation, target_angle, delta * 5)
-			if time_since_last_shoot >= shoot_speed and can_shoot:
-				shoot()
-		else:
-			time_since_last_change +=delta
-			if time_since_last_change >= idle_rotation_time:
-				time_since_last_change = 0.0
-				target_angle = $tower.rotation + randf_range(PI, -PI)
-				
-		$tower.rotation = lerp_angle($tower.rotation, target_angle, delta)
+		#time_since_last_shoot+=delta
+		#if player and detection_radius >= distance_to_player:
+			#isInRange.emit(false)
+			#target_angle = (player.global_position - global_position).angle() +PI/2
+			#$tower.rotation = lerp_angle($tower.rotation, target_angle, delta * 5)
+			#if time_since_last_shoot >= shoot_speed and can_shoot:
+				#isInRange.emit(true)
+		#else:
+			#time_since_last_change +=delta
+			#isInRange.emit(false)
+			#if time_since_last_change >= idle_rotation_time:
+				#time_since_last_change = 0.0
+				#target_angle = $tower.rotation + randf_range(PI, -PI)
+		#$tower.rotation = lerp_angle($tower.rotation, target_angle, delta)
 			
 
 
@@ -70,25 +73,25 @@ func health(variance: int):
 			can_shoot = false
 
 
-func shoot():
-	time_since_last_shoot = 0.0
-	var shoooot : RigidBody2D = bulletScene.instantiate() as Node2D
-	shoooot.shooter_tank = self
-	$tower/Animation.show()
-	$tower/Animation.play("default")
-	shoooot.position = $"tower/rohr_Ende".global_position 
-	shoooot.collision_layer = 0b0010
-	shoooot.collision_mask = 0b0010
-	shoooot.collision_layer = 0b10000
-	shoooot.collision_mask = 0b10000
-	shoooot.rotation = $tower.rotation 
-	shoooot.initial_scale = self.scale-Vector2(0.65,0.65)
-	get_tree().current_scene.add_child(shoooot)
-	
-	var recoil_vector = Vector2(15, 0).rotated($tower.rotation - PI/2)
-	$tower.global_position -= recoil_vector
-	await get_tree().create_timer(0.3).timeout
-	$tower.global_position += recoil_vector
+#func shoot():
+	#time_since_last_shoot = 0.0
+	#var shoooot : RigidBody2D = bulletScene.instantiate() as Node2D
+	#shoooot.shooter_tank = self
+	#$tower/Animation.show()
+	#$tower/Animation.play("default")
+	#shoooot.position = $"tower/rohr_Ende".global_position 
+	#shoooot.collision_layer = 0b0010
+	#shoooot.collision_mask = 0b0010
+	#shoooot.collision_layer = 0b10000
+	#shoooot.collision_mask = 0b10000
+	#shoooot.rotation = $tower.rotation 
+	#shoooot.initial_scale = self.scale-Vector2(0.65,0.65)
+	#get_tree().current_scene.add_child(shoooot)
+	#
+	#var recoil_vector = Vector2(15, 0).rotated($tower.rotation - PI/2)
+	#$tower.global_position -= recoil_vector
+	#await get_tree().create_timer(0.3).timeout
+	#$tower.global_position += recoil_vector
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
