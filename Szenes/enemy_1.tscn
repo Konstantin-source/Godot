@@ -1,4 +1,4 @@
-[gd_scene load_steps=297 format=3 uid="uid://d4mjliv138hwl"]
+[gd_scene load_steps=299 format=3 uid="uid://d4mjliv138hwl"]
 
 [ext_resource type="Script" path="res://Skripts/enemy_1.gd" id="1_fmgl7"]
 [ext_resource type="Texture2D" uid="uid://kvtx63jk4bjl" path="res://Sprites/ground_shaker_asset/Purple/Bodies/body_tracks.png" id="2_j0sa3"]
@@ -85,6 +85,7 @@
 [ext_resource type="Texture2D" uid="uid://mo78wahcwyoy" path="res://Sprites/PixelSimulations/Flame1/0079.png" id="82_vr6uj"]
 [ext_resource type="Texture2D" uid="uid://y4iwwullv5ah" path="res://Sprites/PixelSimulations/Flame1/0080.png" id="83_a8xhn"]
 [ext_resource type="Script" path="res://Skripts/healthbar.gd" id="85_2oyuf"]
+[ext_resource type="PackedScene" uid="uid://dbfhw33ccpft0" path="res://Szenes/enemy_health.tscn" id="85_yhgxv"]
 [ext_resource type="Texture2D" uid="uid://c6xcxdcigwe40" path="res://Sprites/PixelSimulations/Explosion6/0001.png" id="86_86kcl"]
 [ext_resource type="Texture2D" uid="uid://ij10sinnwrvd" path="res://Sprites/PixelSimulations/Explosion6/0002.png" id="87_6himp"]
 [ext_resource type="Texture2D" uid="uid://cixp2ycck8mwr" path="res://Sprites/PixelSimulations/Explosion6/0003.png" id="88_v188o"]
@@ -288,6 +289,7 @@
 [ext_resource type="Texture2D" uid="uid://cupt5t4itndcj" path="res://Sprites/PixelSimulations/Explosion6/0201.png" id="286_7nam4"]
 [ext_resource type="Texture2D" uid="uid://pqjmdy65hmem" path="res://Sprites/PixelSimulations/Explosion6/0202.png" id="287_r288c"]
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="288_n82yk"]
+[ext_resource type="Script" path="res://Skripts/tank_health.gd" id="289_05ms6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5esf"]
 size = Vector2(69.3642, 78.6127)
@@ -1234,7 +1236,12 @@ collision_mask = 4
 position = Vector2(-1.1561, 1.7341)
 shape = SubResource("RectangleShape2D_h3w67")
 
+[node name="enemyHealth" parent="." instance=ExtResource("85_yhgxv")]
+position = Vector2(-100, -85)
+scale = Vector2(0.485, 0.485)
+
 [node name="Node2D" type="Node2D" parent="."]
+visible = false
 position = Vector2(-65.55, -161.02)
 scale = Vector2(0.485, 0.485)
 
@@ -1288,9 +1295,16 @@ debug_enabled = true
 wait_time = 0.5
 autostart = true
 
+[node name="Health" type="Node" parent="."]
+script = ExtResource("289_05ms6")
+
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D" to="Health" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Node2D/healthbar/Timer" to="Node2D/healthbar" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
 [connection signal="timeout" from="pathfinding_Timer" to="." method="_on_pathfinding_timer_timeout"]
+[connection signal="health_changed" from="Health" to="enemyHealth/healthbar" method="_set_health"]
+[connection signal="init_health" from="Health" to="enemyHealth/healthbar" method="init_health"]
+
+[editable path="enemyHealth"]

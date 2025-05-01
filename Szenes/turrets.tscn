@@ -221,3 +221,5 @@ scale = Vector2(0.46, 0.46)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
+
+[editable path="enemyHealth"]
