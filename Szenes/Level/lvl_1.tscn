@@ -5,7 +5,8 @@
 [ext_resource type="Script" path="res://Szenes/ground.gd" id="3_dojhs"]
 [ext_resource type="PackedScene" uid="uid://b4hooddqsnusb" path="res://Szenes/turrets.tscn" id="3_msake"]
 [ext_resource type="PackedScene" uid="uid://bdt4dmy328xje" path="res://Szenes/tank_1.tscn" id="3_sf33a"]
-[ext_resource type="PackedScene" uid="uid://cvfqosxw40bub" path="res://Szenes/enemy_spawn.tscn" id="5_v21ci"]
+[ext_resource type="PackedScene" path="res://Szenes/enemy_spawn.tscn" id="5_v21ci"]
+[ext_resource type="PackedScene" uid="uid://d4mjliv138hwl" path="res://Szenes/enemy_1.tscn" id="7_rxcmw"]
 [ext_resource type="PackedScene" uid="uid://d4mjliv138hwl" path="res://Szenes/enemy_1.tscn" id="7_tkc4n"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_s324l"]
@@ -218,3 +219,5 @@ position = Vector2(2624, 574)
 position = Vector2(3010, 574)
 
 [node name="enemy_1" parent="." instance=ExtResource("7_tkc4n")]
+
+[node name="enemy_1" parent="." instance=ExtResource("7_rxcmw")]
