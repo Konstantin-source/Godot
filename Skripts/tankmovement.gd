@@ -4,8 +4,8 @@ extends CharacterBody2D
 @export var acceleration_duration = 0.5
 @export var deceleration_duration = 1.5
 @export var acc_curve : Curve
-var acceleration_time = 0.0
-var deceleration_time = 0.0
+@export var acceleration_time = 0.0
+var deceleration_time = 0.5
 var speed = 400
 var speed_scale = 0
 
@@ -28,9 +28,8 @@ func _physics_process(delta: float) -> void:
 		speed_scale = acceleration_time / deceleration_duration
 		var speed_factor = acc_curve.sample(speed_scale)
 		moving(speed_factor)
-		
-	move_and_slide()
 	
+	move_and_slide()
 	
 func moving(rightspeed: float):
 	#print("Rightspeed: ", rightspeed)
@@ -40,8 +39,12 @@ func moving(rightspeed: float):
 
 func _on_get_input_input_direction_changed(newInputDirection: Vector2) -> void:
 	input_direction = newInputDirection
-	print(input_direction)
-
 	
 func get_current_rotation():
 	return $body.rotation
+# die input_direction ist am anfang richtig gesetzt, aber wrid dann auf 0, wahrscheinlich hängt das mit der accleration_time zusammen, dass die runter geht und die werte dann nicht mehr richtig beschleunigt werden
+# 6 wird aufgerufen dh wahreinlich wird die neu direction nur einmal übergeben
+
+
+func _on_node_2_input_direction_changed(newInputDirection: Variant) -> void:
+	input_direction = newInputDirection

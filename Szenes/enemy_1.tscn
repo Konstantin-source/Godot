@@ -1,8 +1,7 @@
-[gd_scene load_steps=297 format=3 uid="uid://d4mjliv138hwl"]
+[gd_scene load_steps=298 format=3 uid="uid://d4mjliv138hwl"]
 
-[ext_resource type="Script" path="res://Skripts/enemy_1.gd" id="1_fmgl7"]
+[ext_resource type="Script" path="res://Skripts/tankmovement.gd" id="1_y2x8k"]
 [ext_resource type="Texture2D" uid="uid://kvtx63jk4bjl" path="res://Sprites/ground_shaker_asset/Purple/Bodies/body_tracks.png" id="2_j0sa3"]
-[ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Szenes/bullet1.tscn" id="2_xjdv8"]
 [ext_resource type="Texture2D" uid="uid://c2d2k3ixfxgu4" path="res://Sprites/ground_shaker_asset/Purple/Weapons/turret_01_mk1.png" id="3_hnvm1"]
 [ext_resource type="Texture2D" uid="uid://b2x4ydm81qat7" path="res://Sprites/PixelSimulations/Flame1/0001.png" id="4_b5brj"]
 [ext_resource type="Texture2D" uid="uid://bthcln4cxeptq" path="res://Sprites/PixelSimulations/Flame1/0002.png" id="5_thwvm"]
@@ -288,6 +287,11 @@
 [ext_resource type="Texture2D" uid="uid://cupt5t4itndcj" path="res://Sprites/PixelSimulations/Explosion6/0201.png" id="286_7nam4"]
 [ext_resource type="Texture2D" uid="uid://pqjmdy65hmem" path="res://Sprites/PixelSimulations/Explosion6/0202.png" id="287_r288c"]
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="288_n82yk"]
+[ext_resource type="Script" path="res://Skripts/EnemyControl.gd" id="289_j3x34"]
+
+[sub_resource type="Curve" id="Curve_7lud1"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5esf"]
 size = Vector2(69.3642, 78.6127)
@@ -1196,12 +1200,8 @@ collision_layer = 7
 collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_fmgl7")
-SPEED = 150.0
-detection_radius = 900
-chase_Plaser_radius = 900
-damage_tank = 30
-bulletScene = ExtResource("2_xjdv8")
+script = ExtResource("1_y2x8k")
+acc_curve = SubResource("Curve_7lud1")
 
 [node name="body" type="Sprite2D" parent="."]
 texture = ExtResource("2_j0sa3")
@@ -1288,9 +1288,17 @@ debug_enabled = true
 wait_time = 0.5
 autostart = true
 
+[node name="Node2" type="Node2D" parent="."]
+position = Vector2(-505.202, -337.572)
+scale = Vector2(1.15607, 1.15607)
+script = ExtResource("289_j3x34")
+detection_radius = 800
+chase_Plaser_radius = 700
+
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Node2D/healthbar/Timer" to="Node2D/healthbar" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
-[connection signal="timeout" from="pathfinding_Timer" to="." method="_on_pathfinding_timer_timeout"]
+[connection signal="timeout" from="pathfinding_Timer" to="Node2" method="_on_pathfinding_timer_timeout"]
+[connection signal="inputDirectionChanged" from="Node2" to="." method="_on_node_2_input_direction_changed"]
