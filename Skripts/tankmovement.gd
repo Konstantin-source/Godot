@@ -31,6 +31,11 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 	
+	var mouse_pos = get_global_mouse_position()
+	var angle = (mouse_pos - global_position).angle()
+	
+	$tower.rotation = angle + PI/2
+	
 	
 func moving(rightspeed: float):
 	#print("Rightspeed: ", rightspeed)
@@ -40,7 +45,6 @@ func moving(rightspeed: float):
 
 func _on_get_input_input_direction_changed(newInputDirection: Vector2) -> void:
 	input_direction = newInputDirection
-	print(input_direction)
 
 	
 func get_current_rotation():
