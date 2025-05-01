@@ -19,6 +19,9 @@ config/icon="res://icon.svg"
 
 barrier=""
 player=""
+shootingPoint=""
+tower=""
+enemy=""
 
 [input]
 
