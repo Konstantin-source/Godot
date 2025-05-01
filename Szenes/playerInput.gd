@@ -1,5 +1,8 @@
 extends Node
+
 var input_direction = Vector2.ZERO
+var reload_time_over = true
+
 
 signal inputDirectionChanged(newInputDirection)
 # Called when the node enters the scene tree for the first time.
@@ -20,3 +23,5 @@ func _physics_process(delta: float) -> void:
 		input_direction.y += 1
 		
 	inputDirectionChanged.emit(input_direction)
+
+	

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Szenes/bullet1.tscn" id="2_xjdv8"]
 [ext_resource type="Texture2D" uid="uid://c2d2k3ixfxgu4" path="res://Sprites/ground_shaker_asset/Purple/Weapons/turret_01_mk1.png" id="3_hnvm1"]
 [ext_resource type="Texture2D" uid="uid://b2x4ydm81qat7" path="res://Sprites/PixelSimulations/Flame1/0001.png" id="4_b5brj"]
+[ext_resource type="Script" path="res://Skripts/shoot.gd" id="5_csuj6"]
 [ext_resource type="Texture2D" uid="uid://bthcln4cxeptq" path="res://Sprites/PixelSimulations/Flame1/0002.png" id="5_thwvm"]
 [ext_resource type="Texture2D" uid="uid://dvewcwofmutwa" path="res://Sprites/PixelSimulations/Flame1/0003.png" id="6_lq855"]
 [ext_resource type="Texture2D" uid="uid://y2n27p61ufq4" path="res://Sprites/PixelSimulations/Flame1/0004.png" id="7_5axne"]
@@ -290,6 +291,7 @@
 [ext_resource type="Texture2D" uid="uid://pqjmdy65hmem" path="res://Sprites/PixelSimulations/Explosion6/0202.png" id="287_r288c"]
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="288_n82yk"]
 [ext_resource type="Script" path="res://Skripts/tank_health.gd" id="289_05ms6"]
+[ext_resource type="Script" path="res://Szenes/controler_enemy.gd" id="290_bgh3v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5esf"]
 size = Vector2(69.3642, 78.6127)
@@ -1191,7 +1193,7 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="enemy_1" type="CharacterBody2D"]
+[node name="enemy_1" type="CharacterBody2D" groups=["enemy"]]
 position = Vector2(437, 292)
 scale = Vector2(0.865, 0.865)
 collision_layer = 7
@@ -1216,6 +1218,10 @@ shape = SubResource("RectangleShape2D_o5esf")
 texture = ExtResource("3_hnvm1")
 region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
+script = ExtResource("5_csuj6")
+bulletScene = ExtResource("2_xjdv8")
+tower_path = NodePath(".")
+shoot_point_path = NodePath("rohr_Ende")
 
 [node name="rohr_Ende" type="Marker2D" parent="tower"]
 position = Vector2(0, -61.145)
@@ -1298,6 +1304,12 @@ autostart = true
 [node name="Health" type="Node" parent="."]
 script = ExtResource("289_05ms6")
 
+[node name="ControlerEnemy" type="Node" parent="."]
+script = ExtResource("290_bgh3v")
+detection_radius = 900
+chase_Plaser_radius = 800
+
+[connection signal="isInRange" from="." to="tower" method="_on_enemy_1_is_in_range"]
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="body_entered" from="Area2D" to="Health" method="_on_area_2d_body_entered"]
