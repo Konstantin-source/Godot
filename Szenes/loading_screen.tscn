@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://beg6e2kgsorik"]
 
 [ext_resource type="Script" path="res://Skripts/loading_screen.gd" id="1_217f6"]
-[ext_resource type="Texture2D" uid="uid://b6om663es154w" path="res://Sprites/wallpaper/DALL·E 2025-02-25 22.29.39 - A small, damaged pixel-art tank with rounded but angular elements and a classic caterpillar drive stands in the foreground on solid, bomb-scarred grou.webp" id="2_5i7bj"]
+[ext_resource type="Texture2D" path="res://Sprites/wallpaper/DALL·E 2025-02-25 22.29.39 - A small, damaged pixel-art tank with rounded but angular elements and a classic caterpillar drive stands in the foreground on solid, bomb-scarred grou.webp" id="2_5i7bj"]
 
 [node name="LoadingScreen" type="Control"]
 layout_mode = 3

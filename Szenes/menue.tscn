@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ccond0cnl40ct"]
 
 [ext_resource type="Script" path="res://Skripts/menue.gd" id="1_pa88q"]
-[ext_resource type="Texture2D" uid="uid://c4vquyip2g8c7" path="res://Sprites/wallpaper/DALL·E 2025-02-24 22.08.10 - A pixel art-style digital painting of a battle-worn tank with a cape draped over it, giving it a heroic yet melancholic appearance. The tank's barrel .webp" id="2_kc7fc"]
+[ext_resource type="Texture2D" path="res://Sprites/wallpaper/DALL·E 2025-02-24 22.08.10 - A pixel art-style digital painting of a battle-worn tank with a cape draped over it, giving it a heroic yet melancholic appearance. The tank's barrel .webp" id="2_kc7fc"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_03il4"]
 

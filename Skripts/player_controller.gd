@@ -1,7 +1,9 @@
-extends Node
+extends Node2D
 var input_direction: Vector2 = Vector2.ZERO
+var rotation_direction: Vector2 = Vector2.ZERO
 
-signal inputDirectionChanged(newInputDirection)
+signal input_direction_changed(new_input_direction)
+signal rotation_direction_changed(new_rotation_direction)
 signal shoot()
 signal reload()
 
@@ -20,14 +22,15 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed("up"):
 		input_direction.y += 1
 		
-	inputDirectionChanged.emit(input_direction)
+	input_direction_changed.emit(input_direction)
 
 	if Input.is_action_just_pressed("fire"):
 		shoot.emit()
-	#user_ui.just_shoot()
 
 	if Input.is_action_just_pressed("reload"):
 		reload.emit()
+		
+	rotation_direction_changed.emit(get_global_mouse_position() - global_position)
 
 func _on_tank_destroyed() -> void:
 	death_animation.show()

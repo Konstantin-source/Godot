@@ -1224,23 +1224,22 @@ speed_scale = 2.0
 [node name="playerInterface" parent="." instance=ExtResource("330_82slw")]
 visible = false
 
-[node name="PlayerController" type="Node" parent="."]
-script = ExtResource("288_ylkgc")
-
 [node name="Health" type="Node" parent="."]
 script = ExtResource("289_ao26r")
+
+[node name="PlayerController2" type="Node2D" parent="."]
+script = ExtResource("288_ylkgc")
 
 [connection signal="body_entered" from="body/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="body/Area2D" to="Health" method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
-[connection signal="animation_finished" from="death" to="PlayerController" method="_on_death_animation_finished"]
-[connection signal="inputDirectionChanged" from="PlayerController" to="." method="_on_get_input_input_direction_changed"]
-[connection signal="reload" from="PlayerController" to="tower" method="reload"]
-[connection signal="shoot" from="PlayerController" to="tower" method="shoot"]
 [connection signal="health_changed" from="Health" to="playerInterface/CanvasLayer/healthbar" method="_set_health"]
 [connection signal="init_health" from="Health" to="playerInterface/CanvasLayer/healthbar" method="init_health"]
-[connection signal="tank_destroyed" from="Health" to="PlayerController" method="_on_tank_destroyed"]
+[connection signal="input_direction_changed" from="PlayerController2" to="." method="_on_get_input_input_direction_changed"]
+[connection signal="reload" from="PlayerController2" to="tower" method="reload"]
+[connection signal="rotation_direction_changed" from="PlayerController2" to="." method="_on_get_rotation_direction_changed"]
+[connection signal="shoot" from="PlayerController2" to="tower" method="shoot"]
 
 [editable path="playerInterface"]

@@ -1,6 +1,7 @@
 extends Node
 
 signal shoot()
+signal input_rotation_changed(new_input_rotation)
 var target_angle: float           = 0.0
 var time_since_last_change: float = 0.0
 var player: CharacterBody2D       = null
@@ -27,7 +28,6 @@ func _physics_process(delta: float) -> void:
 
 	if is_instance_valid(player) and is_instance_valid($".."):
 		var distance_to_player = (player.global_position - $"..".global_position).length()
-		print("Distance to player: ", distance_to_player)
 
 		if player and detection_radius >= distance_to_player:
 			target_angle = (player.global_position - $"..".global_position).angle() +PI/2

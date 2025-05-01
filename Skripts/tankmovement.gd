@@ -10,6 +10,7 @@ var speed = 400
 var speed_scale = 0
 
 var input_direction = Vector2.ZERO
+var rotation_direction = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 
@@ -31,8 +32,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-	var mouse_pos = get_global_mouse_position()
-	var angle = (mouse_pos - global_position).angle()
+	var angle: float = rotation_direction.angle()
 	
 	$tower.rotation = angle + PI/2
 	
@@ -45,13 +45,11 @@ func moving(rightspeed: float):
 
 func _on_get_input_input_direction_changed(newInputDirection: Vector2) -> void:
 	input_direction = newInputDirection
-
+	
+func _on_get_rotation_direction_changed(new_rotation_direction: Vector2) -> void:
+	rotation_direction = new_rotation_direction
 	
 func get_current_rotation():
 	return $body.rotation
 # die input_direction ist am anfang richtig gesetzt, aber wrid dann auf 0, wahrscheinlich hängt das mit der accleration_time zusammen, dass die runter geht und die werte dann nicht mehr richtig beschleunigt werden
 # 6 wird aufgerufen dh wahreinlich wird die neu direction nur einmal übergeben
-
-
-func _on_node_2_input_direction_changed(newInputDirection: Variant) -> void:
-	input_direction = newInputDirection
