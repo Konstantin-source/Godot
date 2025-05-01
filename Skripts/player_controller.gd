@@ -2,6 +2,8 @@ extends Node
 var input_direction: Vector2 = Vector2.ZERO
 
 signal inputDirectionChanged(newInputDirection)
+signal shoot()
+signal reload()
 
 @export var death_animation: AnimatedSprite2D
 @export var nodes_to_hide: Array[Node2D] = []
@@ -19,6 +21,13 @@ func _physics_process(_delta: float) -> void:
 		input_direction.y += 1
 		
 	inputDirectionChanged.emit(input_direction)
+
+	if Input.is_action_just_pressed("fire"):
+		shoot.emit()
+	#user_ui.just_shoot()
+
+	if Input.is_action_just_pressed("reload"):
+		reload.emit()
 
 func _on_tank_destroyed() -> void:
 	death_animation.show()

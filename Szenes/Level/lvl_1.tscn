@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cn86yyho52j7d"]
+[gd_scene load_steps=13 format=4 uid="uid://cn86yyho52j7d"]
 
 [ext_resource type="Texture2D" uid="uid://c5c8yqsq5gueh" path="res://Sprites/ground_shaker_asset/terrain.png" id="1_6yhdv"]
 [ext_resource type="Texture2D" uid="uid://dj83tnq6iyny0" path="res://Sprites/ground_shaker_asset/Red/Towers/towers_walls_grass_dark_1.png" id="2_juv64"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b4hooddqsnusb" path="res://Szenes/turrets.tscn" id="3_msake"]
 [ext_resource type="PackedScene" uid="uid://bdt4dmy328xje" path="res://Szenes/tank_1.tscn" id="3_sf33a"]
 [ext_resource type="PackedScene" uid="uid://cvfqosxw40bub" path="res://Szenes/enemy_spawn.tscn" id="5_v21ci"]
+[ext_resource type="PackedScene" uid="uid://d4mjliv138hwl" path="res://Szenes/enemy_1.tscn" id="7_tkc4n"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_s324l"]
 vertices = PackedVector2Array(64, 64, -64, 64, -64, -64, 64, -64)
@@ -215,3 +216,5 @@ position = Vector2(2624, 574)
 
 [node name="turret_14" parent="." instance=ExtResource("3_msake")]
 position = Vector2(3010, 574)
+
+[node name="enemy_1" parent="." instance=ExtResource("7_tkc4n")]

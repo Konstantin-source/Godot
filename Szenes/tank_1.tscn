@@ -1,7 +1,6 @@
 [gd_scene load_steps=297 format=3 uid="uid://bdt4dmy328xje"]
 
-[ext_resource type="Script" path="res://Skripts/tank_1.gd" id="1_55skn"]
-[ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Szenes/bullet1.tscn" id="2_fnl1j"]
+[ext_resource type="Script" path="res://Skripts/tankmovement.gd" id="1_u2up0"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Szenes/bullet1.tscn" id="2_7ygv3"]
 [ext_resource type="Texture2D" uid="uid://u6k16e23tnww" path="res://Sprites/ground_shaker_asset/Desert/Bodies/body_tracks.png" id="2_q50ly"]
 [ext_resource type="Texture2D" uid="uid://dhqiww6hke8od" path="res://Sprites/ground_shaker_asset/Desert/Weapons/turret_01_mk1.png" id="3_q5vmj"]
@@ -291,11 +290,9 @@
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="287_cikdl"]
 [ext_resource type="Script" path="res://Skripts/player_controller.gd" id="288_ylkgc"]
 [ext_resource type="Script" path="res://Skripts/tank_health.gd" id="289_ao26r"]
-[ext_resource type="Script" path="res://Szenes/playerInput.gd" id="288_ylkgc"]
-[ext_resource type="Script" path="res://Szenes/controler.gd" id="291_04d80"]
 [ext_resource type="PackedScene" uid="uid://bsnn5owen8gqq" path="res://Szenes/playerInterface.tscn" id="330_82slw"]
 
-[sub_resource type="Curve" id="Curve_74ivj"]
+[sub_resource type="Curve" id="Curve_oaenc"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
 point_count = 2
 
@@ -1175,9 +1172,8 @@ position = Vector2(568, 320)
 scale = Vector2(0.865, 0.865)
 collision_layer = 18
 collision_mask = 18
-script = ExtResource("1_55skn")
-bulletScene = ExtResource("2_fnl1j")
-acc_curve = SubResource("Curve_74ivj")
+script = ExtResource("1_u2up0")
+acc_curve = SubResource("Curve_oaenc")
 metadata/_edit_group_ = true
 
 [node name="body" type="Sprite2D" parent="."]
@@ -1226,32 +1222,25 @@ frame_progress = 1.0
 speed_scale = 2.0
 
 [node name="playerInterface" parent="." instance=ExtResource("330_82slw")]
-controlerPath = NodePath("../Controler")
 visible = false
 
-[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("death_animation", "nodes_to_hide", "nodes_to_disable")]
+[node name="PlayerController" type="Node" parent="."]
 script = ExtResource("288_ylkgc")
-death_animation = NodePath("../death")
-nodes_to_hide = [NodePath("../body"), NodePath("../tower")]
-nodes_to_disable = [NodePath("../body/Area2D/scanarea"), NodePath("../CollisionShape2D")]
 
-[node name="Controler" type="Node" parent="."]
-script = ExtResource("291_04d80")
-
-[connection signal="body_entered" from="body/Area2D" to="." method="_on_area_2d_body_entered"]
 [node name="Health" type="Node" parent="."]
 script = ExtResource("289_ao26r")
 
+[connection signal="body_entered" from="body/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="body/Area2D" to="Health" method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
+[connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
 [connection signal="animation_finished" from="death" to="PlayerController" method="_on_death_animation_finished"]
 [connection signal="inputDirectionChanged" from="PlayerController" to="." method="_on_get_input_input_direction_changed"]
+[connection signal="reload" from="PlayerController" to="tower" method="reload"]
+[connection signal="shoot" from="PlayerController" to="tower" method="shoot"]
 [connection signal="health_changed" from="Health" to="playerInterface/CanvasLayer/healthbar" method="_set_health"]
 [connection signal="init_health" from="Health" to="playerInterface/CanvasLayer/healthbar" method="init_health"]
 [connection signal="tank_destroyed" from="Health" to="PlayerController" method="_on_tank_destroyed"]
 
 [editable path="playerInterface"]
-[connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
-[connection signal="inputDirectionChanged" from="GetInput" to="." method="_on_get_input_input_direction_changed"]
-[connection signal="shoot" from="Controler" to="tower" method="_on_controler_shoot"]
