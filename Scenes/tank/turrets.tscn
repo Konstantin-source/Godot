@@ -1,0 +1,232 @@
+[gd_scene load_steps=39 format=3 uid="uid://b4hooddqsnusb"]
+
+[ext_resource type="Script" path="res://Skripts/enemy/turrets.gd" id="1_rjjwb"]
+[ext_resource type="Texture2D" uid="uid://d1bwy50ntynot" path="res://Sprites/ground_shaker_asset/Red/Weapons/weapons.png" id="2_d44ay"]
+[ext_resource type="Texture2D" uid="uid://tjsh0vjq3ru" path="res://Sprites/ground_shaker_asset/Red/Weapons/turret_01_mk2.png" id="3_a4r7i"]
+[ext_resource type="Texture2D" uid="uid://chvbr6m2se4rv" path="res://Sprites/ground_shaker_asset/Red/Towers/towers_walls_blank.png" id="4_ceqnt"]
+[ext_resource type="Texture2D" uid="uid://f078jxs81msw" path="res://Sprites/PixelSimulations/Explosion2/0001.png" id="5_sabnc"]
+[ext_resource type="Texture2D" uid="uid://bbbeqwonijl7w" path="res://Sprites/PixelSimulations/Explosion2/0002.png" id="6_y5kpn"]
+[ext_resource type="Texture2D" uid="uid://cmrxt7tr2igd7" path="res://Sprites/PixelSimulations/Explosion2/0003.png" id="7_bt3oe"]
+[ext_resource type="Texture2D" uid="uid://cr15dfry1bqw6" path="res://Sprites/PixelSimulations/Explosion2/0004.png" id="8_o16rw"]
+[ext_resource type="Texture2D" uid="uid://mbg0cbcqbtfn" path="res://Sprites/PixelSimulations/Explosion2/0005.png" id="9_ffmro"]
+[ext_resource type="Texture2D" uid="uid://ca15t8msktahb" path="res://Sprites/PixelSimulations/Explosion2/0006.png" id="10_5bldt"]
+[ext_resource type="Texture2D" uid="uid://c6vkw5vqam32s" path="res://Sprites/PixelSimulations/Explosion2/0007.png" id="11_qo3bb"]
+[ext_resource type="Texture2D" uid="uid://csoucissw2tk8" path="res://Sprites/PixelSimulations/Explosion2/0008.png" id="12_2kkso"]
+[ext_resource type="Texture2D" uid="uid://csuykt82silse" path="res://Sprites/PixelSimulations/Explosion2/0009.png" id="13_r8meo"]
+[ext_resource type="Texture2D" uid="uid://cipbcxecjvuoi" path="res://Sprites/PixelSimulations/Explosion2/0010.png" id="14_4f0jx"]
+[ext_resource type="Texture2D" uid="uid://d2j0m2gwuwmw1" path="res://Sprites/PixelSimulations/Explosion2/0011.png" id="15_n38h5"]
+[ext_resource type="Texture2D" uid="uid://bpgmjx7pbptpg" path="res://Sprites/PixelSimulations/Explosion2/0012.png" id="16_kcbx4"]
+[ext_resource type="Texture2D" uid="uid://bhbtplqiv0650" path="res://Sprites/PixelSimulations/Explosion2/0013.png" id="17_7drmd"]
+[ext_resource type="Texture2D" uid="uid://ijnqndyftuxb" path="res://Sprites/PixelSimulations/Explosion2/0014.png" id="18_ktds7"]
+[ext_resource type="Texture2D" uid="uid://d1nd7xxa4v5w1" path="res://Sprites/PixelSimulations/Explosion2/0015.png" id="19_fqh3p"]
+[ext_resource type="Texture2D" uid="uid://ddcxqkppdkbjn" path="res://Sprites/PixelSimulations/Explosion2/0016.png" id="20_nggu0"]
+[ext_resource type="Texture2D" uid="uid://w76gumdetlny" path="res://Sprites/PixelSimulations/Explosion2/0017.png" id="21_kkasl"]
+[ext_resource type="Texture2D" uid="uid://dchgkk8q8l7wo" path="res://Sprites/PixelSimulations/Explosion2/0018.png" id="22_cqy8b"]
+[ext_resource type="Texture2D" uid="uid://t5oynhyexou6" path="res://Sprites/PixelSimulations/Explosion2/0019.png" id="23_qubdh"]
+[ext_resource type="Texture2D" uid="uid://cl5vb7a80fxdx" path="res://Sprites/PixelSimulations/Explosion2/0020.png" id="24_wbgco"]
+[ext_resource type="PackedScene" uid="uid://dbfhw33ccpft0" path="res://Scenes/ui/enemy_health.tscn" id="25_37duw"]
+[ext_resource type="Script" path="res://Skripts/tank/tank_health.gd" id="26_xan4k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1boim"]
+atlas = ExtResource("3_a4r7i")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1youf"]
+atlas = ExtResource("3_a4r7i")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7inj"]
+atlas = ExtResource("3_a4r7i")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_of0am"]
+atlas = ExtResource("3_a4r7i")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efdlk"]
+atlas = ExtResource("3_a4r7i")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqqk8"]
+atlas = ExtResource("3_a4r7i")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8wvj"]
+atlas = ExtResource("3_a4r7i")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mycwx"]
+atlas = ExtResource("3_a4r7i")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q00uc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1boim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1youf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7inj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_of0am")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efdlk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqqk8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8wvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mycwx")
+}],
+"loop": false,
+"name": &"shooting",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rghsv"]
+radius = 32.5346
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fl4yv"]
+radius = 71.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r014m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_sabnc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_y5kpn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bt3oe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_o16rw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ffmro")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_5bldt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_qo3bb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2kkso")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_r8meo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_4f0jx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_n38h5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_kcbx4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_7drmd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ktds7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_fqh3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_nggu0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_kkasl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_cqy8b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_qubdh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_wbgco")
+}],
+"loop": false,
+"name": &"death",
+"speed": 60.0
+}]
+
+[node name="turret_1" type="StaticBody2D"]
+collision_layer = 3
+script = ExtResource("1_rjjwb")
+range = 800.0
+
+[node name="tower" type="Sprite2D" parent="."]
+position = Vector2(0, -2.75)
+scale = Vector2(1.26563, 1.13125)
+texture = ExtResource("2_d44ay")
+region_enabled = true
+region_rect = Rect2(113, 0, 64, 80)
+
+[node name="schuss" type="AnimatedSprite2D" parent="tower"]
+position = Vector2(-1.32435, 4.90444)
+scale = Vector2(0.979307, 1.09134)
+sprite_frames = SubResource("SpriteFrames_q00uc")
+animation = &"shooting"
+frame = 7
+frame_progress = 1.0
+
+[node name="rohr_Ende" type="Marker2D" parent="tower"]
+position = Vector2(0, -60)
+
+[node name="base" type="Sprite2D" parent="."]
+visible = false
+show_behind_parent = true
+texture = ExtResource("4_ceqnt")
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+
+[node name="collision" type="CollisionShape2D" parent="."]
+light_mask = 3
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_rghsv")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_fl4yv")
+
+[node name="death" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -13)
+scale = Vector2(5.105, 5.105)
+sprite_frames = SubResource("SpriteFrames_r014m")
+animation = &"death"
+frame = 19
+frame_progress = 1.0
+speed_scale = 0.5
+
+[node name="enemyHealth" parent="." instance=ExtResource("25_37duw")]
+position = Vector2(-89, 26)
+scale = Vector2(0.46, 0.46)
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("26_xan4k")
+
+[connection signal="body_entered" from="Area2D" to="Health" method="_on_area_2d_body_entered"]
+[connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
+[connection signal="health_changed" from="Health" to="enemyHealth/healthbar" method="_set_health"]
+[connection signal="init_health" from="Health" to="enemyHealth/healthbar" method="init_health"]
+[connection signal="tank_destroyed" from="Health" to="." method="_on_turret_destroyed"]
+
+[editable path="enemyHealth"]

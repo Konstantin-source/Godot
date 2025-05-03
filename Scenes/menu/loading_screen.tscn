@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://beg6e2kgsorik"]
+
+[ext_resource type="Script" path="res://Skripts/menu/loading_screen.gd" id="1_k6igc"]
+[ext_resource type="Texture2D" uid="uid://n55d0arai2xt" path="res://Sprites/wallpaper/Background1.webp" id="2_2v2op"]
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k6igc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.162066, 0.162066, 0.162066, 0.431373)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -307.0
+offset_right = 68.0
+offset_bottom = 317.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2v2op")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lädt..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="TextureProgressBar" parent="."]
+modulate = Color(0, 1, 1, 1)
+top_level = true
+light_mask = 15
+visibility_layer = 15
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+rounded = true
+tint_under = Color(0, 1, 1, 1)
+tint_over = Color(0.826889, 0.408828, 0.980272, 1)
+tint_progress = Color(1, 1, 0, 1)
