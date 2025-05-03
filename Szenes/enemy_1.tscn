@@ -1307,7 +1307,6 @@ script = ExtResource("289_05ms6")
 [node name="ControlerEnemy" type="Node" parent="."]
 script = ExtResource("292_3cap7")
 detection_radius = 900
-chase_Plaser_radius = 800
 
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
