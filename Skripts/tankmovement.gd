@@ -1,25 +1,18 @@
 extends CharacterBody2D
 
 @onready var rotation_degree = $body.rotation
-@export var acceleration_duration: float = 0.5
-@export var deceleration_duration: float = 1.5
+@export var acceleration_duration = 0.5
+@export var deceleration_duration = 1.5
 @export var acc_curve : Curve
-@export var acceleration_time: float = 0.0
-@export var speed: int               = 200
-var deceleration_time: float = 0.5
-var speed_scale: float         = 0
-var can_dash : bool = true
-signal is_dashing
-@export var dash_time = .1
-@export var dash_timeout :float  = 3
+@export var acceleration_time = 0.0
+var deceleration_time = 0.5
+var speed = 400
+var speed_scale = 0
 
-var input_direction: Vector2    = Vector2.ZERO
-var rotation_direction: Vector2 = Vector2.ZERO
+var input_direction = Vector2.ZERO
+var rotation_direction = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
-	if (!is_instance_valid($body)):
-		return
-
 
 	rotation_degree = input_direction.angle() - PI/2
 	if input_direction != Vector2.ZERO:
@@ -35,7 +28,6 @@ func _physics_process(delta: float) -> void:
 		acceleration_time = max(acceleration_time - delta, 0)
 		speed_scale = acceleration_time / deceleration_duration
 		var speed_factor = acc_curve.sample(speed_scale)
-		
 		moving(speed_factor)
 	
 	move_and_slide()
@@ -59,18 +51,5 @@ func _on_get_rotation_direction_changed(new_rotation_direction: Vector2) -> void
 	
 func get_current_rotation():
 	return $body.rotation
-	
-
 # die input_direction ist am anfang richtig gesetzt, aber wrid dann auf 0, wahrscheinlich hängt das mit der accleration_time zusammen, dass die runter geht und die werte dann nicht mehr richtig beschleunigt werden
 # 6 wird aufgerufen dh wahreinlich wird die neu direction nur einmal übergeben
-
-
-func dash() -> void:
-	if can_dash:
-		can_dash = false
-		speed = speed * 2
-		is_dashing.emit()
-		await get_tree().create_timer(dash_time).timeout
-		speed = speed / 2
-		await get_tree().create_timer(dash_timeout).timeout
-		can_dash = true

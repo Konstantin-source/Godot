@@ -226,6 +226,7 @@ script = ExtResource("1_hi7w3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.675, 0.675)
+position_smoothing_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
