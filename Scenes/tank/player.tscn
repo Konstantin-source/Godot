@@ -1,10 +1,10 @@
 [gd_scene load_steps=297 format=3 uid="uid://bdt4dmy328xje"]
 
-[ext_resource type="Script" path="res://Skripts/tank/tank_movement.gd" id="1_u2up0"]
+[ext_resource type="Script" uid="uid://u0kcym75namg" path="res://Skripts/tank/tank_movement.gd" id="1_u2up0"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="2_7ygv3"]
 [ext_resource type="Texture2D" uid="uid://u6k16e23tnww" path="res://Sprites/ground_shaker_asset/Desert/Bodies/body_tracks.png" id="2_q50ly"]
 [ext_resource type="Texture2D" uid="uid://dhqiww6hke8od" path="res://Sprites/ground_shaker_asset/Desert/Weapons/turret_01_mk1.png" id="3_q5vmj"]
-[ext_resource type="Script" path="res://Skripts/tank/tank_shoot.gd" id="4_vkr7l"]
+[ext_resource type="Script" uid="uid://b4osbpd7nq4yo" path="res://Skripts/tank/tank_shoot.gd" id="4_vkr7l"]
 [ext_resource type="Texture2D" uid="uid://b2x4ydm81qat7" path="res://Sprites/PixelSimulations/Flame1/0001.png" id="5_oebnc"]
 [ext_resource type="Texture2D" uid="uid://bthcln4cxeptq" path="res://Sprites/PixelSimulations/Flame1/0002.png" id="6_vsy73"]
 [ext_resource type="Texture2D" uid="uid://dvewcwofmutwa" path="res://Sprites/PixelSimulations/Flame1/0003.png" id="7_eqgw3"]
@@ -288,8 +288,8 @@
 [ext_resource type="Texture2D" uid="uid://cupt5t4itndcj" path="res://Sprites/PixelSimulations/Explosion6/0201.png" id="285_5ec5p"]
 [ext_resource type="Texture2D" uid="uid://pqjmdy65hmem" path="res://Sprites/PixelSimulations/Explosion6/0202.png" id="286_hylt5"]
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="287_cikdl"]
-[ext_resource type="Script" path="res://Skripts/player/player_controller.gd" id="288_ylkgc"]
-[ext_resource type="Script" path="res://Skripts/tank/tank_health.gd" id="289_ao26r"]
+[ext_resource type="Script" uid="uid://ci8fxeru2trw3" path="res://Skripts/player/player_controller.gd" id="288_ylkgc"]
+[ext_resource type="Script" uid="uid://dvsqcvg2pxki4" path="res://Skripts/tank/tank_health.gd" id="289_ao26r"]
 [ext_resource type="PackedScene" uid="uid://bsnn5owen8gqq" path="res://Scenes/ui/playerInterface.tscn" id="330_82slw"]
 
 [sub_resource type="Curve" id="Curve_oaenc"]
