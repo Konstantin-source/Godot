@@ -1,8 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://b4hooddqsnusb"]
+[gd_scene load_steps=41 format=3 uid="uid://b4hooddqsnusb"]
 
 [ext_resource type="Script" path="res://Skripts/enemy/turrets.gd" id="1_rjjwb"]
 [ext_resource type="Texture2D" uid="uid://d1bwy50ntynot" path="res://Sprites/ground_shaker_asset/Red/Weapons/weapons.png" id="2_d44ay"]
 [ext_resource type="Texture2D" uid="uid://tjsh0vjq3ru" path="res://Sprites/ground_shaker_asset/Red/Weapons/turret_01_mk2.png" id="3_a4r7i"]
+[ext_resource type="Script" path="res://Skripts/tank/tank_shoot.gd" id="3_qnp72"]
+[ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="4_4xsx7"]
 [ext_resource type="Texture2D" uid="uid://chvbr6m2se4rv" path="res://Sprites/ground_shaker_asset/Red/Towers/towers_walls_blank.png" id="4_ceqnt"]
 [ext_resource type="Texture2D" uid="uid://f078jxs81msw" path="res://Sprites/PixelSimulations/Explosion2/0001.png" id="5_sabnc"]
 [ext_resource type="Texture2D" uid="uid://bbbeqwonijl7w" path="res://Sprites/PixelSimulations/Explosion2/0002.png" id="6_y5kpn"]
@@ -87,7 +89,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_mycwx")
 }],
 "loop": false,
-"name": &"shooting",
+"name": &"default",
 "speed": 20.0
 }]
 
@@ -169,6 +171,7 @@ animations = [{
 collision_layer = 3
 script = ExtResource("1_rjjwb")
 range = 800.0
+shoot_speed = 3.0
 
 [node name="tower" type="Sprite2D" parent="."]
 position = Vector2(0, -2.75)
@@ -176,14 +179,19 @@ scale = Vector2(1.26563, 1.13125)
 texture = ExtResource("2_d44ay")
 region_enabled = true
 region_rect = Rect2(113, 0, 64, 80)
+script = ExtResource("3_qnp72")
+max_shots = 1
+shot_delay = 2.0
+bulletScene = ExtResource("4_4xsx7")
+recoilDuration = 10.0
+tower_path = NodePath(".")
+shoot_point_path = NodePath("rohr_Ende")
+shoot_animation_path = NodePath("schuss")
 
 [node name="schuss" type="AnimatedSprite2D" parent="tower"]
 position = Vector2(-1.32435, 4.90444)
 scale = Vector2(0.979307, 1.09134)
 sprite_frames = SubResource("SpriteFrames_q00uc")
-animation = &"shooting"
-frame = 7
-frame_progress = 1.0
 
 [node name="rohr_Ende" type="Marker2D" parent="tower"]
 position = Vector2(0, -60)
