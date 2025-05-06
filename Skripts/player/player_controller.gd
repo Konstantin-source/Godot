@@ -6,6 +6,7 @@ signal input_direction_changed(new_input_direction)
 signal rotation_direction_changed(new_rotation_direction)
 signal shoot()
 signal reload()
+signal dash()
 
 @export var death_animation: AnimatedSprite2D
 @export var nodes_to_hide: Array[Node2D] = []
@@ -29,6 +30,10 @@ func _physics_process(_delta: float) -> void:
 
 	if Input.is_action_just_pressed("reload"):
 		reload.emit()
+	
+	#Dash
+	if Input.is_action_just_pressed("Dash"):
+		dash.emit()
 		
 	rotation_direction_changed.emit(get_global_mouse_position() - global_position)
 
