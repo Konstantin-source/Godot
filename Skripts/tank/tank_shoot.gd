@@ -34,12 +34,10 @@ func _physics_process(delta: float) -> void:
 
 func shoot() -> void:
 	if current_shots >= max_shots:
-		print(reload)
 		reload()
 		return
 
 	if time_since_last_shot <= shot_delay:
-		print("shot delay")
 		return
 	
 	time_since_last_shot = 0

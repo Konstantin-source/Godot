@@ -180,8 +180,8 @@ texture = ExtResource("2_d44ay")
 region_enabled = true
 region_rect = Rect2(113, 0, 64, 80)
 script = ExtResource("3_qnp72")
-max_shots = 1
-shot_delay = 2.0
+max_shots = 2
+shot_delay = 0.2
 bulletScene = ExtResource("4_4xsx7")
 recoilDuration = 10.0
 tower_path = NodePath(".")
@@ -197,7 +197,6 @@ sprite_frames = SubResource("SpriteFrames_q00uc")
 position = Vector2(0, -60)
 
 [node name="base" type="Sprite2D" parent="."]
-visible = false
 show_behind_parent = true
 texture = ExtResource("4_ceqnt")
 region_enabled = true
@@ -228,13 +227,13 @@ speed_scale = 0.5
 position = Vector2(-89, 26)
 scale = Vector2(0.46, 0.46)
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="enemyHealth"]
 script = ExtResource("26_xan4k")
 
-[connection signal="body_entered" from="Area2D" to="Health" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D" to="enemyHealth/Health" method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
-[connection signal="health_changed" from="Health" to="enemyHealth/healthbar" method="_set_health"]
-[connection signal="init_health" from="Health" to="enemyHealth/healthbar" method="init_health"]
-[connection signal="tank_destroyed" from="Health" to="." method="_on_turret_destroyed"]
+[connection signal="health_changed" from="enemyHealth/Health" to="enemyHealth/healthbar" method="_set_health"]
+[connection signal="init_health" from="enemyHealth/Health" to="enemyHealth/healthbar" method="init_health"]
+[connection signal="tank_destroyed" from="enemyHealth/Health" to="." method="_on_turret_destroyed"]
 
 [editable path="enemyHealth"]
