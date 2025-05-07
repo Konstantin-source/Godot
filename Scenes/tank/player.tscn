@@ -1,4 +1,4 @@
-[gd_scene load_steps=297 format=3 uid="uid://bdt4dmy328xje"]
+[gd_scene load_steps=299 format=3 uid="uid://bdt4dmy328xje"]
 
 [ext_resource type="Script" path="res://Skripts/tank/tank_movement.gd" id="1_u2up0"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="2_7ygv3"]
@@ -290,6 +290,8 @@
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="287_cikdl"]
 [ext_resource type="Script" path="res://Skripts/player/player_controller.gd" id="288_ylkgc"]
 [ext_resource type="Script" path="res://Skripts/tank/tank_health.gd" id="289_ao26r"]
+[ext_resource type="Texture2D" uid="uid://drd6ek3fu1inx" path="res://Sprites/tank_effects/tracksLarge.png" id="292_d4squ"]
+[ext_resource type="Script" path="res://Skripts/tank/track_marks.gd" id="293_6rgwo"]
 [ext_resource type="PackedScene" uid="uid://bsnn5owen8gqq" path="res://Scenes/ui/playerInterface.tscn" id="330_82slw"]
 
 [sub_resource type="Curve" id="Curve_oaenc"]
@@ -1234,6 +1236,14 @@ death_animation = NodePath("../death")
 nodes_to_hide = [NodePath("../body"), NodePath("../tower")]
 nodes_to_disable = [NodePath("../body/Area2D/scanarea"), NodePath("../CollisionShape2D")]
 
+[node name="track_marks" type="Sprite2D" parent="."]
+position = Vector2(1.15609, 2.89019)
+scale = Vector2(0.817708, 0.744776)
+texture = ExtResource("292_d4squ")
+script = ExtResource("293_6rgwo")
+
+[connection signal="spawn_new_track_mark" from="." to="." method="_on_spawn_new_track_mark"]
+[connection signal="spawn_new_track_mark" from="." to="track_marks" method="_on_spawn_new_track_mark"]
 [connection signal="body_entered" from="body/Area2D" to="Health" method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]

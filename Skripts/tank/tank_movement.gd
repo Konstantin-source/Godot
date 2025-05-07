@@ -9,6 +9,7 @@ extends CharacterBody2D
 var deceleration_time: float = 0.5
 var speed_scale: int         = 0
 
+signal spawn_new_track_mark()
 var input_direction: Vector2    = Vector2.ZERO
 var rotation_direction: Vector2 = Vector2.ZERO
 
@@ -21,6 +22,7 @@ func _physics_process(delta: float) -> void:
 		#rotieren
 		$CollisionShape2D.rotation = lerp_angle($body.rotation, rotation_degree, 5 *delta)
 		$body.rotation = lerp_angle($body.rotation, rotation_degree, 5 *delta)
+		spawn_new_track_mark.emit(Vector2.ZERO)
 		acceleration_time = min(acceleration_time+delta, acceleration_duration)
 		speed_scale = acceleration_time / acceleration_duration
 		var speed_factor = acc_curve.sample(speed_scale)

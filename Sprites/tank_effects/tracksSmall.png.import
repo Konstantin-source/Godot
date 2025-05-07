@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1wo247nmepid"
-path="res://.godot/imported/bullet-angepasst.png-757aee85f1cf1c363b844a8ef6d972d5.ctex"
+uid="uid://d3ceqxnlupbyf"
+path="res://.godot/imported/tracksSmall.png-19671d9557fd742dca53c6a67f1274ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/bullet-angepasst.png"
-dest_files=["res://.godot/imported/bullet-angepasst.png-757aee85f1cf1c363b844a8ef6d972d5.ctex"]
+source_file="res://Sprites/tank_effects/tracksSmall.png"
+dest_files=["res://.godot/imported/tracksSmall.png-19671d9557fd742dca53c6a67f1274ce.ctex"]
 
 [params]
 
