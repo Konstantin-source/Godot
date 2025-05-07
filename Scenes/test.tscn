@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://3qmdsjv10eah"]
+[gd_scene load_steps=4 format=3 uid="uid://3qmdsjv10eah"]
 
-[ext_resource type="PackedScene" uid="uid://bdt4dmy328xje" path="res://Scenes/tank/player.tscn" id="1_igyql"]
-[ext_resource type="PackedScene" uid="uid://d4mjliv138hwl" path="res://Scenes/tank/enemy.tscn" id="2_xgvum"]
+[ext_resource type="PackedScene" uid="uid://bdt4dmy328xje" path="res://Scenes/tank/player.tscn" id="1_luuyx"]
+[ext_resource type="PackedScene" uid="uid://b4hooddqsnusb" path="res://Scenes/tank/turrets.tscn" id="2_u0v3h"]
+[ext_resource type="PackedScene" uid="uid://d4mjliv138hwl" path="res://Scenes/tank/enemy.tscn" id="3_fpa3d"]
 
-[node name="Node" type="Node"]
+[node name="test" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_igyql")]
+[node name="Player" parent="." instance=ExtResource("1_luuyx")]
+position = Vector2(1076, 506)
 
-[node name="enemy_1" parent="." instance=ExtResource("2_xgvum")]
-position = Vector2(-33, 283)
+[node name="turret_1" parent="." instance=ExtResource("2_u0v3h")]
+
+[node name="enemy_1" parent="." instance=ExtResource("3_fpa3d")]
+
+[connection signal="shoot" from="turret_1" to="turret_1/tower" method="shoot"]

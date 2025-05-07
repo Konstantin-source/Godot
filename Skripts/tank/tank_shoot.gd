@@ -13,11 +13,14 @@ var current_shots: int          = 0
 @export var damage_tank: int = 10
 @export var tower_path : NodePath
 @export var shoot_point_path : NodePath
+@export var shoot_animation_path: NodePath
 signal ui_reloaded
 signal reloaded
 
 @onready var tower: Node2D = get_node(tower_path)
 @onready var shootingPipeEnd: Marker2D = get_node(shoot_point_path)
+@onready var shootingAnimation: AnimatedSprite2D = get_node (shoot_animation_path)
+
 
 var shouldShoot : bool = false
 
@@ -40,6 +43,8 @@ func shoot() -> void:
 	time_since_last_shot = 0
 	current_shots += 1
 	var bullet : RigidBody2D = bulletScene.instantiate() as Node2D
+	shootingAnimation.show()
+	shootingAnimation.play("default")
 	#$tower/Animation.show() Mit dem Signal justShoot austauschen
 	#$tower/Animation.play("default")
 	
@@ -57,7 +62,7 @@ func shoot() -> void:
 	bullet.rotation = $".".rotation 
 	bullet.initial_scale = self.scale-Vector2(0.8,0.8)
 	get_tree().current_scene.add_child(bullet)
-	
+	print(bullet)
 	#print("Bullet Scale: ", shoooot.scale)
 	#print("Self scale: ", self.scale)
 

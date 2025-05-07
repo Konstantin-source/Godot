@@ -1223,6 +1223,7 @@ shot_delay = 0.5
 bulletScene = ExtResource("5_bw2vx")
 tower_path = NodePath(".")
 shoot_point_path = NodePath("rohr_Ende")
+shoot_animation_path = NodePath("Animation")
 
 [node name="rohr_Ende" type="Marker2D" parent="tower"]
 position = Vector2(0, -61.145)
