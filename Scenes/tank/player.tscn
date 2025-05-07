@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Skripts/tank/tank_movement.gd" id="1_u2up0"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="2_7ygv3"]
 [ext_resource type="Texture2D" uid="uid://u6k16e23tnww" path="res://Sprites/ground_shaker_asset/Desert/Bodies/body_tracks.png" id="2_q50ly"]
-[ext_resource type="Gradient" uid="uid://dtn7c86m4eyxq" path="res://Scenes/tank/turbo.tres" id="3_djmfh"]
+[ext_resource type="Gradient" path="res://Scenes/tank/turbo.tres" id="3_djmfh"]
 [ext_resource type="Texture2D" uid="uid://dhqiww6hke8od" path="res://Sprites/ground_shaker_asset/Desert/Weapons/turret_01_mk1.png" id="3_q5vmj"]
 [ext_resource type="Script" path="res://Skripts/tank/tank_shoot.gd" id="4_vkr7l"]
 [ext_resource type="Texture2D" uid="uid://b2x4ydm81qat7" path="res://Sprites/PixelSimulations/Flame1/0001.png" id="5_oebnc"]
@@ -1198,6 +1198,7 @@ collision_layer = 18
 collision_mask = 18
 script = ExtResource("1_u2up0")
 acc_curve = SubResource("Curve_oaenc")
+speed = 350
 dash_time = 0.4
 metadata/_edit_group_ = true
 
@@ -1246,6 +1247,7 @@ script = ExtResource("4_vkr7l")
 bulletScene = ExtResource("2_7ygv3")
 tower_path = NodePath(".")
 shoot_point_path = NodePath("rohr_Ende")
+userUiPath = NodePath("../playerInterface/CanvasLayer/user_UI")
 
 [node name="rohr_Ende" type="Marker2D" parent="tower" groups=["shootingPoint"]]
 position = Vector2(0, -59)
@@ -1283,6 +1285,9 @@ nodes_to_disable = [NodePath("../body/Area2D/scanarea"), NodePath("../CollisionS
 [connection signal="is_dashing" from="." to="body/dustleft" method="_on_player_controller_dash"]
 [connection signal="is_dashing" from="." to="body/dustright" method="_on_player_controller_dash"]
 [connection signal="body_entered" from="body/Area2D" to="Health" method="_on_area_2d_body_entered"]
+[connection signal="justShoot" from="tower" to="playerInterface/CanvasLayer/user_UI" method="just_shoot"]
+[connection signal="ui_reload" from="tower" to="playerInterface/CanvasLayer/user_UI" method="reset_bullets"]
+[connection signal="ui_reload_animation" from="tower" to="playerInterface/CanvasLayer/user_UI" method="reload_animation"]
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]

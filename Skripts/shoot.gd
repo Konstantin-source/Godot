@@ -13,18 +13,24 @@ var current_shots = 0
 @export var damage_tank = 10
 @export var tower_path : NodePath
 @export var shoot_point_path : NodePath
+@export var userUiPath : NodePath
 signal justShoot
 signal ui_reloaded
 signal reloaded
 
 @onready var tower: Node2D = get_node(tower_path)
 @onready var shootingPipeEnd: Marker2D = get_node(shoot_point_path)
+@onready var user_ui = get_node_or_null(userUiPath)
 
 var shouldShoot : bool = false
 
 func _ready() -> void:
-	var tower = $"."
+	await get_tree().process_frame
 	shootingPipeEnd = $rohr_Ende
+	if user_ui:
+		user_ui.max_shoots_ui = max_shots
+	else:
+		push_warning("user UI wurde noch nicht geladen")
 
 
 func _physics_process(delta: float) -> void:
@@ -75,7 +81,6 @@ func reload():
 	reload_time_over = false
 	var reload_timer :float = max_shots/20.0
 	await get_tree().create_timer(reload_time).timeout
-	#user_ui.reset_bullets()
 	ui_reloaded.emit()
 	await get_tree().create_timer(reload_timer).timeout
 	current_shots = 0

@@ -95,8 +95,9 @@ func health(variance: int):
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if "damage" in body and can_take_damage:
-		health(body.damage)
 		start_damage_cooldown()
+		health(body.damage)
+		
 
 
 func start_damage_cooldown():
