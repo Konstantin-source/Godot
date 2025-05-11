@@ -1,10 +1,8 @@
-[gd_scene load_steps=304 format=3 uid="uid://bdt4dmy328xje"]
+[gd_scene load_steps=297 format=3 uid="uid://bdt4dmy328xje"]
 
 [ext_resource type="Script" path="res://Skripts/tank/tank_movement.gd" id="1_u2up0"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="2_7ygv3"]
 [ext_resource type="Texture2D" uid="uid://u6k16e23tnww" path="res://Sprites/ground_shaker_asset/Desert/Bodies/body_tracks.png" id="2_q50ly"]
-[ext_resource type="Gradient" path="res://Scenes/tank/turbo.tres" id="3_djmfh"]
-[ext_resource type="Texture2D" uid="uid://cpq64v7q5kahk" path="res://Sprites/tank_effects/trackMarkSprite.png" id="3_goqen"]
 [ext_resource type="Texture2D" uid="uid://dhqiww6hke8od" path="res://Sprites/ground_shaker_asset/Desert/Weapons/turret_01_mk1.png" id="3_q5vmj"]
 [ext_resource type="Script" path="res://Skripts/tank/tank_shoot.gd" id="4_vkr7l"]
 [ext_resource type="Texture2D" uid="uid://b2x4ydm81qat7" path="res://Sprites/PixelSimulations/Flame1/0001.png" id="5_oebnc"]
@@ -292,37 +290,14 @@
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="287_cikdl"]
 [ext_resource type="Script" path="res://Skripts/player/player_controller.gd" id="288_ylkgc"]
 [ext_resource type="Script" path="res://Skripts/tank/tank_health.gd" id="289_ao26r"]
-[ext_resource type="Texture2D" uid="uid://b27owvwhn6u13" path="res://Sprites/Smoke/dust.png" id="292_xeg4k"]
-[ext_resource type="Script" path="res://Scenes/tank/gpu_particles_2d.gd" id="293_exic1"]
 [ext_resource type="PackedScene" uid="uid://bsnn5owen8gqq" path="res://Scenes/ui/playerInterface.tscn" id="330_82slw"]
 
 [sub_resource type="Curve" id="Curve_oaenc"]
-_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4pa0"]
 size = Vector2(75.1445, 84.3931)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dxxwa"]
-particles_animation = true
-particles_anim_h_frames = 5
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ej5t6"]
-gradient = ExtResource("3_djmfh")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lwot8"]
-lifetime_randomness = 0.64
-particle_flag_disable_z = true
-angle_min = -104.5
-angle_max = 63.9
-angular_velocity_min = 0.999984
-angular_velocity_max = 0.999984
-gravity = Vector3(0, 0, 0)
-scale_min = 1.55
-scale_max = 6.05
-color_ramp = SubResource("GradientTexture1D_ej5t6")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5esf"]
 size = Vector2(67, 78)
@@ -1192,21 +1167,19 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("track_marks_left_position", "track_marks_right_position") groups=["player"]]
-z_index = 1
-position = Vector2(604, 322)
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(568, 320)
 scale = Vector2(0.865, 0.865)
 collision_layer = 18
 collision_mask = 18
 script = ExtResource("1_u2up0")
+acceleration_duration = null
+deceleration_duration = null
 acc_curve = SubResource("Curve_oaenc")
-acceleration_time = 0.1
-speed = 350
-track_marks_left_position = NodePath("body/TrackMarksLeft")
-track_marks_right_position = NodePath("body/TrackMarksRight")
-track_marks_sprite_path = NodePath("body/TrackMarkTexture")
-track_marks_distance = 15
-dash_time = 0.4
+acceleration_time = null
+speed = null
+track_marks_left = NodePath("TrackMarksLeft")
+track_marks_right = NodePath("TrackMarksRight")
 metadata/_edit_group_ = true
 
 [node name="body" type="Sprite2D" parent="."]
@@ -1219,39 +1192,6 @@ collision_mask = 16
 [node name="scanarea" type="CollisionShape2D" parent="body/Area2D"]
 position = Vector2(0.578003, 1.7341)
 shape = SubResource("RectangleShape2D_n4pa0")
-
-[node name="TrackMarksLeft" type="Marker2D" parent="body"]
-position = Vector2(-23.1214, 28.9017)
-
-[node name="TrackMarksRight" type="Marker2D" parent="body"]
-position = Vector2(20.8092, 30.0578)
-
-[node name="TrackMarkTexture" type="Sprite2D" parent="body"]
-position = Vector2(3.8147e-06, 34.6821)
-scale = Vector2(0.0587522, 0.0387702)
-texture = ExtResource("3_goqen")
-
-[node name="dustleft" type="GPUParticles2D" parent="body"]
-material = SubResource("CanvasItemMaterial_dxxwa")
-position = Vector2(-30.0578, 34.6821)
-emitting = false
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_lwot8")
-texture = ExtResource("292_xeg4k")
-one_shot = true
-explosiveness = 0.5
-script = ExtResource("293_exic1")
-
-[node name="dustright" type="GPUParticles2D" parent="body"]
-material = SubResource("CanvasItemMaterial_dxxwa")
-position = Vector2(30.0578, 36.9942)
-emitting = false
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_lwot8")
-texture = ExtResource("292_xeg4k")
-one_shot = true
-explosiveness = 0.5
-script = ExtResource("293_exic1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 2)
@@ -1266,7 +1206,6 @@ bulletScene = ExtResource("2_7ygv3")
 tower_path = NodePath(".")
 shoot_point_path = NodePath("rohr_Ende")
 shoot_animation_path = NodePath("Animation")
-userUiPath = NodePath("../playerInterface/CanvasLayer/user_UI")
 
 [node name="rohr_Ende" type="Marker2D" parent="tower" groups=["shootingPoint"]]
 position = Vector2(0, -59)
@@ -1290,7 +1229,7 @@ frame_progress = 1.0
 speed_scale = 2.0
 
 [node name="playerInterface" parent="." instance=ExtResource("330_82slw")]
-controlerPath = NodePath("../PlayerController")
+visible = false
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("289_ao26r")
@@ -1301,19 +1240,19 @@ death_animation = NodePath("../death")
 nodes_to_hide = [NodePath("../body"), NodePath("../tower")]
 nodes_to_disable = [NodePath("../body/Area2D/scanarea"), NodePath("../CollisionShape2D")]
 
-[connection signal="is_dashing" from="." to="body/dustleft" method="_on_player_controller_dash"]
-[connection signal="is_dashing" from="." to="body/dustright" method="_on_player_controller_dash"]
+[node name="TrackMarksLeft" type="Marker2D" parent="."]
+position = Vector2(-23.1214, 28.9017)
+
+[node name="TrackMarksRight" type="Marker2D" parent="."]
+position = Vector2(20.8092, 30.0578)
+
 [connection signal="body_entered" from="body/Area2D" to="Health" method="_on_area_2d_body_entered"]
-[connection signal="justShoot" from="tower" to="playerInterface/CanvasLayer/user_UI" method="just_shoot"]
-[connection signal="ui_reload" from="tower" to="playerInterface/CanvasLayer/user_UI" method="reset_bullets"]
-[connection signal="ui_reload_animation" from="tower" to="playerInterface/CanvasLayer/user_UI" method="reload_animation"]
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
 [connection signal="health_changed" from="Health" to="playerInterface/CanvasLayer/healthbar" method="_set_health"]
 [connection signal="init_health" from="Health" to="playerInterface/CanvasLayer/healthbar" method="init_health"]
 [connection signal="tank_destroyed" from="Health" to="PlayerController" method="_on_tank_destroyed"]
-[connection signal="dash" from="PlayerController" to="." method="dash"]
 [connection signal="input_direction_changed" from="PlayerController" to="." method="_on_get_input_input_direction_changed"]
 [connection signal="reload" from="PlayerController" to="tower" method="reload"]
 [connection signal="rotation_direction_changed" from="PlayerController" to="." method="_on_get_rotation_direction_changed"]
