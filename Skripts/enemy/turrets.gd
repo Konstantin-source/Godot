@@ -1,16 +1,11 @@
 extends Node2D
 
-@export var bullet_scene: PackedScene = preload("res://Scenes/bullet/bullet.tscn")  # Projektilszene
 @export var range: float = 500.0       # Erkennungs- und Schussreichweite
-@export var shoot_speed: float = 0.5  # Zeit zwischen den Schüssen
-@export var damage_tank: int = 10
 
 signal shoot()
 var time_since_last_change: float = 0.0
 var idle_rotation_time: float = 3.0
 var target_angle: float = 0.0
-var can_take_damage: bool = true
-var can_shoot: bool = true
 
 var player: CharacterBody2D = null
 

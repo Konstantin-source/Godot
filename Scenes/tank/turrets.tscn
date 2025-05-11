@@ -171,7 +171,6 @@ animations = [{
 collision_layer = 3
 script = ExtResource("1_rjjwb")
 range = 800.0
-shoot_speed = 3.0
 
 [node name="tower" type="Sprite2D" parent="."]
 position = Vector2(0, -2.75)
@@ -230,6 +229,7 @@ scale = Vector2(0.46, 0.46)
 [node name="Health" type="Node" parent="enemyHealth"]
 script = ExtResource("26_xan4k")
 
+[connection signal="shoot" from="." to="tower" method="shoot"]
 [connection signal="body_entered" from="Area2D" to="enemyHealth/Health" method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
 [connection signal="health_changed" from="enemyHealth/Health" to="enemyHealth/healthbar" method="_set_health"]
