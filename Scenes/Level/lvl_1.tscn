@@ -173,6 +173,7 @@ tile_map_data = PackedByteArray("AAD0//r/AAADAAEAAGD0//v/AAACAAQAAFD0//z/AAACAAQ
 tile_set = SubResource("TileSet_aumdh")
 
 [node name="Player" parent="." instance=ExtResource("3_sf33a")]
+position = Vector2(0, 0)
 
 [node name="turret_1" parent="." instance=ExtResource("3_msake")]
 position = Vector2(-1471, -706)

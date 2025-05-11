@@ -1247,6 +1247,7 @@ script = ExtResource("4_vkr7l")
 bulletScene = ExtResource("2_7ygv3")
 tower_path = NodePath(".")
 shoot_point_path = NodePath("rohr_Ende")
+shoot_animation_path = NodePath("Animation")
 userUiPath = NodePath("../playerInterface/CanvasLayer/user_UI")
 
 [node name="rohr_Ende" type="Marker2D" parent="tower" groups=["shootingPoint"]]

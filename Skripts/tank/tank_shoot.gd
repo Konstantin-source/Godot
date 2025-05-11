@@ -13,6 +13,9 @@ var current_shots: int          = 0
 @export var damage_tank: int = 10
 @export var tower_path : NodePath
 @export var shoot_point_path : NodePath
+@export var shoot_animation_path: NodePath
+signal ui_reloaded
+signal reloaded
 @export var userUiPath : NodePath
 
 signal ui_reload_animation
@@ -22,6 +25,8 @@ signal justShoot
 @onready var user_ui = get_node_or_null(userUiPath)
 @onready var tower: Node2D = get_node(tower_path)
 @onready var shootingPipeEnd: Marker2D = get_node(shoot_point_path)
+@onready var shootingAnimation: AnimatedSprite2D = get_node (shoot_animation_path)
+
 
 var shouldShoot : bool = false
 
@@ -55,6 +60,8 @@ func shoot() -> void:
 	current_shots += 1
 	
 	var bullet : RigidBody2D = bulletScene.instantiate() as Node2D
+	shootingAnimation.show()
+	shootingAnimation.play("default")
 	#$tower/Animation.show() Mit dem Signal justShoot austauschen
 	#$tower/Animation.play("default")
 	
