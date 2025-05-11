@@ -10,19 +10,21 @@ extends CharacterBody2D
 @export var track_marks_right_position: Marker2D
 @export var track_marks_sprite_path: NodePath 
 @export var track_marks_distance: int
+@export var dash_time = .1
+@export var dash_timeout :float  = 3
+
 @onready var track_marks_sprite = get_node(track_marks_sprite_path) as Sprite2D
 
 var deceleration_time: float = 0.5
 var speed_scale: float         = 0
 var can_dash : bool = true
-signal is_dashing
-@export var dash_time = .1
-@export var dash_timeout :float  = 3
 
 var input_direction: Vector2    = Vector2.ZERO
 var rotation_direction: Vector2 = Vector2.ZERO
 var last_track_position_left: Vector2 = Vector2.ZERO
 var last_track_position_right: Vector2 = Vector2.ZERO
+
+signal is_dashing()
 
 func _physics_process(delta: float) -> void:
 	if (!is_instance_valid($body)):
