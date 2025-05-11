@@ -1,6 +1,6 @@
 [gd_scene load_steps=38 format=3 uid="uid://cuf4jiqjdcs1d"]
 
-[ext_resource type="Script" path="res://Skripts/bullet/bullet.gd" id="1_dmcwa"]
+[ext_resource type="Script" uid="uid://bquykrije2v5c" path="res://Skripts/bullet/bullet.gd" id="1_dmcwa"]
 [ext_resource type="Texture2D" uid="uid://djn8aswjj7p1u" path="res://Sprites/tank_effects/bullet.png" id="2_pqggk"]
 [ext_resource type="Texture2D" uid="uid://whclqfifmjbv" path="res://Sprites/PixelSimulations/Explosion4/0001.png" id="3_puat6"]
 [ext_resource type="Texture2D" uid="uid://yj0wcoxr83ry" path="res://Sprites/PixelSimulations/Explosion4/0002.png" id="4_3ix6x"]
@@ -118,8 +118,7 @@ animations = [{
 height = 40.0
 
 [sub_resource type="Curve" id="Curve_5a7dx"]
-min_value = -360.0
-max_value = 360.0
+_limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, 316.488), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
