@@ -24,9 +24,15 @@ func just_shoot():
 	current_shoots +=1
 	var current_child = children_array[max_shoots_ui - current_shoots]
 	current_child.modulate = Color(0,0,0,1)
-	
-func reset_bullets(bullet_count = 0):
+
+
+func reset_bullets():
 	current_shoots = 0
 	for i in range(max_shoots_ui):
 		children_array[i].modulate = Color(1,1,1,1)
+		await get_tree().create_timer(0.05).timeout
+		
+func reload_animation():
+	for i in range(max_shoots_ui):
+		children_array[i].modulate = Color(0,0,0,.2)
 		await get_tree().create_timer(0.05).timeout
