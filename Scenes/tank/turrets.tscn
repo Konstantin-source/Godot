@@ -1,6 +1,6 @@
 [gd_scene load_steps=39 format=3 uid="uid://b4hooddqsnusb"]
 
-[ext_resource type="Script" path="res://Skripts/enemy/turrets.gd" id="1_rjjwb"]
+[ext_resource type="Script" uid="uid://d1qp6iw8gwgf2" path="res://Skripts/enemy/turrets.gd" id="1_rjjwb"]
 [ext_resource type="Texture2D" uid="uid://d1bwy50ntynot" path="res://Sprites/ground_shaker_asset/Red/Weapons/weapons.png" id="2_d44ay"]
 [ext_resource type="Texture2D" uid="uid://tjsh0vjq3ru" path="res://Sprites/ground_shaker_asset/Red/Weapons/turret_01_mk2.png" id="3_a4r7i"]
 [ext_resource type="Texture2D" uid="uid://chvbr6m2se4rv" path="res://Sprites/ground_shaker_asset/Red/Towers/towers_walls_blank.png" id="4_ceqnt"]
@@ -25,7 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://t5oynhyexou6" path="res://Sprites/PixelSimulations/Explosion2/0019.png" id="23_qubdh"]
 [ext_resource type="Texture2D" uid="uid://cl5vb7a80fxdx" path="res://Sprites/PixelSimulations/Explosion2/0020.png" id="24_wbgco"]
 [ext_resource type="PackedScene" uid="uid://dbfhw33ccpft0" path="res://Scenes/ui/enemy_health.tscn" id="25_37duw"]
-[ext_resource type="Script" path="res://Skripts/tank/tank_health.gd" id="26_xan4k"]
+[ext_resource type="Script" uid="uid://0uird4c4m5j" path="res://Skripts/tank/tank_health.gd" id="26_xan4k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1boim"]
 atlas = ExtResource("3_a4r7i")
