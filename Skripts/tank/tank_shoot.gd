@@ -16,7 +16,13 @@ var current_shots: int          = 0
 @export var shoot_animation_path: NodePath
 signal ui_reloaded
 signal reloaded
+@export var userUiPath : NodePath
 
+signal ui_reload_animation
+signal ui_reload
+signal justShoot
+
+@onready var user_ui = get_node_or_null(userUiPath)
 @onready var tower: Node2D = get_node(tower_path)
 @onready var shootingPipeEnd: Marker2D = get_node(shoot_point_path)
 @onready var shootingAnimation: AnimatedSprite2D = get_node (shoot_animation_path)
@@ -24,8 +30,15 @@ signal reloaded
 
 var shouldShoot : bool = false
 
-func _ready() -> void:
+
+func _ready():
+	await get_tree().process_frame
 	shootingPipeEnd = $rohr_Ende
+	if user_ui:
+		user_ui.max_shoots_ui = max_shots
+		print(user_ui)
+	else:
+		push_warning("user UI wurde noch nicht geladen")
 
 
 func _physics_process(delta: float) -> void:
@@ -36,12 +49,16 @@ func shoot() -> void:
 	if current_shots >= max_shots:
 		reload()
 		return
+	
 
 	if time_since_last_shot <= shot_delay:
 		return
 	
+	justShoot.emit()
+	
 	time_since_last_shot = 0
 	current_shots += 1
+	
 	var bullet : RigidBody2D = bulletScene.instantiate() as Node2D
 	shootingAnimation.show()
 	shootingAnimation.play("default")
@@ -62,7 +79,9 @@ func shoot() -> void:
 	bullet.rotation = $".".rotation 
 	bullet.initial_scale = self.scale-Vector2(0.8,0.8)
 	get_tree().current_scene.add_child(bullet)
-	print(bullet)
+	if current_shots >= max_shots:
+		reload()
+	
 	#print("Bullet Scale: ", shoooot.scale)
 	#print("Self scale: ", self.scale)
 
@@ -78,10 +97,9 @@ func reload() -> void:
 		return
 	reload_time_over = false
 	var reload_timer :float = max_shots/20.0
+	ui_reload_animation.emit()
 	await get_tree().create_timer(reload_time).timeout
-	#user_ui.reset_bullets()
-	ui_reloaded.emit()
+	ui_reload.emit()
 	await get_tree().create_timer(reload_timer).timeout
 	current_shots = 0
 	reload_time_over = true
-	reloaded.emit()
