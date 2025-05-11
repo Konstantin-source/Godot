@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Skripts/tank/tank_movement.gd" id="1_2racs"]
 [ext_resource type="Texture2D" uid="uid://kvtx63jk4bjl" path="res://Sprites/ground_shaker_asset/Purple/Bodies/body_tracks.png" id="2_yeoi8"]
-[ext_resource type="Texture2D" uid="uid://7cb00w5qf873" path="res://Sprites/tank_effects/tracksSmallNew.png" id="3_2pheg"]
+[ext_resource type="Texture2D" uid="uid://cpq64v7q5kahk" path="res://Sprites/tank_effects/trackMarkSprite.png" id="3_bas1u"]
 [ext_resource type="Texture2D" uid="uid://c2d2k3ixfxgu4" path="res://Sprites/ground_shaker_asset/Purple/Weapons/turret_01_mk1.png" id="3_p03pb"]
 [ext_resource type="Script" path="res://Skripts/tank/tank_shoot.gd" id="4_6jm6e"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="5_bw2vx"]
@@ -1199,6 +1199,7 @@ animations = [{
 }]
 
 [node name="enemy_1" type="CharacterBody2D" node_paths=PackedStringArray("track_marks_left_position", "track_marks_right_position") groups=["enemy"]]
+z_index = 1
 position = Vector2(437, 292)
 scale = Vector2(0.865, 0.865)
 collision_layer = 7
@@ -1206,10 +1207,15 @@ collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_2racs")
+acceleration_duration = null
+deceleration_duration = null
 acc_curve = SubResource("Curve_xi5ch")
+acceleration_time = null
+speed = null
 track_marks_left_position = NodePath("body/TrackMarkLeft")
 track_marks_right_position = NodePath("body/TrackMarkRight")
 track_marks_sprite_path = NodePath("body/TrackMarkSprite")
+track_marks_distance = 15
 
 [node name="body" type="Sprite2D" parent="."]
 texture = ExtResource("2_yeoi8")
@@ -1221,7 +1227,9 @@ position = Vector2(-23.1214, 25.4335)
 position = Vector2(24.2775, 25.4335)
 
 [node name="TrackMarkSprite" type="Sprite2D" parent="body"]
-texture = ExtResource("3_2pheg")
+position = Vector2(3.8147e-06, 34.6821)
+scale = Vector2(0.0587522, 0.0387702)
+texture = ExtResource("3_bas1u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.31213)

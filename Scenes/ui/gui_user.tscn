@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b114e77a7auee"]
 
 [ext_resource type="Script" path="res://Skripts/player/gui_user.gd" id="1_0vrgb"]
-[ext_resource type="Texture2D" uid="uid://d1wo247nmepid" path="res://Sprites/bullet-angepasst.png" id="2_o3eq4"]
+[ext_resource type="Texture2D" uid="uid://d1wo247nmepid" path="res://Sprites/tank_effects/bullet-angepasst.png" id="2_o3eq4"]
 
 [node name="user_UI" type="Control"]
 layout_mode = 3

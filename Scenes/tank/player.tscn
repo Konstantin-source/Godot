@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Skripts/tank/tank_movement.gd" id="1_u2up0"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="2_7ygv3"]
 [ext_resource type="Texture2D" uid="uid://u6k16e23tnww" path="res://Sprites/ground_shaker_asset/Desert/Bodies/body_tracks.png" id="2_q50ly"]
+[ext_resource type="Texture2D" uid="uid://cpq64v7q5kahk" path="res://Sprites/tank_effects/trackMarkSprite.png" id="3_goqen"]
 [ext_resource type="Texture2D" uid="uid://dhqiww6hke8od" path="res://Sprites/ground_shaker_asset/Desert/Weapons/turret_01_mk1.png" id="3_q5vmj"]
 [ext_resource type="Script" path="res://Skripts/tank/tank_shoot.gd" id="4_vkr7l"]
 [ext_resource type="Texture2D" uid="uid://b2x4ydm81qat7" path="res://Sprites/PixelSimulations/Flame1/0001.png" id="5_oebnc"]
@@ -290,7 +291,6 @@
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="287_cikdl"]
 [ext_resource type="Script" path="res://Skripts/player/player_controller.gd" id="288_ylkgc"]
 [ext_resource type="Script" path="res://Skripts/tank/tank_health.gd" id="289_ao26r"]
-[ext_resource type="Texture2D" uid="uid://7cb00w5qf873" path="res://Sprites/tank_effects/tracksSmallNew.png" id="292_rg0ib"]
 [ext_resource type="PackedScene" uid="uid://bsnn5owen8gqq" path="res://Scenes/ui/playerInterface.tscn" id="330_82slw"]
 
 [sub_resource type="Curve" id="Curve_oaenc"]
@@ -1169,16 +1169,21 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("track_marks_left_position", "track_marks_right_position") groups=["player"]]
+z_index = 1
 position = Vector2(604, 322)
 scale = Vector2(0.865, 0.865)
 collision_layer = 18
 collision_mask = 18
 script = ExtResource("1_u2up0")
+acceleration_duration = null
+deceleration_duration = null
 acc_curve = SubResource("Curve_oaenc")
-track_marks_left_position = NodePath("body/TrackMarksLeft")
-track_marks_right_position = NodePath("body/TrackMarksRight")
+acceleration_time = null
+speed = null
 track_marks_sprite_path = NodePath("body/TrackMarkTexture")
 track_marks_distance = 15
+track_marks_left_position = NodePath("body/TrackMarksLeft")
+track_marks_right_position = NodePath("body/TrackMarksRight")
 metadata/_edit_group_ = true
 
 [node name="body" type="Sprite2D" parent="."]
@@ -1199,10 +1204,9 @@ position = Vector2(-23.1214, 28.9017)
 position = Vector2(20.8092, 30.0578)
 
 [node name="TrackMarkTexture" type="Sprite2D" parent="body"]
-z_index = -1
-position = Vector2(-1.0307, 7.69614)
-scale = Vector2(0.995878, 0.702652)
-texture = ExtResource("292_rg0ib")
+position = Vector2(3.8147e-06, 34.6821)
+scale = Vector2(0.0587522, 0.0387702)
+texture = ExtResource("3_goqen")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 2)
