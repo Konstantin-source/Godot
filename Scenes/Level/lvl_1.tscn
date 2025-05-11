@@ -212,16 +212,3 @@ position = Vector2(2624, 574)
 position = Vector2(3010, 574)
 
 [node name="enemy_1" parent="." instance=ExtResource("7_rxcmw")]
-
-[connection signal="shoot" from="turret_1" to="turret_1/tower" method="shoot"]
-[connection signal="shoot" from="turret_7" to="turret_7/tower" method="shoot"]
-[connection signal="shoot" from="turret_8" to="turret_8/tower" method="shoot"]
-[connection signal="shoot" from="turret_4" to="turret_4/tower" method="shoot"]
-[connection signal="shoot" from="turret_5" to="turret_5/tower" method="shoot"]
-[connection signal="shoot" from="turret_6" to="turret_6/tower" method="shoot"]
-[connection signal="shoot" from="turret_9" to="turret_9/tower" method="shoot"]
-[connection signal="shoot" from="turret_10" to="turret_10/tower" method="shoot"]
-[connection signal="shoot" from="turret_11" to="turret_11/tower" method="shoot"]
-[connection signal="shoot" from="turret_12" to="turret_12/tower" method="shoot"]
-[connection signal="shoot" from="turret_13" to="turret_13/tower" method="shoot"]
-[connection signal="shoot" from="turret_14" to="turret_14/tower" method="shoot"]
