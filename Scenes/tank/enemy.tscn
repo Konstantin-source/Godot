@@ -1,7 +1,8 @@
-[gd_scene load_steps=302 format=3 uid="uid://d4mjliv138hwl"]
+[gd_scene load_steps=303 format=3 uid="uid://d4mjliv138hwl"]
 
 [ext_resource type="Script" path="res://Skripts/tank/tank_movement.gd" id="1_2racs"]
 [ext_resource type="Texture2D" uid="uid://kvtx63jk4bjl" path="res://Sprites/ground_shaker_asset/Purple/Bodies/body_tracks.png" id="2_yeoi8"]
+[ext_resource type="Texture2D" uid="uid://7cb00w5qf873" path="res://Sprites/tank_effects/tracksSmallNew.png" id="3_2pheg"]
 [ext_resource type="Texture2D" uid="uid://c2d2k3ixfxgu4" path="res://Sprites/ground_shaker_asset/Purple/Weapons/turret_01_mk1.png" id="3_p03pb"]
 [ext_resource type="Script" path="res://Skripts/tank/tank_shoot.gd" id="4_6jm6e"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="5_bw2vx"]
@@ -1197,7 +1198,7 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="enemy_1" type="CharacterBody2D" groups=["enemy"]]
+[node name="enemy_1" type="CharacterBody2D" node_paths=PackedStringArray("track_marks_left_position", "track_marks_right_position") groups=["enemy"]]
 position = Vector2(437, 292)
 scale = Vector2(0.865, 0.865)
 collision_layer = 7
@@ -1206,9 +1207,21 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_2racs")
 acc_curve = SubResource("Curve_xi5ch")
+track_marks_left_position = NodePath("body/TrackMarkLeft")
+track_marks_right_position = NodePath("body/TrackMarkRight")
+track_marks_sprite_path = NodePath("body/TrackMarkSprite")
 
 [node name="body" type="Sprite2D" parent="."]
 texture = ExtResource("2_yeoi8")
+
+[node name="TrackMarkLeft" type="Marker2D" parent="body"]
+position = Vector2(-23.1214, 25.4335)
+
+[node name="TrackMarkRight" type="Marker2D" parent="body"]
+position = Vector2(24.2775, 25.4335)
+
+[node name="TrackMarkSprite" type="Sprite2D" parent="body"]
+texture = ExtResource("3_2pheg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.31213)

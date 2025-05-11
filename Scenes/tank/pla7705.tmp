@@ -1,4 +1,4 @@
-[gd_scene load_steps=298 format=3 uid="uid://bdt4dmy328xje"]
+[gd_scene load_steps=297 format=3 uid="uid://bdt4dmy328xje"]
 
 [ext_resource type="Script" path="res://Skripts/tank/tank_movement.gd" id="1_u2up0"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="2_7ygv3"]
@@ -290,7 +290,6 @@
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="287_cikdl"]
 [ext_resource type="Script" path="res://Skripts/player/player_controller.gd" id="288_ylkgc"]
 [ext_resource type="Script" path="res://Skripts/tank/tank_health.gd" id="289_ao26r"]
-[ext_resource type="Texture2D" uid="uid://7cb00w5qf873" path="res://Sprites/tank_effects/tracksSmallNew.png" id="292_rg0ib"]
 [ext_resource type="PackedScene" uid="uid://bsnn5owen8gqq" path="res://Scenes/ui/playerInterface.tscn" id="330_82slw"]
 
 [sub_resource type="Curve" id="Curve_oaenc"]
@@ -1168,17 +1167,19 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("track_marks_left_position", "track_marks_right_position") groups=["player"]]
-position = Vector2(604, 322)
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(568, 320)
 scale = Vector2(0.865, 0.865)
 collision_layer = 18
 collision_mask = 18
 script = ExtResource("1_u2up0")
+acceleration_duration = null
+deceleration_duration = null
 acc_curve = SubResource("Curve_oaenc")
-track_marks_left_position = NodePath("body/TrackMarksLeft")
-track_marks_right_position = NodePath("body/TrackMarksRight")
-track_marks_sprite_path = NodePath("body/TrackMarkTexture")
-track_marks_distance = 15
+acceleration_time = null
+speed = null
+track_marks_left = NodePath("TrackMarksLeft")
+track_marks_right = NodePath("TrackMarksRight")
 metadata/_edit_group_ = true
 
 [node name="body" type="Sprite2D" parent="."]
@@ -1191,18 +1192,6 @@ collision_mask = 16
 [node name="scanarea" type="CollisionShape2D" parent="body/Area2D"]
 position = Vector2(0.578003, 1.7341)
 shape = SubResource("RectangleShape2D_n4pa0")
-
-[node name="TrackMarksLeft" type="Marker2D" parent="body"]
-position = Vector2(-23.1214, 28.9017)
-
-[node name="TrackMarksRight" type="Marker2D" parent="body"]
-position = Vector2(20.8092, 30.0578)
-
-[node name="TrackMarkTexture" type="Sprite2D" parent="body"]
-z_index = -1
-position = Vector2(-1.0307, 7.69614)
-scale = Vector2(0.995878, 0.702652)
-texture = ExtResource("292_rg0ib")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 2)
@@ -1250,6 +1239,12 @@ script = ExtResource("288_ylkgc")
 death_animation = NodePath("../death")
 nodes_to_hide = [NodePath("../body"), NodePath("../tower")]
 nodes_to_disable = [NodePath("../body/Area2D/scanarea"), NodePath("../CollisionShape2D")]
+
+[node name="TrackMarksLeft" type="Marker2D" parent="."]
+position = Vector2(-23.1214, 28.9017)
+
+[node name="TrackMarksRight" type="Marker2D" parent="."]
+position = Vector2(20.8092, 30.0578)
 
 [connection signal="body_entered" from="body/Area2D" to="Health" method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
