@@ -11,6 +11,7 @@ extends Node
 signal inputDirectionChanged(newInputDirection)
 signal input_rotation_changed(new_input_rotation)
 signal shoot()
+signal tank_destroyed()
 
 var time_since_last_change: float = 0.0
 var time_since_last_shoot: float  = 0.0
@@ -30,6 +31,9 @@ var input_rotation: Vector2 = Vector2.UP
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	$"../Node2D/healthbar".init_health(current_health)
+	
+	var coin_counter = get_node("/root/CoinCounter")
+	tank_destroyed.connect(coin_counter._add_coin)
 
 
 func _physics_process(delta: float) -> void:
@@ -73,6 +77,7 @@ func _physics_process(delta: float) -> void:
 
 func make_Path() -> void:
 	nav_Agent.target_position = player.global_position
+	# TODO: what is this for?
 	nav_Agent.path_changed
 
 	
@@ -86,6 +91,8 @@ func _on_tank_destroyed() -> void:
 		node.queue_free()
 	for node in nodes_to_disable:
 		node.disabled = true
+		
+	tank_destroyed.emit()
 
 func _on_death_animation_finished() -> void:
 	$"..".queue_free()

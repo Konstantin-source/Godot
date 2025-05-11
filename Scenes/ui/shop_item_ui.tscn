@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmf0h7m13snvw"]
+
+[ext_resource type="Script" uid="uid://4quitos78wnp" path="res://Skripts/shop/shop_item_ui.gd" id="1_3xeji"]
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(300, 180)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 180.0
+size_flags_horizontal = 3
+script = ExtResource("1_3xeji")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Item Name"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+stretch_mode = 5
+
+[node name="ItemPrice" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemDescription" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Item Description"
+autowrap_mode = 3
+
+[node name="PurchaseButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Purchase"
