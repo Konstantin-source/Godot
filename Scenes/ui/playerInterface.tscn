@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://bsnn5owen8gqq"]
 
-[ext_resource type="Script" path="res://Skripts/ui/ui.gd" id="1_hi7w3"]
-[ext_resource type="Script" path="res://Skripts/ui/healthbar.gd" id="2_vd4rb"]
+[ext_resource type="Script" uid="uid://cqysp65l1h2ws" path="res://Skripts/ui/ui.gd" id="1_hi7w3"]
+[ext_resource type="Script" uid="uid://c0v72o7gsi13h" path="res://Skripts/ui/healthbar.gd" id="2_vd4rb"]
 [ext_resource type="PackedScene" uid="uid://b114e77a7auee" path="res://Scenes/ui/gui_user.tscn" id="3_57c5g"]
-[ext_resource type="Script" path="res://Skripts/ui/minimap.gd" id="4_dq1gv"]
+[ext_resource type="Script" uid="uid://dwm1imy5nsel3" path="res://Skripts/ui/minimap.gd" id="4_dq1gv"]
 [ext_resource type="Texture2D" uid="uid://ciwxajqxl3hv2" path="res://Sprites/Interface/PNG/Outline/Default/pointer_b_shaded.png" id="5_1s6n5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5hdj8"]

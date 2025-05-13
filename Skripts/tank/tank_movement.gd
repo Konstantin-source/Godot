@@ -14,6 +14,7 @@ extends CharacterBody2D
 @export var dash_timeout :float  = 3
 
 @onready var track_marks_sprite = get_node(track_marks_sprite_path) as Sprite2D
+@onready var street_tiles = get_tree().get_first_node_in_group("ground")
 
 var deceleration_time: float = 0.5
 var speed_scale: float         = 0
@@ -29,6 +30,20 @@ signal is_dashing()
 func _physics_process(delta: float) -> void:
 	if (!is_instance_valid($body)):
 		return
+		
+	#Track Marks auf der Straße entfernen
+	
+	var coords = street_tiles.local_to_map(street_tiles.to_local(global_position))
+	var tile_data = street_tiles.get_cell_tile_data(coords)
+
+	if tile_data != null:
+		var value = tile_data.get_custom_data("street")
+		if tile_data.has_custom_data("street"):
+			var tile_type = tile_data.get_custom_data("street")
+			if tile_type == 1:
+				track_marks_sprite.modulate = Color(0.1,0.1,0.1,0.1)
+			else:
+				track_marks_sprite.modulate = Color(1,1,1,0.3)
 
 
 	rotation_degree = input_direction.angle() - PI/2

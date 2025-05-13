@@ -1,12 +1,12 @@
 [gd_scene load_steps=304 format=3 uid="uid://bdt4dmy328xje"]
 
-[ext_resource type="Script" path="res://Skripts/tank/tank_movement.gd" id="1_u2up0"]
+[ext_resource type="Script" uid="uid://va2gxmus2ar2" path="res://Skripts/tank/tank_movement.gd" id="1_u2up0"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="2_7ygv3"]
 [ext_resource type="Texture2D" uid="uid://u6k16e23tnww" path="res://Sprites/ground_shaker_asset/Desert/Bodies/body_tracks.png" id="2_q50ly"]
-[ext_resource type="Gradient" path="res://Scenes/tank/turbo.tres" id="3_djmfh"]
+[ext_resource type="Gradient" uid="uid://dtn7c86m4eyxq" path="res://Scenes/tank/turbo.tres" id="3_djmfh"]
 [ext_resource type="Texture2D" uid="uid://cpq64v7q5kahk" path="res://Sprites/tank_effects/trackMarkSprite.png" id="3_goqen"]
 [ext_resource type="Texture2D" uid="uid://dhqiww6hke8od" path="res://Sprites/ground_shaker_asset/Desert/Weapons/turret_01_mk1.png" id="3_q5vmj"]
-[ext_resource type="Script" path="res://Skripts/tank/tank_shoot.gd" id="4_vkr7l"]
+[ext_resource type="Script" uid="uid://cqaxfnohadlpg" path="res://Skripts/tank/tank_shoot.gd" id="4_vkr7l"]
 [ext_resource type="Texture2D" uid="uid://b2x4ydm81qat7" path="res://Sprites/PixelSimulations/Flame1/0001.png" id="5_oebnc"]
 [ext_resource type="Texture2D" uid="uid://bthcln4cxeptq" path="res://Sprites/PixelSimulations/Flame1/0002.png" id="6_vsy73"]
 [ext_resource type="Texture2D" uid="uid://dvewcwofmutwa" path="res://Sprites/PixelSimulations/Flame1/0003.png" id="7_eqgw3"]
@@ -290,10 +290,10 @@
 [ext_resource type="Texture2D" uid="uid://cupt5t4itndcj" path="res://Sprites/PixelSimulations/Explosion6/0201.png" id="285_5ec5p"]
 [ext_resource type="Texture2D" uid="uid://pqjmdy65hmem" path="res://Sprites/PixelSimulations/Explosion6/0202.png" id="286_hylt5"]
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="287_cikdl"]
-[ext_resource type="Script" path="res://Skripts/player/player_controller.gd" id="288_ylkgc"]
-[ext_resource type="Script" path="res://Skripts/tank/tank_health.gd" id="289_ao26r"]
+[ext_resource type="Script" uid="uid://bvt8a41ss2bu6" path="res://Skripts/player/player_controller.gd" id="288_ylkgc"]
+[ext_resource type="Script" uid="uid://0uird4c4m5j" path="res://Skripts/tank/tank_health.gd" id="289_ao26r"]
 [ext_resource type="Texture2D" uid="uid://b27owvwhn6u13" path="res://Sprites/Smoke/dust.png" id="292_xeg4k"]
-[ext_resource type="Script" path="res://Scenes/tank/gpu_particles_2d.gd" id="293_exic1"]
+[ext_resource type="Script" uid="uid://d0nhdf5n2xi4x" path="res://Scenes/tank/gpu_particles_2d.gd" id="293_exic1"]
 [ext_resource type="PackedScene" uid="uid://bsnn5owen8gqq" path="res://Scenes/ui/playerInterface.tscn" id="330_82slw"]
 
 [sub_resource type="Curve" id="Curve_oaenc"]
@@ -1194,7 +1194,6 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("track_marks_left_position", "track_marks_right_position") groups=["player"]]
 z_index = 1
-position = Vector2(604, 322)
 scale = Vector2(0.865, 0.865)
 collision_layer = 18
 collision_mask = 18
@@ -1227,6 +1226,7 @@ position = Vector2(-23.1214, 28.9017)
 position = Vector2(20.8092, 30.0578)
 
 [node name="TrackMarkTexture" type="Sprite2D" parent="body"]
+modulate = Color(1, 1, 1, 0.3)
 position = Vector2(3.8147e-06, 34.6821)
 scale = Vector2(0.0587522, 0.0387702)
 texture = ExtResource("3_goqen")
@@ -1236,10 +1236,10 @@ material = SubResource("CanvasItemMaterial_dxxwa")
 position = Vector2(-30.0578, 34.6821)
 emitting = false
 amount = 20
-process_material = SubResource("ParticleProcessMaterial_lwot8")
 texture = ExtResource("292_xeg4k")
 one_shot = true
 explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_lwot8")
 script = ExtResource("293_exic1")
 
 [node name="dustright" type="GPUParticles2D" parent="body"]
@@ -1247,10 +1247,10 @@ material = SubResource("CanvasItemMaterial_dxxwa")
 position = Vector2(30.0578, 36.9942)
 emitting = false
 amount = 20
-process_material = SubResource("ParticleProcessMaterial_lwot8")
 texture = ExtResource("292_xeg4k")
 one_shot = true
 explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_lwot8")
 script = ExtResource("293_exic1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
