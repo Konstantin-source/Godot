@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cvfqosxw40bub"]
 
-[ext_resource type="Script" uid="uid://hciwgbdeptg4" path="res://Skripts/enemy/enemy_spawn.gd" id="1_y6cvl"]
+[ext_resource type="Script" path="res://Skripts/enemy/enemy_spawn.gd" id="1_y6cvl"]
 [ext_resource type="PackedScene" uid="uid://d4mjliv138hwl" path="res://Scenes/tank/enemy.tscn" id="2_w3wxr"]
 
 [sub_resource type="Curve2D" id="Curve2D_ko4ga"]
