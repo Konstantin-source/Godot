@@ -1,8 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://b4hooddqsnusb"]
+[gd_scene load_steps=41 format=3 uid="uid://b4hooddqsnusb"]
 
-[ext_resource type="Script" path="res://Skripts/enemy/turrets.gd" id="1_rjjwb"]
+[ext_resource type="Script" uid="uid://uxo24aw3dls6" path="res://Skripts/enemy/turrets.gd" id="1_rjjwb"]
 [ext_resource type="Texture2D" uid="uid://d1bwy50ntynot" path="res://Sprites/ground_shaker_asset/Red/Weapons/weapons.png" id="2_d44ay"]
 [ext_resource type="Texture2D" uid="uid://tjsh0vjq3ru" path="res://Sprites/ground_shaker_asset/Red/Weapons/turret_01_mk2.png" id="3_a4r7i"]
+[ext_resource type="Script" uid="uid://dmrtojvp2mml0" path="res://Skripts/tank/tank_shoot.gd" id="3_qnp72"]
+[ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="4_4xsx7"]
 [ext_resource type="Texture2D" uid="uid://chvbr6m2se4rv" path="res://Sprites/ground_shaker_asset/Red/Towers/towers_walls_blank.png" id="4_ceqnt"]
 [ext_resource type="Texture2D" uid="uid://f078jxs81msw" path="res://Sprites/PixelSimulations/Explosion2/0001.png" id="5_sabnc"]
 [ext_resource type="Texture2D" uid="uid://bbbeqwonijl7w" path="res://Sprites/PixelSimulations/Explosion2/0002.png" id="6_y5kpn"]
@@ -25,7 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://t5oynhyexou6" path="res://Sprites/PixelSimulations/Explosion2/0019.png" id="23_qubdh"]
 [ext_resource type="Texture2D" uid="uid://cl5vb7a80fxdx" path="res://Sprites/PixelSimulations/Explosion2/0020.png" id="24_wbgco"]
 [ext_resource type="PackedScene" uid="uid://dbfhw33ccpft0" path="res://Scenes/ui/enemy_health.tscn" id="25_37duw"]
-[ext_resource type="Script" path="res://Skripts/tank/tank_health.gd" id="26_xan4k"]
+[ext_resource type="Script" uid="uid://76rf80gmcbuv" path="res://Skripts/tank/tank_health.gd" id="26_xan4k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1boim"]
 atlas = ExtResource("3_a4r7i")
@@ -87,7 +89,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_mycwx")
 }],
 "loop": false,
-"name": &"shooting",
+"name": &"default",
 "speed": 20.0
 }]
 
@@ -176,20 +178,24 @@ scale = Vector2(1.26563, 1.13125)
 texture = ExtResource("2_d44ay")
 region_enabled = true
 region_rect = Rect2(113, 0, 64, 80)
+script = ExtResource("3_qnp72")
+max_shots = 2
+shot_delay = 0.2
+bulletScene = ExtResource("4_4xsx7")
+recoilDuration = 10.0
+tower_path = NodePath(".")
+shoot_point_path = NodePath("rohr_Ende")
+shoot_animation_path = NodePath("schuss")
 
 [node name="schuss" type="AnimatedSprite2D" parent="tower"]
 position = Vector2(-1.32435, 4.90444)
 scale = Vector2(0.979307, 1.09134)
 sprite_frames = SubResource("SpriteFrames_q00uc")
-animation = &"shooting"
-frame = 7
-frame_progress = 1.0
 
 [node name="rohr_Ende" type="Marker2D" parent="tower"]
 position = Vector2(0, -60)
 
 [node name="base" type="Sprite2D" parent="."]
-visible = false
 show_behind_parent = true
 texture = ExtResource("4_ceqnt")
 region_enabled = true
@@ -220,13 +226,14 @@ speed_scale = 0.5
 position = Vector2(-89, 26)
 scale = Vector2(0.46, 0.46)
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="enemyHealth"]
 script = ExtResource("26_xan4k")
 
-[connection signal="body_entered" from="Area2D" to="Health" method="_on_area_2d_body_entered"]
+[connection signal="shoot" from="." to="tower" method="shoot"]
+[connection signal="body_entered" from="Area2D" to="enemyHealth/Health" method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
-[connection signal="health_changed" from="Health" to="enemyHealth/healthbar" method="_set_health"]
-[connection signal="init_health" from="Health" to="enemyHealth/healthbar" method="init_health"]
-[connection signal="tank_destroyed" from="Health" to="." method="_on_turret_destroyed"]
+[connection signal="health_changed" from="enemyHealth/Health" to="enemyHealth/healthbar" method="_set_health"]
+[connection signal="init_health" from="enemyHealth/Health" to="enemyHealth/healthbar" method="init_health"]
+[connection signal="tank_destroyed" from="enemyHealth/Health" to="." method="_on_turret_destroyed"]
 
 [editable path="enemyHealth"]

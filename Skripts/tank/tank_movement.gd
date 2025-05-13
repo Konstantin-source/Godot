@@ -6,21 +6,38 @@ extends CharacterBody2D
 @export var acc_curve : Curve
 @export var acceleration_time: float = 0.0
 @export var speed: int               = 200
+@export var track_marks_left_position : Marker2D
+@export var track_marks_right_position: Marker2D
+@export var track_marks_sprite_path: NodePath 
+@export var track_marks_distance: int
+@export var dash_time = .1
+@export var dash_timeout :float  = 3
+
+@onready var track_marks_sprite = get_node(track_marks_sprite_path) as Sprite2D
+
 var deceleration_time: float = 0.5
-var speed_scale: int         = 0
+var speed_scale: float         = 0
+var can_dash : bool = true
 
 var input_direction: Vector2    = Vector2.ZERO
 var rotation_direction: Vector2 = Vector2.ZERO
+var last_track_position_left: Vector2 = Vector2.ZERO
+var last_track_position_right: Vector2 = Vector2.ZERO
+
+signal is_dashing()
 
 func _physics_process(delta: float) -> void:
 	if (!is_instance_valid($body)):
 		return
-		
+
+
 	rotation_degree = input_direction.angle() - PI/2
 	if input_direction != Vector2.ZERO:
 		#rotieren
 		$CollisionShape2D.rotation = lerp_angle($body.rotation, rotation_degree, 5 *delta)
 		$body.rotation = lerp_angle($body.rotation, rotation_degree, 5 *delta)
+		#var track_mark_direction = Vector2(cos($body.rotation), sin($body.rotation))
+		make_track_marks($body.rotation)
 		acceleration_time = min(acceleration_time+delta, acceleration_duration)
 		speed_scale = acceleration_time / acceleration_duration
 		var speed_factor = acc_curve.sample(speed_scale)
@@ -30,6 +47,7 @@ func _physics_process(delta: float) -> void:
 		acceleration_time = max(acceleration_time - delta, 0)
 		speed_scale = acceleration_time / deceleration_duration
 		var speed_factor = acc_curve.sample(speed_scale)
+		
 		moving(speed_factor)
 	
 	move_and_slide()
@@ -53,5 +71,53 @@ func _on_get_rotation_direction_changed(new_rotation_direction: Vector2) -> void
 	
 func get_current_rotation():
 	return $body.rotation
+	
+
 # die input_direction ist am anfang richtig gesetzt, aber wrid dann auf 0, wahrscheinlich hängt das mit der accleration_time zusammen, dass die runter geht und die werte dann nicht mehr richtig beschleunigt werden
 # 6 wird aufgerufen dh wahreinlich wird die neu direction nur einmal übergeben
+
+
+func dash() -> void:
+	if can_dash:
+		can_dash = false
+		speed = speed * 2
+		is_dashing.emit()
+		await get_tree().create_timer(dash_time).timeout
+		speed = speed / 2
+		await get_tree().create_timer(dash_timeout).timeout
+		can_dash = true
+
+func make_track_marks(direction: float):
+	# wird eingebunden, indem man zwei Marker2D und einen Sprite2d an den body häng (An den Markern spawnen die neuen spuren) 
+	# damit nicht unendlich of dupliziert wird 
+	if ((track_marks_left_position.global_position - last_track_position_left).length() > track_marks_distance):
+		var duplicate_left = track_marks_sprite.duplicate()
+		# an die linke Kette setzen 
+		duplicate_left.global_position = track_marks_left_position.global_position
+		last_track_position_left = duplicate_left.global_position 
+		
+		duplicate_left.rotation = direction
+		
+		get_tree().current_scene.add_child(duplicate_left)
+		#verschwinden lassen, könnten wir noch öfter benutzen 
+		var tween_left = get_tree().create_tween()
+		tween_left.tween_property(duplicate_left, "modulate:a", 0.0, 5.0)
+		tween_left.tween_callback(Callable(duplicate_left, "queue_free"))
+		
+	if ((track_marks_right_position.global_position - last_track_position_right).length() > track_marks_distance):
+		var duplicate_right= track_marks_sprite.duplicate()
+		
+		duplicate_right.global_position = track_marks_right_position.global_position
+		last_track_position_right = duplicate_right.global_position 
+		
+		duplicate_right.rotation = direction
+		
+		get_tree().current_scene.add_child(duplicate_right)
+		
+		var tween_right = get_tree().create_tween()
+		tween_right.tween_property(duplicate_right, "modulate:a", 0.0, 5.0)
+		tween_right.tween_callback(Callable(duplicate_right, "queue_free"))
+	
+
+
+	

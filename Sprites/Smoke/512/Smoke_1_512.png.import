@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1wo247nmepid"
-path="res://.godot/imported/bullet-angepasst.png-757aee85f1cf1c363b844a8ef6d972d5.ctex"
+uid="uid://demxcdw12ncad"
+path="res://.godot/imported/Smoke_1_512.png-f0c8e6b3ad04d53eb954daea6d7554c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/bullet-angepasst.png"
-dest_files=["res://.godot/imported/bullet-angepasst.png-757aee85f1cf1c363b844a8ef6d972d5.ctex"]
+source_file="res://Sprites/Smoke/512/Smoke_1_512.png"
+dest_files=["res://.godot/imported/Smoke_1_512.png-f0c8e6b3ad04d53eb954daea6d7554c4.ctex"]
 
 [params]
 

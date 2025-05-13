@@ -1,0 +1,44 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://bfqs3e01d4ehc"]
+
+[sub_resource type="Gradient" id="Gradient_g8c7j"]
+offsets = PackedFloat32Array(0, 0.771739, 0.907609, 1)
+colors = PackedColorArray(0.427809, 0.0862703, 2.40654e-08, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0.518933, 0.245239, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oovyc"]
+gradient = SubResource("Gradient_g8c7j")
+
+[sub_resource type="Curve" id="Curve_4xvgc"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f4wb3"]
+curve = SubResource("Curve_4xvgc")
+
+[resource]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 26.6
+inherit_velocity_ratio = 0.717
+spread = 87.0
+flatness = 0.9
+initial_velocity_max = 177.42
+gravity = Vector3(0, 98, 0)
+radial_accel_min = -26.61
+radial_accel_max = 38.71
+scale_min = 0.0
+scale_max = 5.55
+scale_curve = SubResource("CurveTexture_f4wb3")
+scale_over_velocity_min = 68.55
+scale_over_velocity_max = 197.58
+color_ramp = SubResource("GradientTexture1D_oovyc")
+hue_variation_min = 0.04
+hue_variation_max = 0.19
+anim_speed_max = 3.35
+turbulence_enabled = true
+turbulence_noise_strength = 9.57
+turbulence_noise_scale = 5.952
+turbulence_noise_speed_random = 1.37
+collision_mode = 1
+collision_friction = 0.21
+collision_bounce = 0.0
