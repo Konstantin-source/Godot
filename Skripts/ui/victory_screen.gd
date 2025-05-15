@@ -26,7 +26,6 @@ func _ready():
 	coin_counter = get_node("/root/CoinCounter")
 	coins_earned = coin_counter.get_level_coins()
 	
-	# Create animated stars
 	create_stars()
 	
 	# Connect button signals
@@ -34,14 +33,11 @@ func _ready():
 	home_button.pressed.connect(_on_home_button_pressed)
 	animation_timer.timeout.connect(_animate_next_star)
 	
-	# Set up the screen based on victory or defeat
 	setup_screen()
 	
-	# Start animations
 	animation_timer.start()
 
 func create_stars():
-	# Create three animated stars
 	for i in range(3):
 		var star = animated_star_scene.instantiate()
 		star_container.add_child(star)

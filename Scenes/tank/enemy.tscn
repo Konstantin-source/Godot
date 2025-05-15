@@ -1323,7 +1323,7 @@ autostart = true
 [node name="Health" type="Node" parent="."]
 script = ExtResource("291_vy64v")
 
-[node name="ControlerEnemy" type="Node" parent="." node_paths=PackedStringArray("death_animation", "nodes_to_remove")]
+[node name="EnemyController" type="Node" parent="." node_paths=PackedStringArray("death_animation", "nodes_to_remove")]
 script = ExtResource("292_ka2rn")
 detection_radius = 900
 chase_player_radius = 700
@@ -1339,9 +1339,9 @@ nodes_to_remove = [NodePath("../CollisionShape2D"), NodePath("../Area2D"), NodeP
 [connection signal="timeout" from="pathfinding_Timer" to="." method="_on_pathfinding_timer_timeout"]
 [connection signal="health_changed" from="Health" to="enemyHealth/healthbar" method="_set_health"]
 [connection signal="init_health" from="Health" to="enemyHealth/healthbar" method="init_health"]
-[connection signal="tank_destroyed" from="Health" to="ControlerEnemy" method="_on_tank_destroyed"]
-[connection signal="inputDirectionChanged" from="ControlerEnemy" to="." method="_on_get_input_input_direction_changed"]
-[connection signal="input_rotation_changed" from="ControlerEnemy" to="." method="_on_get_rotation_direction_changed"]
-[connection signal="shoot" from="ControlerEnemy" to="tower" method="shoot"]
+[connection signal="tank_destroyed" from="Health" to="EnemyController" method="_on_tank_destroyed"]
+[connection signal="inputDirectionChanged" from="EnemyController" to="." method="_on_get_input_input_direction_changed"]
+[connection signal="input_rotation_changed" from="EnemyController" to="." method="_on_get_rotation_direction_changed"]
+[connection signal="shoot" from="EnemyController" to="tower" method="shoot"]
 
 [editable path="enemyHealth"]

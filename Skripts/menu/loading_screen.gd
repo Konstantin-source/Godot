@@ -32,7 +32,7 @@ func _process(delta):
 			progress_bar.value = progress[0] * 100  # Aktualisiert den Fortschritt
 			loading_label.text = "Lädt... " + str(int(progress[0] * 100)) + "%"  
 		elif status == ResourceLoader.THREAD_LOAD_LOADED:
-			await get_tree().create_timer(5).timeout
+			#await get_tree().create_timer(5).timeout
 			var scene = ResourceLoader.load_threaded_get(target_scene)  # Fertig geladene Szene abrufen
 			get_tree().change_scene_to_packed(scene)  # Szene wechseln
 			loading = false  # Ladeprozess beenden

@@ -13,7 +13,6 @@ func _ready() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if "damage" in body and can_take_damage:
-		print("damaged")
 		start_damage_cooldown()
 		var damage = body.damage
 		current_health -= damage
