@@ -11,7 +11,8 @@ var unlocked_items = []
 @onready var save_manager = get_node("/root/SaveManager")
 
 func _ready():
-	save_manager.save_data_loaded.connect(_on_save_data_loaded)
+	# Use the improved registration method
+	save_manager.register_for_data(self, "_on_save_data_loaded")
 	
 	load_shop_items()
 
@@ -56,9 +57,7 @@ func purchase_item(item_name: String) -> bool:
 		purchase_failed.emit("Not enough coins")
 		return false
 	
-	save_manager.save_data["coin_count"] -= item.item_price
-	coin_counter.total_coins = save_manager.save_data["coin_count"]
-	coin_counter.coin_count_changed.emit(coin_counter.total_coins)
+	coin_counter._remove_total_coins(item.item_price)
 	
 	item.item_is_unlocked = true
 	unlocked_items.append(item_name)

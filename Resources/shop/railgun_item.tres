@@ -5,10 +5,10 @@
 
 [resource]
 script = ExtResource("1_wcxid")
-item_name = "Speed Boost"
+item_name = "Railgun"
 item_price = 30
-item_description = "Increases your tank's movement speed."
+item_description = "Railgun"
 item_icon = ExtResource("1_h5iab")
-item_type = "upgrade"
+item_type = ""
 item_is_unlocked = false
 metadata/_custom_type_script = "uid://ncpoqarsyfoo"

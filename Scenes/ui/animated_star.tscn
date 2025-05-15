@@ -1,0 +1,191 @@
+[gd_scene load_steps=10 format=3 uid="uid://bc83mi7autgdn"]
+
+[ext_resource type="Script" uid="uid://cdcuqqisuxe84" path="res://Skripts/ui/animated_star.gd" id="1_k45i0"]
+
+[sub_resource type="Gradient" id="Gradient_c7utr"]
+offsets = PackedFloat32Array(0, 0.48324, 1)
+colors = PackedColorArray(1, 0.85098, 0, 1, 1, 0.847059, 0, 1, 1, 0.709804, 0, 0.494118)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cxn5h"]
+gradient = SubResource("Gradient_c7utr")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.1)
+
+[sub_resource type="Animation" id="Animation_5qsw0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wwhmm"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bucor"]
+resource_name = "star_appear"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(0.5, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(0.9, 0.9), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w55r4"]
+_data = {
+&"RESET": SubResource("Animation_5qsw0"),
+&"idle": SubResource("Animation_wwhmm"),
+&"star_appear": SubResource("Animation_bucor")
+}
+
+[sub_resource type="Curve" id="Curve_wcmit"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.55128, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_1tim2"]
+offsets = PackedFloat32Array(0, 0.258993, 0.683453, 1)
+colors = PackedColorArray(1, 0.937255, 0.419608, 1, 1, 0.8, 0, 1, 1, 0.54902, 0, 0.698039, 1, 0.54902, 0, 0)
+
+[node name="AnimatedStar" type="Polygon2D"]
+polygon = PackedVector2Array(0, -50, 10, -15, 30, -15, 15, 5, 20, 30, 0, 15, -20, 30, -15, 5, -30, -15, -10, -15)
+script = ExtResource("1_k45i0")
+
+[node name="InnerStar" type="Polygon2D" parent="."]
+scale = Vector2(0.6, 0.6)
+color = Color(1, 0.917647, 0.329412, 1)
+polygon = PackedVector2Array(0, -50, 10, -15, 30, -15, 15, 5, 20, 30, 0, 15, -20, 30, -15, 5, -30, -15, -10, -15)
+
+[node name="Glow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.427451)
+scale = Vector2(1.5, 1.5)
+texture = SubResource("GradientTexture2D_cxn5h")
+region_rect = Rect2(-1.33558, -3.00506, 124.671, 124.671)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w55r4")
+}
+autoplay = "idle"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 0.9
+lifetime_randomness = 0.28
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+radial_accel_min = -35.77
+radial_accel_max = 72.36
+damping_min = 68.13
+damping_max = 68.13
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_wcmit")
+color_ramp = SubResource("Gradient_1tim2")

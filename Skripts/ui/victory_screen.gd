@@ -1,0 +1,122 @@
+extends Control
+
+signal next_level_requested
+signal home_requested
+
+enum GameResult { VICTORY, DEFEAT }
+
+@onready var result_title = $Panel/MarginContainer/VBoxContainer/ResultTitle
+@onready var level_completed_label = $Panel/MarginContainer/VBoxContainer/RewardContainer/LevelCompletedLabel
+@onready var coins_value = $Panel/MarginContainer/VBoxContainer/RewardContainer/CoinsEarnedContainer/CoinsValue
+@onready var star_container = $Panel/MarginContainer/VBoxContainer/StarContainer
+@onready var next_level_button = $Panel/MarginContainer/VBoxContainer/ButtonContainer/NextLevelButton
+@onready var home_button = $Panel/MarginContainer/VBoxContainer/ButtonContainer/HomeButton
+@onready var animation_timer = $AnimationTimer
+
+var animated_star_scene = preload("res://Scenes/ui/animated_star.tscn")
+var stars = []
+
+var coin_counter: Node
+var current_stars = 0
+var total_stars_possible = 3
+var result_type = GameResult.VICTORY
+var coins_earned = 0
+
+func _ready():
+	coin_counter = get_node("/root/CoinCounter")
+	coins_earned = coin_counter.get_level_coins()
+	
+	# Create animated stars
+	create_stars()
+	
+	# Connect button signals
+	next_level_button.pressed.connect(_on_next_level_button_pressed)
+	home_button.pressed.connect(_on_home_button_pressed)
+	animation_timer.timeout.connect(_animate_next_star)
+	
+	# Set up the screen based on victory or defeat
+	setup_screen()
+	
+	# Start animations
+	animation_timer.start()
+
+func create_stars():
+	# Create three animated stars
+	for i in range(3):
+		var star = animated_star_scene.instantiate()
+		star_container.add_child(star)
+		star.scale = Vector2(0.7, 0.7) # Adjust size as needed
+		stars.append(star)
+		
+		# Start with all stars inactive
+		star.modulate.a = 0.0
+
+func setup_screen():
+	coins_value.text = str(coins_earned)
+	
+	# Calculate stars based on coins collected
+	calculate_stars()
+	
+	if result_type == GameResult.VICTORY:
+		result_title.text = "VICTORY!"
+		level_completed_label.text = "Level Completed!"
+		next_level_button.disabled = false
+	else:
+		result_title.text = "DEFEAT!"
+		level_completed_label.text = "Try Again!"
+		next_level_button.disabled = true
+
+func calculate_stars():
+	# In a real game, you might calculate stars based on performance metrics
+	# For this example, we'll use coins collected as an example
+	if coins_earned >= 25:
+		current_stars = 3
+	elif coins_earned >= 15:
+		current_stars = 2
+	elif coins_earned > 0:
+		current_stars = 1
+	else:
+		current_stars = 0
+		
+	# Gray out stars that weren't earned
+	for i in range(3):
+		if i >= current_stars:
+			stars[i].set_inactive()
+
+func _animate_next_star():
+	if current_stars > 0:
+		var star_index = current_stars - 1
+		if star_index >= 0 and star_index < 3:
+			stars[star_index].appear()
+			
+			# Play sound effect here if you have one
+			# AudioManager.play_sound("star_earned")
+			
+			current_stars -= 1
+			animation_timer.start()
+	else:
+		# Animation complete
+		pass
+
+func show_victory():
+	result_type = GameResult.VICTORY
+	visible = true
+	setup_screen()
+	animation_timer.start()
+
+func show_defeat():
+	result_type = GameResult.DEFEAT
+	visible = true
+	setup_screen()
+	animation_timer.start()
+
+func _on_next_level_button_pressed():
+	coin_counter.complete_level() # Add coins to total
+	next_level_requested.emit()
+	queue_free()
+
+func _on_home_button_pressed():
+	if result_type == GameResult.VICTORY:
+		coin_counter.complete_level() # Only add coins if victory
+	home_requested.emit()
+	get_tree().change_scene_to_file("res://Scenes/menu/menue.tscn")

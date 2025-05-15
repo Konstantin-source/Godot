@@ -1,0 +1,228 @@
+[gd_scene load_steps=11 format=3 uid="uid://cne1lllvwpcii"]
+
+[ext_resource type="Script" uid="uid://v4ibv5y7t7ji" path="res://Skripts/ui/victory_screen.gd" id="1_l8jv2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36krr"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 0.858824)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8jys"]
+bg_color = Color(0.0941176, 0.0784314, 0.145098, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.478431, 0.356863, 0.141176, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.301961)
+shadow_size = 5
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="FontFile" id="FontFile_y0vyi"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+cache/0/37/0/ascent = 0.0
+cache/0/37/0/descent = 0.0
+cache/0/37/0/underline_position = 0.0
+cache/0/37/0/underline_thickness = 0.0
+cache/0/37/0/scale = 1.0
+cache/0/26/0/ascent = 0.0
+cache/0/26/0/descent = 0.0
+cache/0/26/0/underline_position = 0.0
+cache/0/26/0/underline_thickness = 0.0
+cache/0/26/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_6lqth"]
+line_spacing = 6.0
+font = SubResource("FontFile_y0vyi")
+font_size = 48
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.541176)
+shadow_offset = Vector2(3.18, -4.325)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fjuj3"]
+line_spacing = 6.0
+font = SubResource("FontFile_y0vyi")
+font_size = 37
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.541176)
+shadow_offset = Vector2(3.18, -4.325)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c3g6y"]
+line_spacing = 6.0
+font = SubResource("FontFile_y0vyi")
+font_size = 26
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.541176)
+shadow_offset = Vector2(1.5, -2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a4xdt"]
+bg_color = Color(0.356863, 0.207843, 0.0470588, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.894118, 0.713726, 0.305882, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.301961)
+shadow_size = 5
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0e2i3"]
+bg_color = Color(0.219608, 0.12549, 0.0235294, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.631373, 0.478431, 0.176471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajvw7"]
+bg_color = Color(0.32549, 0.196078, 0.0588235, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.811765, 0.631373, 0.262745, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.301961)
+shadow_size = 5
+shadow_offset = Vector2(0, 3)
+
+[node name="VictoryScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l8jv2")
+
+[node name="BackgroundDim" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_36krr")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_j8jys")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ResultTitle" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "VICTORY!"
+label_settings = SubResource("LabelSettings_6lqth")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="StarContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="RewardContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="LevelCompletedLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/RewardContainer"]
+layout_mode = 2
+text = "Level Completed!"
+label_settings = SubResource("LabelSettings_fjuj3")
+horizontal_alignment = 1
+
+[node name="CoinsEarnedContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/RewardContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/RewardContainer/CoinsEarnedContainer"]
+layout_mode = 2
+text = "Coins Earned: "
+label_settings = SubResource("LabelSettings_c3g6y")
+
+[node name="CoinsValue" type="Label" parent="Panel/MarginContainer/VBoxContainer/RewardContainer/CoinsEarnedContainer"]
+layout_mode = 2
+text = "25"
+label_settings = SubResource("LabelSettings_c3g6y")
+
+[node name="ButtonContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="HomeButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_a4xdt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0e2i3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ajvw7")
+text = "HOME"
+
+[node name="NextLevelButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_a4xdt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0e2i3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ajvw7")
+text = "NEXT LEVEL"
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

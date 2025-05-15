@@ -5,9 +5,9 @@
 
 [resource]
 script = ExtResource("1_wcxid")
-item_name = "Dash"
-item_price = 1
-item_description = "A dash for the tank."
+item_name = "Minigun"
+item_price = 50
+item_description = "A Minigun for the tank."
 item_icon = ExtResource("1_h5iab")
 item_type = ""
 item_is_unlocked = false

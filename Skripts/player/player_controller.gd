@@ -46,5 +46,14 @@ func _on_tank_destroyed() -> void:
 	for node in nodes_to_disable:
 		node.disabled = true
 		
+	# Show defeat screen after a short delay
+	await get_tree().create_timer(1.5).timeout
+	var level_manager = get_tree().get_root().get_node_or_null("Game/LevelManager")
+	if level_manager and level_manager.has_method("show_defeat_screen"):
+		level_manager.show_defeat_screen()
+		
 func _on_death_animation_finished() -> void:
+	# Don't queue_free() immediately to allow defeat screen to show
+	# Delay destruction to keep the death scene visible
+	await get_tree().create_timer(3.0).timeout
 	queue_free()
