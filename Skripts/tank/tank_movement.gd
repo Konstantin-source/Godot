@@ -49,6 +49,7 @@ func _physics_process(delta: float) -> void:
 	rotation_degree = input_direction.angle() - PI/2
 	if input_direction != Vector2.ZERO:
 		#rotieren
+		print("Input direction: ", input_direction)
 		$CollisionShape2D.rotation = lerp_angle($body.rotation, rotation_degree, 5 *delta)
 		$body.rotation = lerp_angle($body.rotation, rotation_degree, 5 *delta)
 		#var track_mark_direction = Vector2(cos($body.rotation), sin($body.rotation))

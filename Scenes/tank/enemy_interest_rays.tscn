@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://3iiqg00rtfrt"]
+
+[ext_resource type="Script" uid="uid://bhltp5mtai7lo" path="res://Scenes/tank/enemy_interest_calculation.gd" id="1_vo4ne"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_vo4ne")
+
+[node name="unten" type="RayCast2D" parent="."]
+collision_mask = 15
+
+[node name="untenRechts" type="RayCast2D" parent="."]
+target_position = Vector2(35, 35)
+
+[node name="rechts" type="RayCast2D" parent="."]
+target_position = Vector2(50, 0)
+
+[node name="links" type="RayCast2D" parent="."]
+target_position = Vector2(-50, 0)
+
+[node name="oben" type="RayCast2D" parent="."]
+target_position = Vector2(0, -50)
+
+[node name="obenRechts" type="RayCast2D" parent="."]
+target_position = Vector2(35, -35)
+
+[node name="obenLinks" type="RayCast2D" parent="."]
+target_position = Vector2(-35, -35)
+
+[node name="untenLinks" type="RayCast2D" parent="."]
+target_position = Vector2(-35, 35)

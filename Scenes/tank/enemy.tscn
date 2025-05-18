@@ -1,4 +1,4 @@
-[gd_scene load_steps=303 format=3 uid="uid://d4mjliv138hwl"]
+[gd_scene load_steps=304 format=3 uid="uid://d4mjliv138hwl"]
 
 [ext_resource type="Script" uid="uid://va2gxmus2ar2" path="res://Skripts/tank/tank_movement.gd" id="1_2racs"]
 [ext_resource type="Texture2D" uid="uid://kvtx63jk4bjl" path="res://Sprites/ground_shaker_asset/Purple/Bodies/body_tracks.png" id="2_yeoi8"]
@@ -293,6 +293,7 @@
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="290_cvtv7"]
 [ext_resource type="Script" uid="uid://0uird4c4m5j" path="res://Skripts/tank/tank_health.gd" id="291_vy64v"]
 [ext_resource type="Script" uid="uid://bw3adfmuxypvl" path="res://Skripts/enemy/enemy_controller.gd" id="292_ka2rn"]
+[ext_resource type="PackedScene" uid="uid://3iiqg00rtfrt" path="res://Scenes/tank/enemy_interest_rays.tscn" id="294_2012l"]
 
 [sub_resource type="Curve" id="Curve_xi5ch"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
@@ -1200,7 +1201,6 @@ animations = [{
 
 [node name="enemy_1" type="CharacterBody2D" node_paths=PackedStringArray("track_marks_left_position", "track_marks_right_position") groups=["enemy"]]
 z_index = 1
-position = Vector2(437, 292)
 scale = Vector2(0.865, 0.865)
 collision_layer = 7
 collision_mask = 3
@@ -1307,11 +1307,13 @@ animation = &"death"
 speed_scale = 2.5
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 5.0
+path_desired_distance = 20.42
 path_max_distance = 300.0
 navigation_layers = 3
 path_postprocessing = 1
-avoidance_enabled = true
+radius = 100.0
+max_neighbors = 5
+time_horizon_obstacles = 1.85
 avoidance_layers = 3
 avoidance_mask = 3
 debug_enabled = true
@@ -1326,10 +1328,17 @@ script = ExtResource("291_vy64v")
 [node name="ControlerEnemy" type="Node" parent="." node_paths=PackedStringArray("death_animation", "nodes_to_remove")]
 script = ExtResource("292_ka2rn")
 detection_radius = 900
-chase_player_radius = 700
+chase_player_radius = 800
 bulletScene = ExtResource("5_bw2vx")
 death_animation = NodePath("../death")
 nodes_to_remove = [NodePath("../CollisionShape2D"), NodePath("../Area2D"), NodePath("../body"), NodePath("../tower")]
+
+[node name="EnemyAI" parent="." instance=ExtResource("294_2012l")]
+scale = Vector2(4.025, 4.025)
+
+[node name="randomPositionTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
 
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
@@ -1343,5 +1352,7 @@ nodes_to_remove = [NodePath("../CollisionShape2D"), NodePath("../Area2D"), NodeP
 [connection signal="inputDirectionChanged" from="ControlerEnemy" to="." method="_on_get_input_input_direction_changed"]
 [connection signal="input_rotation_changed" from="ControlerEnemy" to="." method="_on_get_rotation_direction_changed"]
 [connection signal="shoot" from="ControlerEnemy" to="tower" method="shoot"]
+[connection signal="avoidance_vektor" from="EnemyAI" to="ControlerEnemy" method="calculate_avoidance"]
+[connection signal="timeout" from="randomPositionTimer" to="ControlerEnemy" method="_on_random_position_timer_timeout"]
 
 [editable path="enemyHealth"]
