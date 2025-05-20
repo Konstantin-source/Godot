@@ -25,6 +25,7 @@ var velocity: Vector2             = Vector2.ZERO
 var direction: Vector2            = Vector2.ZERO
 var player: CharacterBody2D = null
 var input_rotation: Vector2 = Vector2.UP
+var is_destroyed: bool = false
 
 @onready var nav_Agent := $"../NavigationAgent2D" as NavigationAgent2D
 
@@ -35,6 +36,9 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	if is_destroyed:
+		return
+		
 	time_since_last_change +=delta
 	await get_tree().process_frame
 	player = get_tree().get_first_node_in_group("player")
@@ -80,6 +84,10 @@ func make_Path() -> void:
 
 	
 func _on_tank_destroyed() -> void:
+	if is_destroyed:
+		return
+	is_destroyed = true
+
 	player = null
 	can_shoot = false
 

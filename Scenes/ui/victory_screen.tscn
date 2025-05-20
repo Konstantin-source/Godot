@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://v4ibv5y7t7ji" path="res://Skripts/ui/victory_screen.gd" id="1_l8jv2"]
 [ext_resource type="Texture2D" uid="uid://cnff0314d2xp1" path="res://Sprites/UI/coin_single.png" id="2_x6ewr"]
-[ext_resource type="Script" uid="uid://dcrydoj7oluaf" path="res://Skripts/ui/coin_ui.gd" id="3_8ly6r"]
+[ext_resource type="Script" path="res://Skripts/ui/coin_ui.gd" id="3_8ly6r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36krr"]
 bg_color = Color(0.141176, 0.141176, 0.141176, 0.858824)
@@ -214,7 +214,7 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/hover = SubResource("StyleBoxFlat_a4xdt")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0e2i3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ajvw7")
-text = "HOME"
+text = "Home"
 
 [node name="NextLevelButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonContainer"]
 custom_minimum_size = Vector2(150, 50)
@@ -223,7 +223,7 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/hover = SubResource("StyleBoxFlat_a4xdt")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0e2i3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ajvw7")
-text = "NEXT LEVEL"
+text = "Next Level"
 
 [node name="AnimationTimer" type="Timer" parent="."]
 wait_time = 0.5

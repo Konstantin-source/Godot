@@ -5,7 +5,7 @@ const SAVE_FILE_PATH: String = "user://save_data.save"
 var save_data: Dictionary = {
 	"coin_count": 0,
 	"experience": 0,
-	"level": 1,
+	"completed_levels": [],
 	"unlocked_items": [],
 	"skill_tree_levels": {
 		"movement": 0,
@@ -55,6 +55,17 @@ func load_save_data() -> bool:
 func _save_new_coin_count(new_count: int) -> void:
 	save_data["coin_count"] = new_count
 	save_save_data()
+
+func _save_new_experience(new_experience: int) -> void:
+	save_data["experience"] = new_experience
+	save_save_data()
+
+func _save_completed_level(level_number: int) -> void:
+	if not save_data["completed_levels"].has(level_number):
+		save_data["completed_levels"].append(level_number)
+		save_save_data()
+	else:
+		print("Level %d already completed." % level_number)
 	
 func is_data_loaded() -> bool:
 	return initial_save_data_loaded

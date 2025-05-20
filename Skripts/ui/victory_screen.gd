@@ -1,6 +1,7 @@
 extends Control
 
 signal next_level_requested
+signal retry_level_requested
 signal home_requested
 
 enum GameResult { VICTORY, DEFEAT }
@@ -60,13 +61,12 @@ func setup_screen():
 	if result_type == GameResult.VICTORY:
 		result_title.text = "VICTORY!"
 		level_completed_label.text = "Level Completed!"
-		next_level_button.disabled = false
 		coin_counter.complete_level()
 
 	else:
 		result_title.text = "DEFEAT!"
 		level_completed_label.text = "Try Again!"
-		next_level_button.disabled = true
+		next_level_button.text = "Retry"
 
 func calculate_stars():
 	if coins_earned >= 25:
@@ -106,9 +106,14 @@ func show_defeat():
 	animation_timer.start()
 
 func _on_next_level_button_pressed():
-	next_level_requested.emit()
+	if result_type == GameResult.VICTORY:
+		next_level_requested.emit()
+	else :
+		retry_level_requested.emit()
+
 	queue_free()
 
 func _on_home_button_pressed():
 	home_requested.emit()
 	get_tree().change_scene_to_file("res://Scenes/menu/menue.tscn")
+	queue_free()

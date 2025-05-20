@@ -2,6 +2,8 @@ extends Node2D
 var input_direction: Vector2 = Vector2.ZERO
 var rotation_direction: Vector2 = Vector2.ZERO
 
+var is_destroyed: bool = false
+
 signal input_direction_changed(new_input_direction)
 signal rotation_direction_changed(new_rotation_direction)
 signal shoot()
@@ -12,7 +14,12 @@ signal dash()
 @export var nodes_to_hide: Array[Node2D] = []
 @export var nodes_to_disable: Array[CollisionShape2D] = []
 
+@onready var level_manager = get_node("/root/LevelManager")
+
 func _physics_process(_delta: float) -> void:
+	if is_destroyed:
+		return
+
 	input_direction = Vector2.ZERO
 	if Input.is_action_pressed("right"):
 		input_direction.x -= 1
@@ -39,6 +46,10 @@ func _physics_process(_delta: float) -> void:
 	rotation_direction_changed.emit(get_global_mouse_position() - global_position)
 
 func _on_tank_destroyed() -> void:
+	if is_destroyed:
+		return
+	is_destroyed = true
+
 	death_animation.show()
 	death_animation.play("death")
 	for node in nodes_to_hide:
@@ -48,7 +59,6 @@ func _on_tank_destroyed() -> void:
 		
 	# Show defeat screen after a short delay
 	await get_tree().create_timer(1.5).timeout
-	var level_manager = get_tree().get_root().get_node_or_null("Game/LevelManager")
 	if level_manager and level_manager.has_method("show_defeat_screen"):
 		level_manager.show_defeat_screen()
 		
