@@ -36,7 +36,6 @@ func _ready():
 	shootingPipeEnd = $rohr_Ende
 	if user_ui:
 		user_ui.max_shoots_ui = max_shots
-		print(user_ui)
 	else:
 		push_warning("user UI wurde noch nicht geladen")
 
@@ -66,8 +65,8 @@ func shoot() -> void:
 	#$tower/Animation.play("default")
 	
 	#bullet.collision_layer = 0b0100
-	bullet.collision_layer = 0b10100
-	bullet.collision_mask = 0b0110
+	#bullet.collision_layer = 0b10100
+	#bullet.collision_mask = 0b0110
 	
 	bullet.global_position = shootingPipeEnd.global_position
 	bullet.shooter_tank = self
