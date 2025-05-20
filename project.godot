@@ -27,6 +27,7 @@ player=""
 shootingPoint=""
 tower=""
 enemy=""
+bullet=""
 
 [input]
 

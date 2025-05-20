@@ -1,6 +1,5 @@
 [gd_scene load_steps=13 format=3 uid="uid://bsnn5owen8gqq"]
 
-[ext_resource type="Script" uid="uid://hycqit16ypta" path="res://Skripts/ui/ui.gd" id="1_hi7w3"]
 [ext_resource type="Script" uid="uid://dfjuhm3vdfsba" path="res://Skripts/ui/healthbar.gd" id="2_vd4rb"]
 [ext_resource type="PackedScene" uid="uid://b114e77a7auee" path="res://Scenes/ui/gui_user.tscn" id="3_57c5g"]
 [ext_resource type="Script" uid="uid://kugb076ptbrv" path="res://Skripts/ui/minimap.gd" id="4_dq1gv"]
@@ -223,7 +222,6 @@ shadow_color = Color(0, 0, 0, 0.541176)
 shadow_offset = Vector2(3.18, -4.325)
 
 [node name="playerInterface" type="Node2D"]
-script = ExtResource("1_hi7w3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.675, 0.675)

@@ -153,11 +153,12 @@ color_ramp = SubResource("GradientTexture1D_42yw6")
 turbulence_enabled = true
 turbulence_noise_scale = 1.319
 
-[node name="bullet1" type="RigidBody2D"]
-collision_layer = 0
-collision_mask = 0
+[node name="bullet1" type="RigidBody2D" groups=["bullet"]]
+collision_layer = 20
+collision_mask = 20
 mass = 0.001
 gravity_scale = 0.0
+max_contacts_reported = 1
 script = ExtResource("1_dmcwa")
 Bulletspeed = 800
 metadata/_edit_group_ = true
@@ -185,8 +186,8 @@ frame_progress = 1.0
 speed_scale = 0.7
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 16
+collision_layer = 20
+collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(1, -5)

@@ -293,15 +293,12 @@
 [ext_resource type="Script" uid="uid://cfclwikhyk62j" path="res://Skripts/player/player_controller.gd" id="288_ylkgc"]
 [ext_resource type="Script" uid="uid://76rf80gmcbuv" path="res://Skripts/tank/tank_health.gd" id="289_ao26r"]
 [ext_resource type="Texture2D" uid="uid://b27owvwhn6u13" path="res://Sprites/Smoke/dust.png" id="292_xeg4k"]
-[ext_resource type="Script" uid="uid://wtn25orde20a" path="res://Scenes/tank/gpu_particles_2d.gd" id="293_exic1"]
+[ext_resource type="Script" path="res://Scenes/tank/gpu_particles_2d.gd" id="293_exic1"]
 [ext_resource type="PackedScene" uid="uid://bsnn5owen8gqq" path="res://Scenes/ui/playerInterface.tscn" id="330_82slw"]
 
 [sub_resource type="Curve" id="Curve_oaenc"]
 _data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4pa0"]
-size = Vector2(75.1445, 84.3931)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dxxwa"]
 particles_animation = true
@@ -323,9 +320,6 @@ gravity = Vector3(0, 0, 0)
 scale_min = 1.55
 scale_max = 6.05
 color_ramp = SubResource("GradientTexture1D_ej5t6")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5esf"]
-size = Vector2(67, 78)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_53yy2"]
 animations = [{
@@ -1192,9 +1186,14 @@ animations = [{
 "speed": 60.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4pa0"]
+size = Vector2(75.1445, 84.3931)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_scedh"]
+size = Vector2(71.6763, 82.0809)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("track_marks_left_position", "track_marks_right_position") groups=["player"]]
 z_index = 1
-position = Vector2(604, 322)
 scale = Vector2(0.865, 0.865)
 collision_layer = 18
 collision_mask = 18
@@ -1211,14 +1210,6 @@ metadata/_edit_group_ = true
 
 [node name="body" type="Sprite2D" parent="."]
 texture = ExtResource("2_q50ly")
-
-[node name="Area2D" type="Area2D" parent="body"]
-collision_layer = 0
-collision_mask = 16
-
-[node name="scanarea" type="CollisionShape2D" parent="body/Area2D"]
-position = Vector2(0.578003, 1.7341)
-shape = SubResource("RectangleShape2D_n4pa0")
 
 [node name="TrackMarksLeft" type="Marker2D" parent="body"]
 position = Vector2(-23.1214, 28.9017)
@@ -1253,10 +1244,6 @@ explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_lwot8")
 script = ExtResource("293_exic1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 2)
-shape = SubResource("RectangleShape2D_o5esf")
-
 [node name="tower" type="Sprite2D" parent="." groups=["tower"]]
 texture = ExtResource("3_q5vmj")
 region_enabled = true
@@ -1290,7 +1277,6 @@ frame_progress = 1.0
 speed_scale = 2.0
 
 [node name="playerInterface" parent="." instance=ExtResource("330_82slw")]
-controlerPath = NodePath("../PlayerController")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("289_ao26r")
@@ -1299,11 +1285,22 @@ script = ExtResource("289_ao26r")
 script = ExtResource("288_ylkgc")
 death_animation = NodePath("../death")
 nodes_to_hide = [NodePath("../body"), NodePath("../tower")]
-nodes_to_disable = [NodePath("../body/Area2D/scanarea"), NodePath("../CollisionShape2D")]
+nodes_to_disable = [NodePath("../Area2D/scanarea")]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="scanarea" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.578003, 1.7341)
+shape = SubResource("RectangleShape2D_n4pa0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.7341)
+shape = SubResource("RectangleShape2D_scedh")
 
 [connection signal="is_dashing" from="." to="body/dustleft" method="_on_player_controller_dash"]
 [connection signal="is_dashing" from="." to="body/dustright" method="_on_player_controller_dash"]
-[connection signal="body_entered" from="body/Area2D" to="Health" method="_on_area_2d_body_entered"]
 [connection signal="justShoot" from="tower" to="playerInterface/CanvasLayer/user_UI" method="just_shoot"]
 [connection signal="ui_reload" from="tower" to="playerInterface/CanvasLayer/user_UI" method="reset_bullets"]
 [connection signal="ui_reload_animation" from="tower" to="playerInterface/CanvasLayer/user_UI" method="reload_animation"]

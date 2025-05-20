@@ -298,9 +298,6 @@
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5esf"]
-size = Vector2(69.3642, 78.6127)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_53yy2"]
 animations = [{
 "frames": [{
@@ -548,9 +545,6 @@ animations = [{
 "name": &"default",
 "speed": 60.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3w67"]
-size = Vector2(76.3006, 84.3931)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qrjnu"]
 
@@ -1198,9 +1192,14 @@ animations = [{
 "speed": 60.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3w67"]
+size = Vector2(76.3006, 84.3931)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6v8p"]
+size = Vector2(71.6763, 78.6127)
+
 [node name="enemy_1" type="CharacterBody2D" node_paths=PackedStringArray("track_marks_left_position", "track_marks_right_position") groups=["enemy"]]
 z_index = 1
-position = Vector2(437, 292)
 scale = Vector2(0.865, 0.865)
 collision_layer = 7
 collision_mask = 3
@@ -1227,10 +1226,6 @@ position = Vector2(3.8147e-06, 34.6821)
 scale = Vector2(0.0587522, 0.0387702)
 texture = ExtResource("3_bas1u")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2.31213)
-shape = SubResource("RectangleShape2D_o5esf")
-
 [node name="tower" type="Sprite2D" parent="."]
 texture = ExtResource("3_p03pb")
 region_enabled = true
@@ -1252,14 +1247,6 @@ sprite_frames = SubResource("SpriteFrames_53yy2")
 frame = 79
 frame_progress = 1.0
 speed_scale = 3.5
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 4
-
-[node name="scanarea" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1.1561, 1.7341)
-shape = SubResource("RectangleShape2D_h3w67")
 
 [node name="enemyHealth" parent="." instance=ExtResource("86_psc55")]
 position = Vector2(-100, -85)
@@ -1329,11 +1316,23 @@ detection_radius = 900
 chase_player_radius = 700
 bulletScene = ExtResource("5_bw2vx")
 death_animation = NodePath("../death")
-nodes_to_remove = [NodePath("../CollisionShape2D"), NodePath("../Area2D"), NodePath("../body"), NodePath("../tower")]
+nodes_to_remove = [NodePath("../Area2D"), NodePath("../body"), NodePath("../tower")]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="scanarea" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(-1.1561, 1.7341)
+shape = SubResource("RectangleShape2D_h3w67")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.10251e-06, 1.15607)
+shape = SubResource("RectangleShape2D_g6v8p")
 
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
-[connection signal="body_entered" from="Area2D" to="Health" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Node2D/healthbar/Timer" to="Node2D/healthbar" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
 [connection signal="timeout" from="pathfinding_Timer" to="." method="_on_pathfinding_timer_timeout"]
