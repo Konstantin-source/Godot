@@ -1,13 +1,25 @@
-﻿extends Label
+extends Label
+
+enum CoinUIState {
+	LEVEL_COINS,
+	TOTAL_COINS
+}
+
+@export var coin_ui_state: CoinUIState = CoinUIState.LEVEL_COINS
 
 @onready var coin_counter: Node = get_node("/root/CoinCounter")
 
+var previous_coin_count: int = 0
+var initial_coin_count_loaded: bool = false
+
 func _ready() -> void:
-	coin_counter.coin_count_changed.connect(_on_coin_count_changed)
-	coin_counter.level_coins_changed.connect(_on_level_coins_changed)
-	
-	# Initial display
-	update_display()
+	if coin_ui_state == CoinUIState.LEVEL_COINS:
+		coin_counter.level_coins_changed.connect(_on_level_coins_changed)
+	else:
+		coin_counter.coin_count_changed.connect(_on_coin_count_changed)
+
+	if not initial_coin_count_loaded:
+		update_display()
 
 func _on_coin_count_changed(new_count: int) -> void:
 	update_display()
@@ -16,7 +28,24 @@ func _on_level_coins_changed(_level_coins: int) -> void:
 	update_display()
 	
 func update_display() -> void:
-	# Display both current level coins and total coins
-	var level_coins = coin_counter.get_level_coins()
-	var total_coins = coin_counter.get_total_coins()
-	text = "Level: " + str(level_coins) + " | Total: " + str(total_coins)
+	if not initial_coin_count_loaded:
+		previous_coin_count = coin_counter.get_level_coins() if coin_ui_state == CoinUIState.LEVEL_COINS else coin_counter.get_total_coins()
+		initial_coin_count_loaded = true
+		text = str(previous_coin_count)
+		return
+
+	var new_count = coin_counter.get_level_coins() if coin_ui_state == CoinUIState.LEVEL_COINS else coin_counter.get_total_coins()
+	if previous_coin_count != new_count:
+		animate(previous_coin_count, new_count)
+	previous_coin_count = new_count
+
+
+func animate(from: int, to: int) -> void:
+	text = str(from) + " + " + str(to - from)
+	await get_tree().create_timer(0.5).timeout
+
+	for i in range(from, to + 1):
+		await get_tree().create_timer(0.1).timeout
+		text = str(i) + " + " + str(to - i)
+
+	text = str(to)

@@ -4,8 +4,14 @@ const SAVE_FILE_PATH: String = "user://save_data.save"
 
 var save_data: Dictionary = {
 	"coin_count": 0,
+	"experience": 0,
 	"level": 1,
-	"unlocked_items": []
+	"unlocked_items": [],
+	"skill_tree_levels": {
+		"movement": 0,
+		"health": 0,
+		"damage": 0
+	}
 }
 var initial_save_data_loaded: bool = false
 signal save_data_loaded(save_data: Dictionary)
@@ -17,10 +23,8 @@ func _ready() -> void:
 	else:
 		save_data["coin_count"] = 100
 		
-		# Set the flag first so that checking is_data_loaded() will work
 		initial_save_data_loaded = true
 		
-		# Emit signal after setting flag
 		save_data_loaded.emit(save_data)
 		print(save_data)
 			

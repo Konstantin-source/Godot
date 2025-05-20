@@ -11,10 +11,11 @@ var unlocked_items = []
 @onready var save_manager = get_node("/root/SaveManager")
 
 func _ready():
+	load_shop_items()
+	
 	# Use the improved registration method
 	save_manager.register_for_data(self, "_on_save_data_loaded")
 	
-	load_shop_items()
 
 func load_shop_items():
 	var dir = DirAccess.open("res://Resources/shop/")

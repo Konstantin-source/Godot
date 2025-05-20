@@ -2,29 +2,34 @@ extends Node
 
 @onready var coin_counter: Node = get_node("/root/CoinCounter")
 var victory_screen_scene = preload("res://Scenes/ui/victory_screen.tscn")
+var game_over = false
 
 func _on_level_completed() -> void:
 	show_victory_screen()
 
 func show_victory_screen() -> void:
-	# Create a canvas layer to ensure the UI is always drawn on top and fixed to the camera
+	if game_over:
+		return
+	game_over = true
+	
 	var canvas_layer = CanvasLayer.new()
-	canvas_layer.layer = 10  # Set a high layer value to ensure it's on top
+	canvas_layer.layer = 10
 	get_tree().root.add_child(canvas_layer)
 	
-	# Instantiate and add the victory screen to the canvas layer
 	var victory_screen = victory_screen_scene.instantiate()
 	canvas_layer.add_child(victory_screen)
 	victory_screen.show_victory()
 	victory_screen.next_level_requested.connect(_on_next_level_requested)
 
 func show_defeat_screen() -> void:
-	# Create a canvas layer to ensure the UI is always drawn on top and fixed to the camera
+	if game_over:
+		return
+	game_over = true
+
 	var canvas_layer = CanvasLayer.new()
-	canvas_layer.layer = 10  # Set a high layer value to ensure it's on top
+	canvas_layer.layer = 10
 	get_tree().root.add_child(canvas_layer)
 	
-	# Instantiate and add the victory screen to the canvas layer
 	var victory_screen = victory_screen_scene.instantiate()
 	canvas_layer.add_child(victory_screen)
 	victory_screen.show_defeat()

@@ -7,6 +7,7 @@ extends Node
 @export var death_animation: AnimatedSprite2D
 @export var nodes_to_remove: Array[Node2D] = []
 @export var nodes_to_disable: Array[CollisionShape2D] = []
+@export var scripts_to_disable: Array[Node] = []
 
 signal inputDirectionChanged(newInputDirection)
 signal input_rotation_changed(new_input_rotation)
@@ -32,9 +33,6 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	$"../Node2D/healthbar".init_health(current_health)
 	
-	var coin_counter = get_node("/root/CoinCounter")
-	tank_destroyed.connect(coin_counter._add_coin)
-
 
 func _physics_process(delta: float) -> void:
 	time_since_last_change +=delta
@@ -91,6 +89,10 @@ func _on_tank_destroyed() -> void:
 		node.queue_free()
 	for node in nodes_to_disable:
 		node.disabled = true
+	for script in scripts_to_disable:
+		script.set_process(false)
+
+	$".".set_process(false)
 		
 	tank_destroyed.emit()
 
