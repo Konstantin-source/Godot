@@ -7,14 +7,11 @@ signal items_loaded
 var shop_items = {}
 var unlocked_items = []
 
-@onready var coin_counter = get_node("/root/CoinCounter")
-@onready var save_manager = get_node("/root/SaveManager")
-
 func _ready():
 	load_shop_items()
 	
 	# Use the improved registration method
-	save_manager.register_for_data(self, "_on_save_data_loaded")
+	SaveManager.register_for_data(self, "_on_save_data_loaded")
 	
 
 func load_shop_items():
@@ -54,17 +51,17 @@ func purchase_item(item_name: String) -> bool:
 		purchase_failed.emit("Item already unlocked")
 		return false
 	
-	if coin_counter.get_total_coins() < item.item_price:
+	if CoinCounter.get_total_coins() < item.item_price:
 		purchase_failed.emit("Not enough coins")
 		return false
 	
-	coin_counter._remove_total_coins(item.item_price)
+	CoinCounter._remove_total_coins(item.item_price)
 	
 	item.item_is_unlocked = true
 	unlocked_items.append(item_name)
 	
-	save_manager.save_data["unlocked_items"] = unlocked_items
-	save_manager.save_save_data()
+	SaveManager.save_data["unlocked_items"] = unlocked_items
+	SaveManager.save_save_data()
 	
 	item_purchased.emit(item_name)
 	return true

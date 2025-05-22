@@ -6,12 +6,10 @@ var current_level_coins: int = 0
 signal coin_count_changed(new_count: int)
 signal level_coins_changed(level_coins: int)
 
-@onready var save_manager: Node = get_node("/root/SaveManager")
-
 func _ready() -> void:
-	coin_count_changed.connect(save_manager._save_new_coin_count)
+	coin_count_changed.connect(SaveManager._save_new_coin_count)
 	
-	save_manager.register_for_data(self, "_on_save_data_loaded")
+	SaveManager.register_for_data(self, "_on_save_data_loaded")
 
 func _add_coin() -> void:
 	current_level_coins += 1

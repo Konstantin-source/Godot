@@ -14,8 +14,6 @@ signal dash()
 @export var nodes_to_hide: Array[Node2D] = []
 @export var nodes_to_disable: Array[CollisionShape2D] = []
 
-@onready var level_manager = get_node("/root/LevelManager")
-
 func _physics_process(_delta: float) -> void:
 	if is_destroyed:
 		return
@@ -59,8 +57,7 @@ func _on_tank_destroyed() -> void:
 		
 	# Show defeat screen after a short delay
 	await get_tree().create_timer(1.5).timeout
-	if level_manager and level_manager.has_method("show_defeat_screen"):
-		level_manager.show_defeat_screen()
+	LevelManager.show_defeat_screen()
 		
 func _on_death_animation_finished() -> void:
 	# Don't queue_free() immediately to allow defeat screen to show

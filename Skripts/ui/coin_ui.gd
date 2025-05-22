@@ -7,16 +7,14 @@ enum CoinUIState {
 
 @export var coin_ui_state: CoinUIState = CoinUIState.LEVEL_COINS
 
-@onready var coin_counter: Node = get_node("/root/CoinCounter")
-
 var previous_coin_count: int = 0
 var initial_coin_count_loaded: bool = false
 
 func _ready() -> void:
 	if coin_ui_state == CoinUIState.LEVEL_COINS:
-		coin_counter.level_coins_changed.connect(_on_level_coins_changed)
+		CoinCounter.level_coins_changed.connect(_on_level_coins_changed)
 	else:
-		coin_counter.coin_count_changed.connect(_on_coin_count_changed)
+		CoinCounter.coin_count_changed.connect(_on_coin_count_changed)
 
 	if not initial_coin_count_loaded:
 		update_display()
@@ -29,12 +27,12 @@ func _on_level_coins_changed(_level_coins: int) -> void:
 	
 func update_display() -> void:
 	if not initial_coin_count_loaded:
-		previous_coin_count = coin_counter.get_level_coins() if coin_ui_state == CoinUIState.LEVEL_COINS else coin_counter.get_total_coins()
+		previous_coin_count = CoinCounter.get_level_coins() if coin_ui_state == CoinUIState.LEVEL_COINS else CoinCounter.get_total_coins()
 		initial_coin_count_loaded = true
 		text = str(previous_coin_count)
 		return
 
-	var new_count = coin_counter.get_level_coins() if coin_ui_state == CoinUIState.LEVEL_COINS else coin_counter.get_total_coins()
+	var new_count = CoinCounter.get_level_coins() if coin_ui_state == CoinUIState.LEVEL_COINS else CoinCounter.get_total_coins()
 	if previous_coin_count != new_count:
 		animate(previous_coin_count, new_count)
 	previous_coin_count = new_count

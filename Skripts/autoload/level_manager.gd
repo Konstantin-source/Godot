@@ -10,14 +10,11 @@ var current_level_index: int = 0
 var unlocked_levels: Array[LevelData] = []
 var current_level: Node = null
 
-@onready var coin_counter: Node = get_node("/root/CoinCounter")
-@onready var save_manager: Node = get_node("/root/SaveManager")
-
 var victory_screen_scene = preload("res://Scenes/ui/victory_screen.tscn")
 var game_over = false
 
 func _ready():
-	save_manager.register_for_data(self, "_on_save_data_loaded")
+	SaveManager.register_for_data(self, "_on_save_data_loaded")
 	# Connect to notifications to detect when a level is loaded
 	get_tree().node_added.connect(_on_node_added)
 
@@ -43,7 +40,7 @@ func show_victory_screen() -> void:
 		return
 	game_over = true
 
-	save_manager._save_completed_level(current_level_index + 1)
+	SaveManager._save_completed_level(current_level_index + 1)
 	
 	var canvas_layer = CanvasLayer.new()
 	canvas_layer.layer = 10
@@ -101,3 +98,8 @@ func _on_save_data_loaded(save_data: Dictionary) -> void:
 	if save_data["completed_levels"].size() > 0:
 		for level_number in save_data["completed_levels"]:
 			unlocked_levels.append(levels[level_number - 1])
+
+func get_current_level_max_coins() -> int:
+	if current_level_index < levels.size():
+		return levels[current_level_index].max_coins
+	return 0

@@ -14,8 +14,6 @@ enum GameResult { VICTORY, DEFEAT }
 @onready var home_button = $Panel/MarginContainer/VBoxContainer/ButtonContainer/HomeButton
 @onready var animation_timer = $AnimationTimer
 
-@onready var coin_counter = get_node("/root/CoinCounter")
-
 var animated_star_scene = preload("res://Scenes/ui/animated_star.tscn")
 var stars = []
 
@@ -27,7 +25,7 @@ var coins_earned = 0
 var next_star_to_animate = 0
 
 func _ready():
-	coins_earned = coin_counter.get_level_coins()
+	coins_earned = CoinCounter.get_level_coins()
 	
 	create_stars()
 	
@@ -61,7 +59,7 @@ func setup_screen():
 	if result_type == GameResult.VICTORY:
 		result_title.text = "VICTORY!"
 		level_completed_label.text = "Level Completed!"
-		coin_counter.complete_level()
+		CoinCounter.complete_level()
 
 	else:
 		result_title.text = "DEFEAT!"
@@ -69,17 +67,15 @@ func setup_screen():
 		next_level_button.text = "Retry"
 
 func calculate_stars():
-	if coins_earned >= 25:
+	var max_coins = LevelManager.get_current_level_max_coins()
+	if coins_earned >= max_coins:
 		current_stars = 3
-	elif coins_earned >= 15:
+	elif coins_earned >= max_coins / 2:
 		current_stars = 2
 	elif coins_earned > 0:
 		current_stars = 1
 	else:
 		current_stars = 0
-	
-	# Set to 2 for testing
-	current_stars = 2
 
 	next_star_to_animate = 0
 

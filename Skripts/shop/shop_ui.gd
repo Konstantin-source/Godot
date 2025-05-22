@@ -8,11 +8,9 @@ var shop_item_ui_scene = preload("res://Scenes/ui/shop_item_ui.tscn")
 @onready var notification_label = $NotificationLabel
 @onready var timer = $NotificationTimer
 
-func _ready():
-	var coin_counter = get_node("/root/CoinCounter")
-	
-	coin_display.text = "Coins: " + str(coin_counter.get_total_coins())
-	coin_counter.coin_count_changed.connect(_update_coin_display)
+func _ready():	
+	coin_display.text = "Coins: " + str(CoinCounter.get_total_coins())
+	CoinCounter.coin_count_changed.connect(_update_coin_display)
 	
 	shop_manager.item_purchased.connect(_on_item_purchased)
 	shop_manager.purchase_failed.connect(_on_purchase_failed)
