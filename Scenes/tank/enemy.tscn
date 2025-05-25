@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dmrtojvp2mml0" path="res://Skripts/tank/tank_shoot.gd" id="4_6jm6e"]
 [ext_resource type="AudioStream" uid="uid://dlla66htn1lh3" path="res://Sounds/SFX/Movement/treadsoundTank.mp3" id="4_n1ija"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="5_bw2vx"]
-[ext_resource type="Script" uid="uid://ck3kpdvkcrurv" path="res://Scenes/tank/treadsound_tank.gd" id="5_d1qw5"]
+[ext_resource type="Script" uid="uid://b4gt62gl34q4a" path="res://Skripts/sound/treadsound_controller.gd" id="5_u2ycg"]
 [ext_resource type="Texture2D" uid="uid://b2x4ydm81qat7" path="res://Sprites/PixelSimulations/Flame1/0001.png" id="6_0p6bj"]
 [ext_resource type="Texture2D" uid="uid://bthcln4cxeptq" path="res://Sprites/PixelSimulations/Flame1/0002.png" id="7_4clly"]
 [ext_resource type="Texture2D" uid="uid://dvewcwofmutwa" path="res://Sprites/PixelSimulations/Flame1/0003.png" id="8_iqgbq"]
@@ -1231,7 +1231,7 @@ texture = ExtResource("3_bas1u")
 
 [node name="treadsoundTank" type="AudioStreamPlayer2D" parent="body"]
 stream = ExtResource("4_n1ija")
-script = ExtResource("5_d1qw5")
+script = ExtResource("5_u2ycg")
 audio_player_path = NodePath(".")
 max_volume_db = -10.0
 
