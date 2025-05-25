@@ -33,9 +33,16 @@ func _populate_shop_items():
 		item_grid.add_child(item_ui_instance)
 		item_ui_instance.setup(item)
 		item_ui_instance.purchase_requested.connect(_on_purchase_requested)
+		item_ui_instance.equip_requested.connect(_on_equip_requested)
 
 func _on_purchase_requested(item_name: String):
 	shop_manager.purchase_item(item_name)
+
+func _on_equip_requested(item_name: String):
+	if shop_manager.equip_item(item_name):
+		show_notification("Successfully equipped: " + item_name)
+	else:
+		show_notification("Failed to equip: " + item_name)
 
 func _on_item_purchased(item_name: String):
 	show_notification("Successfully purchased: " + item_name)

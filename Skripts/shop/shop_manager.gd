@@ -3,9 +3,11 @@ extends Node
 signal item_purchased(item_name: String)
 signal purchase_failed(reason: String)
 signal items_loaded
+signal item_equipped(item_id: String, item_type: String)
 
 var shop_items = {}
 var unlocked_items = []
+var equipped_items = {} # Maps item_type to item_id
 
 func _ready():
 	load_shop_items()
@@ -38,7 +40,15 @@ func _on_save_data_loaded(data: Dictionary):
 			if shop_items.has(item_name):
 				shop_items[item_name].item_is_unlocked = true
 				item_purchased.emit(item_name)
-		
+	
+	# Load equipped items by type
+	if data.has("equipped_weapon"):
+		equipped_items["weapon"] = data["equipped_weapon"]
+	
+	# Later we could add more types like:
+	# if data.has("equipped_armor"):
+	#     equipped_items["armor"] = data["equipped_armor"]
+
 
 func purchase_item(item_name: String) -> bool:
 	if not shop_items.has(item_name):
@@ -66,6 +76,30 @@ func purchase_item(item_name: String) -> bool:
 	item_purchased.emit(item_name)
 	return true
 
+func equip_item(item_name: String) -> bool:
+	if not shop_items.has(item_name):
+		return false
+	
+	var item = shop_items[item_name]
+	
+	if not item.item_is_unlocked:
+		return false
+	
+	if item.item_id.is_empty() or item.item_type.is_empty():
+		return false
+	
+	# Store the equipped item by its type
+	equipped_items[item.item_type] = item.item_id
+	
+	# Save according to item type
+	if item.item_type == "weapon":
+		SaveManager.save_equipped_weapon(item.item_id)
+	
+	# Emit signal with item_id and its type
+	item_equipped.emit(item.item_id, item.item_type)
+	
+	return true
+
 func get_all_items() -> Dictionary:
 	return shop_items
 	
@@ -73,3 +107,12 @@ func is_item_unlocked(item_name: String) -> bool:
 	if not shop_items.has(item_name):
 		return false
 	return shop_items[item_name].item_is_unlocked
+
+func get_equipped_item(item_type: String) -> String:
+	if equipped_items.has(item_type):
+		return equipped_items[item_type]
+	return ""
+
+# For backward compatibility
+func get_equipped_weapon() -> String:
+	return get_equipped_item("weapon")

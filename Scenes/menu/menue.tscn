@@ -58,6 +58,10 @@ size_flags_vertical = 4
 layout_mode = 2
 text = "Play"
 
+[node name="LevelSelect" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level Select"
+
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Options"
@@ -67,5 +71,6 @@ layout_mode = 2
 text = "Exit"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/LevelSelect" to="." method="_on_level_select_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

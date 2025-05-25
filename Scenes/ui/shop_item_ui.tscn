@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://4quitos78wnp" path="res://Skripts/shop/shop_item_ui.gd" id="1_3xeji"]
 
 [node name="Control" type="Control"]
-custom_minimum_size = Vector2(300, 250)
+custom_minimum_size = Vector2(300, 280)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 300.0
@@ -29,6 +29,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ItemIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+clip_contents = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -52,3 +53,9 @@ autowrap_mode = 3
 layout_mode = 2
 size_flags_vertical = 3
 text = "Purchase"
+
+[node name="EquipButton" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+text = "Equip"

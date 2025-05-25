@@ -21,6 +21,10 @@ SaveManager="*res://Skripts/autoload/save_manager.gd"
 CoinCounter="*res://Skripts/autoload/coin_counter.gd"
 LevelManager="*res://Skripts/autoload/level_manager.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [global_group]
 
 barrier=""

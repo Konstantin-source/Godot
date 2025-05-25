@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=3 format=3 uid="uid://makptri0orbt"]
+
+[ext_resource type="Texture2D" uid="uid://bfiyqll3r328q" path="res://Sprites/shop/turret_01_mk2.png" id="1_cq3ej"]
+[ext_resource type="Script" uid="uid://ncpoqarsyfoo" path="res://Skripts/shop/shop_item.gd" id="1_wcxid"]
+
+[resource]
+script = ExtResource("1_wcxid")
+item_name = "MK2 Standard Turret"
+item_price = 200
+item_description = "An upgraded standard turret with improved accuracy."
+item_icon = ExtResource("1_cq3ej")
+item_type = "weapon"
+item_id = "turret_01_mk2"

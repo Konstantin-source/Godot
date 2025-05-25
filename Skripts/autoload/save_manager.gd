@@ -7,6 +7,7 @@ var save_data: Dictionary = {
 	"experience": 0,
 	"completed_levels": [],
 	"unlocked_items": [],
+	"equipped_weapon": "turret_01_mk1",
 	"skill_tree_levels": {
 		"movement": 0,
 		"health": 0,
@@ -66,6 +67,26 @@ func _save_completed_level(level_number: int) -> void:
 		save_save_data()
 	else:
 		print("Level %d already completed." % level_number)
+
+# Generic function to save any equipped item
+func save_equipped_item(item_id: String, item_type: String) -> void:
+	var save_key = "equipped_" + item_type
+	save_data[save_key] = item_id
+	save_save_data()
+	print("%s equipped and saved: %s" % [item_type.capitalize(), item_id])
+
+# For backward compatibility and common use case
+func save_equipped_weapon(weapon_id: String) -> void:
+	save_equipped_item(weapon_id, "weapon")
+
+func get_equipped_item(item_type: String) -> String:
+	var save_key = "equipped_" + item_type
+	if save_data.has(save_key):
+		return save_data[save_key]
+	return ""
+	
+func get_equipped_weapon() -> String:
+	return get_equipped_item("weapon")
 	
 func is_data_loaded() -> bool:
 	return initial_save_data_loaded
