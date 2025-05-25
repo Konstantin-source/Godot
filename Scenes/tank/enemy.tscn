@@ -1,11 +1,13 @@
-[gd_scene load_steps=303 format=3 uid="uid://d4mjliv138hwl"]
+[gd_scene load_steps=305 format=3 uid="uid://d4mjliv138hwl"]
 
 [ext_resource type="Script" uid="uid://bohkor8xc1spb" path="res://Skripts/tank/tank_movement.gd" id="1_2racs"]
 [ext_resource type="Texture2D" uid="uid://kvtx63jk4bjl" path="res://Sprites/ground_shaker_asset/Purple/Bodies/body_tracks.png" id="2_yeoi8"]
 [ext_resource type="Texture2D" uid="uid://cpq64v7q5kahk" path="res://Sprites/tank_effects/trackMarkSprite.png" id="3_bas1u"]
 [ext_resource type="Texture2D" uid="uid://c2d2k3ixfxgu4" path="res://Sprites/ground_shaker_asset/Purple/Weapons/turret_01_mk1.png" id="3_p03pb"]
 [ext_resource type="Script" uid="uid://dmrtojvp2mml0" path="res://Skripts/tank/tank_shoot.gd" id="4_6jm6e"]
+[ext_resource type="AudioStream" uid="uid://dlla66htn1lh3" path="res://Sounds/SFX/Movement/treadsoundTank.mp3" id="4_n1ija"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="5_bw2vx"]
+[ext_resource type="Script" uid="uid://b4gt62gl34q4a" path="res://Skripts/sound/treadsound_controller.gd" id="5_u2ycg"]
 [ext_resource type="Texture2D" uid="uid://b2x4ydm81qat7" path="res://Sprites/PixelSimulations/Flame1/0001.png" id="6_0p6bj"]
 [ext_resource type="Texture2D" uid="uid://bthcln4cxeptq" path="res://Sprites/PixelSimulations/Flame1/0002.png" id="7_4clly"]
 [ext_resource type="Texture2D" uid="uid://dvewcwofmutwa" path="res://Sprites/PixelSimulations/Flame1/0003.png" id="8_iqgbq"]
@@ -1227,6 +1229,12 @@ position = Vector2(3.8147e-06, 34.6821)
 scale = Vector2(0.0587522, 0.0387702)
 texture = ExtResource("3_bas1u")
 
+[node name="treadsoundTank" type="AudioStreamPlayer2D" parent="body"]
+stream = ExtResource("4_n1ija")
+script = ExtResource("5_u2ycg")
+audio_player_path = NodePath(".")
+max_volume_db = -10.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.31213)
 shape = SubResource("RectangleShape2D_o5esf")
@@ -1240,13 +1248,15 @@ shot_delay = 0.5
 bulletScene = ExtResource("5_bw2vx")
 tower_path = NodePath(".")
 shoot_point_path = NodePath("rohr_Ende")
-shoot_animation_path = NodePath("Animation")
+shoot_animation_path = NodePath("rohr_Ende/Animation")
+bullet_type_sound = 11
+volume_of_shot = -7.0
 
 [node name="rohr_Ende" type="Marker2D" parent="tower"]
 position = Vector2(0, -61.145)
 
-[node name="Animation" type="AnimatedSprite2D" parent="tower"]
-position = Vector2(0, -80)
+[node name="Animation" type="AnimatedSprite2D" parent="tower/rohr_Ende"]
+position = Vector2(0, -18.855)
 scale = Vector2(1.485, 1.485)
 sprite_frames = SubResource("SpriteFrames_53yy2")
 frame = 79
@@ -1331,8 +1341,8 @@ bulletScene = ExtResource("5_bw2vx")
 death_animation = NodePath("../death")
 nodes_to_remove = [NodePath("../CollisionShape2D"), NodePath("../Area2D"), NodePath("../body"), NodePath("../tower")]
 
-[connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
+[connection signal="animation_finished" from="tower/rohr_Ende/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_looped" from="tower/rohr_Ende/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="body_entered" from="Area2D" to="Health" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Node2D/healthbar/Timer" to="Node2D/healthbar" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]

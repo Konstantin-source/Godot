@@ -13,7 +13,11 @@ func _ready() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if "damage" in body and can_take_damage:
-		print("damaged")
+		if self.is_in_group("player"): # wenn spieler getroffen wird anderer sound 
+			SoundManager.play_soundeffect(SoundManager.Sound.GET_HITTED_MARKER, 0)
+		else : 
+			SoundManager.play_soundeffect(SoundManager.Sound.HITMARKER, 0)
+			
 		start_damage_cooldown()
 		var damage = body.damage
 		current_health -= damage

@@ -118,7 +118,6 @@ animations = [{
 height = 40.0
 
 [sub_resource type="Curve" id="Curve_5a7dx"]
-_limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, 316.488), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 

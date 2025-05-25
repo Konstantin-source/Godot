@@ -186,6 +186,7 @@ recoilDuration = 10.0
 tower_path = NodePath(".")
 shoot_point_path = NodePath("rohr_Ende")
 shoot_animation_path = NodePath("schuss")
+volume_of_shot = -15.0
 
 [node name="schuss" type="AnimatedSprite2D" parent="tower"]
 position = Vector2(-1.32435, 4.90444)

@@ -30,7 +30,6 @@ func _physics_process(_delta: float) -> void:
 
 	if Input.is_action_just_pressed("reload"):
 		reload.emit()
-		print("reload gedrückt")
 	
 	#Dash
 	if Input.is_action_just_pressed("Dash"):
@@ -40,6 +39,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_tank_destroyed() -> void:
 	death_animation.show()
+	SoundManager.play_soundeffect(SoundManager.Sound.EXPLOSION_TANK, 30)
 	death_animation.play("death")
 	for node in nodes_to_hide:
 		node.hide()

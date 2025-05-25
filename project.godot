@@ -15,6 +15,11 @@ run/main_scene="res://Scenes/menu/menue.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SoundManager="*res://Skripts/sound/sound_manager.gd"
+MusicManager="*res://Skripts/sound/music_manager.gd"
+
 [global_group]
 
 barrier=""

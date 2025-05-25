@@ -1,0 +1,8 @@
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://c7osbx6ieyq2u"]
+
+[sub_resource type="AudioEffectRecord" id="AudioEffectRecord_hpvmk"]
+resource_name = "Record"
+
+[resource]
+bus/0/effect/0/effect = SubResource("AudioEffectRecord_hpvmk")
+bus/0/effect/0/enabled = false

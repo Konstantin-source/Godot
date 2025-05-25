@@ -14,6 +14,10 @@ var current_shots: int          = 0
 @export var tower_path : NodePath
 @export var shoot_point_path : NodePath
 @export var shoot_animation_path: NodePath
+## Sound für die Bullet angeben entweder normal oder big! ##
+@export var bullet_type_sound: SoundManager.Sound
+## Lautstärke für die schüsse ##
+@export var volume_of_shot: float
 signal ui_reloaded
 signal reloaded
 @export var userUiPath : NodePath
@@ -68,7 +72,7 @@ func shoot() -> void:
 	#bullet.collision_layer = 0b0100
 	bullet.collision_layer = 0b10100
 	bullet.collision_mask = 0b0110
-	
+	SoundManager.play_soundeffect(bullet_type_sound, volume_of_shot)
 	bullet.global_position = shootingPipeEnd.global_position
 	bullet.shooter_tank = self
 	
@@ -99,6 +103,7 @@ func reload() -> void:
 	var reload_timer :float = max_shots/20.0
 	ui_reload_animation.emit()
 	await get_tree().create_timer(reload_time).timeout
+	SoundManager.play_soundeffect(SoundManager.Sound.RELOAD_SOUND_TANK, -10)
 	ui_reload.emit()
 	await get_tree().create_timer(reload_timer).timeout
 	current_shots = 0

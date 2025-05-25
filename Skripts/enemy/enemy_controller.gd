@@ -79,7 +79,7 @@ func make_Path() -> void:
 func _on_tank_destroyed() -> void:
 	player = null
 	can_shoot = false
-
+	SoundManager.play_soundeffect(SoundManager.Sound.EXPLOSION_TANK, 30)
 	death_animation.show()
 	death_animation.play("death")
 	for node in nodes_to_remove:

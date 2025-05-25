@@ -1,4 +1,4 @@
-[gd_scene load_steps=304 format=3 uid="uid://bdt4dmy328xje"]
+[gd_scene load_steps=306 format=3 uid="uid://bdt4dmy328xje"]
 
 [ext_resource type="Script" uid="uid://bohkor8xc1spb" path="res://Skripts/tank/tank_movement.gd" id="1_u2up0"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="2_7ygv3"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b2x4ydm81qat7" path="res://Sprites/PixelSimulations/Flame1/0001.png" id="5_oebnc"]
 [ext_resource type="Texture2D" uid="uid://bthcln4cxeptq" path="res://Sprites/PixelSimulations/Flame1/0002.png" id="6_vsy73"]
 [ext_resource type="Texture2D" uid="uid://dvewcwofmutwa" path="res://Sprites/PixelSimulations/Flame1/0003.png" id="7_eqgw3"]
+[ext_resource type="Script" uid="uid://b4gt62gl34q4a" path="res://Skripts/sound/treadsound_controller.gd" id="8_7srpt"]
 [ext_resource type="Texture2D" uid="uid://y2n27p61ufq4" path="res://Sprites/PixelSimulations/Flame1/0004.png" id="8_i8bho"]
 [ext_resource type="Texture2D" uid="uid://bgl4ivgxkxr6i" path="res://Sprites/PixelSimulations/Flame1/0005.png" id="9_2oxk2"]
 [ext_resource type="Texture2D" uid="uid://d3fl4haj8a7uc" path="res://Sprites/PixelSimulations/Flame1/0006.png" id="10_ytr4a"]
@@ -293,7 +294,8 @@
 [ext_resource type="Script" uid="uid://cfclwikhyk62j" path="res://Skripts/player/player_controller.gd" id="288_ylkgc"]
 [ext_resource type="Script" uid="uid://76rf80gmcbuv" path="res://Skripts/tank/tank_health.gd" id="289_ao26r"]
 [ext_resource type="Texture2D" uid="uid://b27owvwhn6u13" path="res://Sprites/Smoke/dust.png" id="292_xeg4k"]
-[ext_resource type="Script" uid="uid://wtn25orde20a" path="res://Scenes/tank/gpu_particles_2d.gd" id="293_exic1"]
+[ext_resource type="Script" uid="uid://wtn25orde20a" path="res://Skripts/player/gpu_particles_2d.gd" id="293_exic1"]
+[ext_resource type="AudioStream" uid="uid://dlla66htn1lh3" path="res://Sounds/SFX/Movement/treadsoundTank.mp3" id="296_kldrs"]
 [ext_resource type="PackedScene" uid="uid://bsnn5owen8gqq" path="res://Scenes/ui/playerInterface.tscn" id="330_82slw"]
 
 [sub_resource type="Curve" id="Curve_oaenc"]
@@ -1207,7 +1209,6 @@ track_marks_right_position = NodePath("body/TrackMarksRight")
 track_marks_sprite_path = NodePath("body/TrackMarkTexture")
 track_marks_distance = 15
 dash_time = 0.4
-metadata/_edit_group_ = true
 
 [node name="body" type="Sprite2D" parent="."]
 texture = ExtResource("2_q50ly")
@@ -1253,6 +1254,13 @@ explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_lwot8")
 script = ExtResource("293_exic1")
 
+[node name="treadsoundTank" type="AudioStreamPlayer2D" parent="body"]
+stream = ExtResource("296_kldrs")
+script = ExtResource("8_7srpt")
+audio_player_path = NodePath(".")
+min_volume_db = -25.0
+max_volume_db = -5.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_o5esf")
@@ -1266,6 +1274,8 @@ bulletScene = ExtResource("2_7ygv3")
 tower_path = NodePath(".")
 shoot_point_path = NodePath("rohr_Ende")
 shoot_animation_path = NodePath("Animation")
+bullet_type_sound = 11
+volume_of_shot = 5.0
 userUiPath = NodePath("../playerInterface/CanvasLayer/user_UI")
 
 [node name="rohr_Ende" type="Marker2D" parent="tower" groups=["shootingPoint"]]
@@ -1292,7 +1302,7 @@ speed_scale = 2.0
 [node name="playerInterface" parent="." instance=ExtResource("330_82slw")]
 controlerPath = NodePath("../PlayerController")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." groups=["player"]]
 script = ExtResource("289_ao26r")
 
 [node name="PlayerController" type="Node2D" parent="." node_paths=PackedStringArray("death_animation", "nodes_to_hide", "nodes_to_disable")]
