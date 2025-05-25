@@ -23,7 +23,6 @@ func _physics_process(delta: float) -> void:
 			$tower.rotation = lerp_angle($tower.rotation, target_angle, delta * 5)
 			
 			if play_rotation_sound:
-				print(1)
 				SoundManager.play_soundeffect(SoundManager.Sound.TURRET_ROTATE, -25)
 				play_rotation_sound = false # sound soll nur jeweils beim eintreten in die Reichweite gespielt werden
 				
