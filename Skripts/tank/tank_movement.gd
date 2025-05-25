@@ -37,19 +37,20 @@ func _physics_process(delta: float) -> void:
 		$CollisionShape2D.rotation = lerp_angle($body.rotation, rotation_degree, 5 *delta)
 		$body.rotation = lerp_angle($body.rotation, rotation_degree, 5 *delta)
 		#var track_mark_direction = Vector2(cos($body.rotation), sin($body.rotation))
-		make_track_marks($body.rotation)
+		
 		acceleration_time = min(acceleration_time+delta, acceleration_duration)
 		speed_scale = acceleration_time / acceleration_duration
 		var speed_factor = acc_curve.sample(speed_scale)
 		moving(speed_factor)
-		
+		$body/treadsoundTank.update_volume(speed_factor, delta)
 	else:
+		$body/treadsoundTank.update_volume(0.0 , delta)
 		acceleration_time = max(acceleration_time - delta, 0)
 		speed_scale = acceleration_time / deceleration_duration
 		var speed_factor = acc_curve.sample(speed_scale)
 		
 		moving(speed_factor)
-	
+	make_track_marks($body.rotation)
 	move_and_slide()
 	
 	var angle: float = rotation_direction.angle()
@@ -66,6 +67,7 @@ func moving(rightspeed: float):
 func _on_get_input_input_direction_changed(newInputDirection: Vector2) -> void:
 	input_direction = newInputDirection
 	
+	
 func _on_get_rotation_direction_changed(new_rotation_direction: Vector2) -> void:
 	rotation_direction = new_rotation_direction
 	
@@ -81,6 +83,7 @@ func dash() -> void:
 	if can_dash:
 		can_dash = false
 		speed = speed * 2
+		SoundManager.play_soundeffect(SoundManager.Sound.DASH, 0)
 		is_dashing.emit()
 		await get_tree().create_timer(dash_time).timeout
 		speed = speed / 2

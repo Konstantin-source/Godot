@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ccond0cnl40ct"]
 
-[ext_resource type="Script" uid="uid://xyhaewr2ca00" path="res://Skripts/menu/menu.gd" id="1_pa88q"]
+[ext_resource type="Script" path="res://Skripts/menu/menu.gd" id="1_pa88q"]
 [ext_resource type="Texture2D" uid="uid://n55d0arai2xt" path="res://Sprites/wallpaper/Background1.webp" id="2_kc7fc"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_03il4"]

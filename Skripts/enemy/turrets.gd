@@ -6,7 +6,7 @@ signal shoot()
 var time_since_last_change: float = 0.0
 var idle_rotation_time: float = 3.0
 var target_angle: float = 0.0
-
+var play_rotation_sound: bool = true
 var player: CharacterBody2D = null
 
 func _ready() -> void:
@@ -21,20 +21,28 @@ func _physics_process(delta: float) -> void:
 			# Spieler in Reichweite – Turret richtet sich auf den Spieler aus
 			target_angle = (player.global_position - global_position).angle() + PI/2
 			$tower.rotation = lerp_angle($tower.rotation, target_angle, delta * 5)
-			await get_tree().create_timer(2).timeout  # Erst 0.5s warten
+			
+			if play_rotation_sound:
+				print(1)
+				SoundManager.play_soundeffect(SoundManager.Sound.TURRET_ROTATE, -25)
+				play_rotation_sound = false # sound soll nur jeweils beim eintreten in die Reichweite gespielt werden
+				
+			await get_tree().create_timer(2).timeout  # Erst 2s warten
 			shoot.emit()
 		else:
-			#Spieler außerhalb der Reichweite – zufällige Idle-Rotation
+			#Spieler außerhalb der Reichweite – zufällige Rotation
 			time_since_last_change += delta
 			if time_since_last_change >= idle_rotation_time:
 				time_since_last_change = 0.0
 				target_angle = $tower.rotation + randf_range(-PI, PI)
 			$tower.rotation = lerp_angle($tower.rotation, target_angle, delta)
+			play_rotation_sound = true
 
 
 
 func _on_turret_destroyed() -> void:
 	$death.show()
+	SoundManager.play_soundeffect(SoundManager.Sound.EXPLOSION_TANK, 20)
 	$death.play("death")
 	$tower.hide()
 	$base.hide()

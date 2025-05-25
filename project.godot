@@ -12,8 +12,13 @@ config_version=5
 
 config/name="Tank Tactics 8-Bit"
 run/main_scene="res://Scenes/menu/menue.tscn"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SoundManager="*res://Skripts/sound/sound_manager.gd"
+MusicManager="*res://Skripts/sound/music_manager.gd"
 
 [global_group]
 
