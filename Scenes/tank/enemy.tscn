@@ -1,4 +1,4 @@
-[gd_scene load_steps=304 format=3 uid="uid://d4mjliv138hwl"]
+[gd_scene load_steps=300 format=3 uid="uid://d4mjliv138hwl"]
 
 [ext_resource type="Script" uid="uid://va2gxmus2ar2" path="res://Skripts/tank/tank_movement.gd" id="1_2racs"]
 [ext_resource type="Texture2D" uid="uid://kvtx63jk4bjl" path="res://Sprites/ground_shaker_asset/Purple/Bodies/body_tracks.png" id="2_yeoi8"]
@@ -87,7 +87,6 @@
 [ext_resource type="Texture2D" uid="uid://mo78wahcwyoy" path="res://Sprites/PixelSimulations/Flame1/0079.png" id="84_6wgsg"]
 [ext_resource type="Texture2D" uid="uid://y4iwwullv5ah" path="res://Sprites/PixelSimulations/Flame1/0080.png" id="85_r4u88"]
 [ext_resource type="PackedScene" uid="uid://dbfhw33ccpft0" path="res://Scenes/ui/enemy_health.tscn" id="86_psc55"]
-[ext_resource type="Script" uid="uid://c0v72o7gsi13h" path="res://Skripts/ui/healthbar.gd" id="87_nve6i"]
 [ext_resource type="Texture2D" uid="uid://c6xcxdcigwe40" path="res://Sprites/PixelSimulations/Explosion6/0001.png" id="88_3i80f"]
 [ext_resource type="Texture2D" uid="uid://ij10sinnwrvd" path="res://Sprites/PixelSimulations/Explosion6/0002.png" id="89_bnir7"]
 [ext_resource type="Texture2D" uid="uid://cixp2ycck8mwr" path="res://Sprites/PixelSimulations/Explosion6/0003.png" id="90_bcfco"]
@@ -294,6 +293,7 @@
 [ext_resource type="Script" uid="uid://0uird4c4m5j" path="res://Skripts/tank/tank_health.gd" id="291_vy64v"]
 [ext_resource type="Script" uid="uid://bw3adfmuxypvl" path="res://Skripts/enemy/enemy_controller.gd" id="292_ka2rn"]
 [ext_resource type="PackedScene" uid="uid://3iiqg00rtfrt" path="res://Scenes/tank/enemy_interest_rays.tscn" id="294_2012l"]
+[ext_resource type="Script" uid="uid://bvktdwf14fung" path="res://Skripts/enemy/enemy_interest_calculation.gd" id="294_u2ycg"]
 
 [sub_resource type="Curve" id="Curve_xi5ch"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
@@ -552,35 +552,6 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3w67"]
 size = Vector2(76.3006, 84.3931)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qrjnu"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fy21g"]
-bg_color = Color(0.92813, 0.26828, 0.412603, 0.662745)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4chf7"]
-bg_color = Color(0.165657, 0.165656, 0.165656, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-expand_margin_left = 4.0
-expand_margin_top = 4.0
-expand_margin_right = 4.0
-expand_margin_bottom = 4.0
-shadow_color = Color(0, 0, 0, 0.27451)
-shadow_offset = Vector2(0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frif3"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x2x3v"]
 animations = [{
@@ -1265,40 +1236,6 @@ shape = SubResource("RectangleShape2D_h3w67")
 position = Vector2(-100, -85)
 scale = Vector2(0.485, 0.485)
 
-[node name="Node2D" type="Node2D" parent="."]
-visible = false
-position = Vector2(-65.55, -161.02)
-scale = Vector2(0.485, 0.485)
-
-[node name="healthbar" type="ProgressBar" parent="Node2D"]
-z_index = 1
-offset_left = -56.6474
-offset_top = 150.289
-offset_right = 343.353
-offset_bottom = 175.289
-theme_override_styles/background = SubResource("StyleBoxEmpty_qrjnu")
-theme_override_styles/fill = SubResource("StyleBoxFlat_fy21g")
-value = 60.0
-show_percentage = false
-script = ExtResource("87_nve6i")
-
-[node name="damageBar" type="ProgressBar" parent="Node2D/healthbar"]
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_4chf7")
-theme_override_styles/fill = SubResource("StyleBoxFlat_frif3")
-value = 80.0
-show_percentage = false
-
-[node name="Timer" type="Timer" parent="Node2D/healthbar"]
-wait_time = 0.4
-one_shot = true
-
 [node name="death" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -102.89)
 scale = Vector2(5.105, 5.105)
@@ -1306,7 +1243,7 @@ sprite_frames = SubResource("SpriteFrames_x2x3v")
 animation = &"death"
 speed_scale = 2.5
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="TracePlayer" type="NavigationAgent2D" parent="."]
 path_desired_distance = 20.42
 path_max_distance = 300.0
 navigation_layers = 3
@@ -1327,32 +1264,39 @@ script = ExtResource("291_vy64v")
 
 [node name="ControlerEnemy" type="Node" parent="." node_paths=PackedStringArray("death_animation", "nodes_to_remove")]
 script = ExtResource("292_ka2rn")
-detection_radius = 900
 chase_player_radius = 800
 bulletScene = ExtResource("5_bw2vx")
 death_animation = NodePath("../death")
 nodes_to_remove = [NodePath("../CollisionShape2D"), NodePath("../Area2D"), NodePath("../body"), NodePath("../tower")]
 
 [node name="EnemyAI" parent="." instance=ExtResource("294_2012l")]
-scale = Vector2(4.025, 4.025)
+rotation = 0.200713
+scale = Vector2(5.08, 5.08)
+script = ExtResource("294_u2ycg")
+chase_player_radius = 800.0
+desired_distance = 350.0
 
 [node name="randomPositionTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 
+[node name="randomIdleTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="body_entered" from="Area2D" to="Health" method="_on_area_2d_body_entered"]
-[connection signal="timeout" from="Node2D/healthbar/Timer" to="Node2D/healthbar" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
-[connection signal="timeout" from="pathfinding_Timer" to="." method="_on_pathfinding_timer_timeout"]
+[connection signal="timeout" from="pathfinding_Timer" to="ControlerEnemy" method="make_Path"]
 [connection signal="health_changed" from="Health" to="enemyHealth/healthbar" method="_set_health"]
 [connection signal="init_health" from="Health" to="enemyHealth/healthbar" method="init_health"]
 [connection signal="tank_destroyed" from="Health" to="ControlerEnemy" method="_on_tank_destroyed"]
-[connection signal="inputDirectionChanged" from="ControlerEnemy" to="." method="_on_get_input_input_direction_changed"]
-[connection signal="input_rotation_changed" from="ControlerEnemy" to="." method="_on_get_rotation_direction_changed"]
 [connection signal="shoot" from="ControlerEnemy" to="tower" method="shoot"]
-[connection signal="avoidance_vektor" from="EnemyAI" to="ControlerEnemy" method="calculate_avoidance"]
+[connection signal="change_speed" from="EnemyAI" to="." method="change_speed"]
+[connection signal="inputDirectionChanged" from="EnemyAI" to="." method="_on_get_input_input_direction_changed"]
+[connection signal="input_rotation_changed" from="EnemyAI" to="." method="_on_get_rotation_direction_changed"]
+[connection signal="shoot" from="EnemyAI" to="tower" method="shoot"]
 [connection signal="timeout" from="randomPositionTimer" to="ControlerEnemy" method="_on_random_position_timer_timeout"]
+[connection signal="timeout" from="randomIdleTimer" to="EnemyAI" method="_on_random_idle_timer_timeout"]
 
 [editable path="enemyHealth"]

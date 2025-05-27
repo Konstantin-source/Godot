@@ -232,7 +232,5 @@ position = Vector2(2624, 574)
 [node name="turret_14" parent="." instance=ExtResource("3_msake")]
 position = Vector2(3010, 574)
 
-[node name="enemy_1" parent="." instance=ExtResource("7_rxcmw")]
-
 [node name="enemy_2" parent="." instance=ExtResource("7_rxcmw")]
-position = Vector2(-127, 293)
+position = Vector2(-907, 593)
