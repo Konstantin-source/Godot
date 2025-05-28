@@ -293,7 +293,7 @@
 [ext_resource type="Script" uid="uid://bvt8a41ss2bu6" path="res://Skripts/player/player_controller.gd" id="288_ylkgc"]
 [ext_resource type="Script" uid="uid://0uird4c4m5j" path="res://Skripts/tank/tank_health.gd" id="289_ao26r"]
 [ext_resource type="Texture2D" uid="uid://b27owvwhn6u13" path="res://Sprites/Smoke/dust.png" id="292_xeg4k"]
-[ext_resource type="Script" uid="uid://d0nhdf5n2xi4x" path="res://Scenes/tank/gpu_particles_2d.gd" id="293_exic1"]
+[ext_resource type="Script" path="res://Scenes/tank/gpu_particles_2d.gd" id="293_exic1"]
 [ext_resource type="PackedScene" uid="uid://bsnn5owen8gqq" path="res://Scenes/ui/playerInterface.tscn" id="330_82slw"]
 
 [sub_resource type="Curve" id="Curve_oaenc"]
@@ -1198,8 +1198,9 @@ scale = Vector2(0.865, 0.865)
 collision_layer = 18
 collision_mask = 18
 script = ExtResource("1_u2up0")
+acceleration_duration = 1.0
 acc_curve = SubResource("Curve_oaenc")
-acceleration_time = 0.1
+acceleration_time = 0.5
 speed = 350
 track_marks_left_position = NodePath("body/TrackMarksLeft")
 track_marks_right_position = NodePath("body/TrackMarksRight")

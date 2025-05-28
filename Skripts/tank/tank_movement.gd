@@ -24,6 +24,7 @@ var input_direction: Vector2    = Vector2.ZERO
 var rotation_direction: Vector2 = Vector2.ZERO
 var last_track_position_left: Vector2 = Vector2.ZERO
 var last_track_position_right: Vector2 = Vector2.ZERO
+var turn_speed : int = 10
 
 signal is_dashing()
 
@@ -49,8 +50,8 @@ func _physics_process(delta: float) -> void:
 	rotation_degree = input_direction.angle() - PI/2
 	if input_direction != Vector2.ZERO:
 		#rotieren
-		$CollisionShape2D.rotation = lerp_angle($body.rotation, rotation_degree, 5 *delta)
-		$body.rotation = lerp_angle($body.rotation, rotation_degree, 5 *delta)
+		$CollisionShape2D.rotation = lerp_angle($body.rotation, rotation_degree, turn_speed *delta)
+		$body.rotation = lerp_angle($body.rotation, rotation_degree, turn_speed *delta)
 		#var track_mark_direction = Vector2(cos($body.rotation), sin($body.rotation))
 		make_track_marks($body.rotation)
 		acceleration_time = min(acceleration_time+delta, acceleration_duration)

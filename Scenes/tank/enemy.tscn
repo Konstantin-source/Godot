@@ -1224,6 +1224,9 @@ frame = 79
 frame_progress = 1.0
 speed_scale = 3.5
 
+[node name="LineOfSight" type="RayCast2D" parent="tower"]
+target_position = Vector2(0, -50)
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 4
@@ -1273,8 +1276,10 @@ nodes_to_remove = [NodePath("../CollisionShape2D"), NodePath("../Area2D"), NodeP
 rotation = 0.200713
 scale = Vector2(5.08, 5.08)
 script = ExtResource("294_u2ycg")
-chase_player_radius = 800.0
+chase_player_radius = 400.0
 desired_distance = 350.0
+turret_rotation_speed = 5.0
+viewing_distance = 900.0
 
 [node name="randomPositionTimer" type="Timer" parent="."]
 wait_time = 2.0
