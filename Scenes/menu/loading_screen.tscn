@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://beg6e2kgsorik"]
+[gd_scene load_steps=2 format=3 uid="uid://beg6e2kgsorik"]
 
-[ext_resource type="Script" uid="uid://m8c7jnwaculo" path="res://Skripts/menu/loading_screen.gd" id="1_k6igc"]
 [ext_resource type="Texture2D" uid="uid://n55d0arai2xt" path="res://Sprites/wallpaper/Background1.webp" id="2_2v2op"]
 
 [node name="LoadingScreen" type="Control"]
@@ -12,7 +11,6 @@ offset_right = 3.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_k6igc")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(0.162066, 0.162066, 0.162066, 0.431373)

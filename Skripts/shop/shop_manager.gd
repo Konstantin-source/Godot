@@ -16,20 +16,22 @@ func _ready():
 	
 
 func load_shop_items():
-	var dir = DirAccess.open("res://Resources/shop/")
+	# Explicitly preload all shop items to ensure they're included in the export
+	var turret_01_mk1 = preload("res://Resources/shop/turret_01_mk1.tres")
+	var turret_01_mk2 = preload("res://Resources/shop/turret_01_mk2.tres")
+	var turret_02_mk1 = preload("res://Resources/shop/turret_02_mk1.tres")
 	
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		
-		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".tres"):
-				var item = load("res://Resources/shop/" + file_name)
-				if item is ShopItem:
-					shop_items[item.item_id] = item
-			file_name = dir.get_next()
+	# Add all preloaded items to the shop_items dictionary
+	var preloaded_items = [turret_01_mk1, turret_01_mk2, turret_02_mk1]
+	
+	for item in preloaded_items:
+		if item is ShopItem:
+			shop_items[item.item_id] = item
 	
 	items_loaded.emit()
+	
+	# For debugging purposes
+	print("Loaded shop items: ", shop_items.keys())
 
 func _on_save_data_loaded(data: Dictionary):
 	if data.has("unlocked_items"):

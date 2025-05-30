@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 SaveManager="*res://Skripts/autoload/save_manager.gd"
 CoinCounter="*res://Skripts/autoload/coin_counter.gd"
 LevelManager="*res://Skripts/autoload/level_manager.gd"
+LoadingScreen="*res://Skripts/autoload/loading_screen.gd"
 
 [display]
 

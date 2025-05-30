@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bsnn5owen8gqq"]
+[gd_scene load_steps=14 format=3 uid="uid://bsnn5owen8gqq"]
 
 [ext_resource type="Script" uid="uid://dfjuhm3vdfsba" path="res://Skripts/ui/healthbar.gd" id="2_vd4rb"]
 [ext_resource type="PackedScene" uid="uid://b114e77a7auee" path="res://Scenes/ui/gui_user.tscn" id="3_57c5g"]
 [ext_resource type="Script" uid="uid://kugb076ptbrv" path="res://Skripts/ui/minimap.gd" id="4_dq1gv"]
 [ext_resource type="Texture2D" uid="uid://ciwxajqxl3hv2" path="res://Sprites/Interface/PNG/Outline/Default/pointer_b_shaded.png" id="5_1s6n5"]
 [ext_resource type="PackedScene" uid="uid://b2cshmnpla3yo" path="res://Scenes/ui/coin_counter.tscn" id="5_822sk"]
+[ext_resource type="Script" uid="uid://bnwyr7p7qg78t" path="res://Skripts/enemy/chat_ui.gd" id="6_bnfb3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5hdj8"]
 
@@ -341,5 +342,25 @@ offset_left = -160.0
 offset_top = 48.0
 offset_bottom = 108.0
 coin_ui_state = 0
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -54.0
+offset_right = 301.0
+offset_bottom = 54.0
+grow_vertical = 2
+script = ExtResource("6_bnfb3")
+
+[node name="MessagesLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+autowrap_mode = 3
 
 [connection signal="timeout" from="CanvasLayer/healthbar/Timer" to="CanvasLayer/healthbar" method="_on_timer_timeout"]

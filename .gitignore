@@ -2,7 +2,7 @@
 .godot/
 
 .idea/
-
+Build/
 
 # Godot-specific ignores
 .import/

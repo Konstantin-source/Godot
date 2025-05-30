@@ -70,25 +70,6 @@ func _setup_level_buttons() -> void:
 			level_container.add_child(level_button)
 
 func _on_level_selected(level_index: int) -> void:
-	var level_data = LevelManager.levels[level_index]
-	print("Starting level: " + level_data.level_name)
-	
-	var loading_label = Label.new()
-	loading_label.text = "Loading " + level_data.level_name + "..."
-	loading_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	loading_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	loading_label.add_theme_font_size_override("font_size", 24)
-	
-	loading_label.anchors_preset = Control.PRESET_CENTER
-	loading_label.anchor_left = 0.5
-	loading_label.anchor_top = 0.5
-	loading_label.anchor_right = 0.5
-	loading_label.anchor_bottom = 0.5
-	loading_label.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	loading_label.grow_vertical = Control.GROW_DIRECTION_BOTH
-	
-	add_child(loading_label)
-	
 	LevelManager._on_level_requested(level_index)
 
 func _on_back_pressed() -> void:

@@ -48,6 +48,8 @@ func _on_tank_destroyed() -> void:
 		return
 	is_destroyed = true
 
+	input_direction_changed.emit(Vector2.ZERO)
+
 	death_animation.show()
 	death_animation.play("death")
 	for node in nodes_to_hide:

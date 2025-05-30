@@ -167,10 +167,12 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="TurretController" type="StaticBody2D" groups=["tower"]]
+[node name="TurretController" type="StaticBody2D" node_paths=PackedStringArray("death_animation", "nodes_to_remove") groups=["tower"]]
 collision_layer = 3
 script = ExtResource("1_rjjwb")
 range = 800.0
+death_animation = NodePath("death")
+nodes_to_remove = [NodePath("tower"), NodePath("base")]
 
 [node name="tower" type="Sprite2D" parent="." node_paths=PackedStringArray("tower", "shoot_points", "shooting_animation")]
 position = Vector2(0, -2.75)

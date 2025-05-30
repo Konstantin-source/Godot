@@ -1,9 +1,10 @@
-[gd_scene load_steps=220 format=3 uid="uid://bdt4dmy328xje"]
+[gd_scene load_steps=221 format=3 uid="uid://bdt4dmy328xje"]
 
 [ext_resource type="Script" uid="uid://bohkor8xc1spb" path="res://Skripts/tank/tank_movement.gd" id="1_u2up0"]
 [ext_resource type="Texture2D" uid="uid://u6k16e23tnww" path="res://Sprites/ground_shaker_asset/Desert/Bodies/body_tracks.png" id="2_q50ly"]
 [ext_resource type="Gradient" uid="uid://dtn7c86m4eyxq" path="res://Scenes/tank/turbo.tres" id="3_djmfh"]
 [ext_resource type="Texture2D" uid="uid://cpq64v7q5kahk" path="res://Sprites/tank_effects/trackMarkSprite.png" id="3_goqen"]
+[ext_resource type="Script" path="res://Scenes/tank/gpu_particles_2d.gd" id="6_bg1rj"]
 [ext_resource type="Texture2D" uid="uid://c6xcxdcigwe40" path="res://Sprites/PixelSimulations/Explosion6/0001.png" id="85_i5h4m"]
 [ext_resource type="Texture2D" uid="uid://ij10sinnwrvd" path="res://Sprites/PixelSimulations/Explosion6/0002.png" id="86_n5h3b"]
 [ext_resource type="Texture2D" uid="uid://cixp2ycck8mwr" path="res://Sprites/PixelSimulations/Explosion6/0003.png" id="87_n5npp"]
@@ -900,6 +901,7 @@ texture = ExtResource("292_xeg4k")
 one_shot = true
 explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_lwot8")
+script = ExtResource("6_bg1rj")
 
 [node name="dustright" type="GPUParticles2D" parent="body"]
 material = SubResource("CanvasItemMaterial_dxxwa")
@@ -910,6 +912,7 @@ texture = ExtResource("292_xeg4k")
 one_shot = true
 explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_lwot8")
+script = ExtResource("6_bg1rj")
 
 [node name="death" type="AnimatedSprite2D" parent="."]
 visible = false

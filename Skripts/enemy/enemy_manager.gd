@@ -6,6 +6,8 @@ var total_enemies = 0
 var defeated_enemies = 0
 var enemies_remaining = 0
 
+@export var chat_manager: Node
+
 func _ready() -> void:
 	LevelManager.level_loaded.connect(_on_level_loaded)
 
@@ -27,7 +29,7 @@ func initialize_enemies() -> void:
 
 			var enemy_controller = enemy.get_node_or_null("EnemyController")
 			if enemy_controller and enemy_controller.has_signal("tank_destroyed"):
-				enemy_controller.tank_destroyed.connect(_on_enemy_destroyed)
+				enemy_controller.tank_destroyed.connect(_on_tank_destroyed)
 				print("Connected tank_destroyed signal to: ", enemy.name)
 			else:
 				print("EnemyController not found or does not have tank_destroyed signal: ", enemy.name)
@@ -39,7 +41,7 @@ func initialize_enemies() -> void:
 
 			var turret_controller = tower
 			if turret_controller and turret_controller.has_signal("turret_destroyed"):
-				turret_controller.turret_destroyed.connect(_on_enemy_destroyed)
+				turret_controller.turret_destroyed.connect(_on_turret_destroyed)
 				print("Connected turret_destroyed signal to tower: ", tower.name)
 			else:
 				print("TurretController not found or does not have turret_destroyed signal: ", tower.name)
@@ -51,11 +53,21 @@ func reset_enemy_counters() -> void:
 	defeated_enemies = 0
 	enemies_remaining = 0
 
-func _on_enemy_destroyed() -> void:
+func _on_tank_destroyed():
+	_on_enemy_destroyed("tank")
+
+func _on_turret_destroyed():
+	_on_enemy_destroyed("turret")
+
+func _on_enemy_destroyed(enemy_type: String) -> void:
 	defeated_enemies += 1
 	enemies_remaining -= 1
 
 	CoinCounter._add_coin(10)
+	if enemy_type == "tank":
+		chat_manager.add_message("system", "TANK_DESTROYED:tank_" + str(defeated_enemies) + ":" + str(enemies_remaining), true)
+	else:
+		chat_manager.add_message("system", "TURRET_DOWN:turret" + str(defeated_enemies) + ":" + str(enemies_remaining), true)
 	
 	print("Enemy destroyed! Remaining: ", enemies_remaining, "/", total_enemies)
 	

@@ -74,25 +74,19 @@ func _on_next_level_requested() -> void:
 
 	current_level_index += 1
 
-	var loading_screen = preload("res://Scenes/menu/loading_screen.tscn").instantiate()
-	get_tree().get_root().add_child(loading_screen)
-	loading_screen._start_loading(levels[current_level_index].level_scene.resource_path, true)
+	LoadingScreen.start_loading(levels[current_level_index].level_scene.resource_path, true)
 
 func _on_retry_level_requested() -> void:
 	if current_level:
 		current_level.queue_free()
 		current_level = null
 
-	var loading_screen = preload("res://Scenes/menu/loading_screen.tscn").instantiate()
-	get_tree().get_root().add_child(loading_screen)
-	loading_screen._start_loading(levels[current_level_index].level_scene.resource_path, true)
+	LoadingScreen.start_loading(levels[current_level_index].level_scene.resource_path, true)
 
 func _on_level_requested(level_number: int) -> void:
 	if level_number < levels.size():
 		current_level_index = level_number
-		var loading_screen = preload("res://Scenes/menu/loading_screen.tscn").instantiate()
-		get_tree().get_root().add_child(loading_screen)
-		loading_screen._start_loading(levels[current_level_index].level_scene.resource_path, true)
+		LoadingScreen.start_loading(levels[current_level_index].level_scene.resource_path, true)
 	else:
 		print("Level not found")
 

@@ -1226,7 +1226,9 @@ position = Vector2(3.8147e-06, 34.6821)
 scale = Vector2(0.0587522, 0.0387702)
 texture = ExtResource("3_bas1u")
 
-[node name="tower" type="Sprite2D" parent="." node_paths=PackedStringArray("tower", "shoot_points", "shooting_animation")]
+[node name="turret" type="Node2D" parent="."]
+
+[node name="tower" type="Sprite2D" parent="turret" node_paths=PackedStringArray("tower", "shoot_points", "shooting_animation")]
 texture = ExtResource("3_p03pb")
 region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
@@ -1237,10 +1239,10 @@ tower = NodePath(".")
 shoot_points = [NodePath("rohr_Ende")]
 shooting_animation = NodePath("Animation")
 
-[node name="rohr_Ende" type="Marker2D" parent="tower"]
+[node name="rohr_Ende" type="Marker2D" parent="turret/tower"]
 position = Vector2(0, -61.145)
 
-[node name="Animation" type="AnimatedSprite2D" parent="tower"]
+[node name="Animation" type="AnimatedSprite2D" parent="turret/tower"]
 position = Vector2(0, -80)
 scale = Vector2(1.485, 1.485)
 sprite_frames = SubResource("SpriteFrames_53yy2")
@@ -1316,7 +1318,7 @@ detection_radius = 900
 chase_player_radius = 700
 bulletScene = ExtResource("5_bw2vx")
 death_animation = NodePath("../death")
-nodes_to_remove = [NodePath("../Area2D"), NodePath("../body"), NodePath("../tower")]
+nodes_to_remove = [NodePath("../Area2D"), NodePath("../body"), NodePath("../turret/tower")]
 nodes_to_disable = [NodePath("../Area2D/scanarea"), NodePath("../CollisionShape2D")]
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -1332,8 +1334,8 @@ shape = SubResource("RectangleShape2D_h3w67")
 position = Vector2(1.10251e-06, 1.15607)
 shape = SubResource("RectangleShape2D_g6v8p")
 
-[connection signal="animation_finished" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="animation_looped" from="tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
+[connection signal="animation_finished" from="turret/tower/Animation" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_looped" from="turret/tower/Animation" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="timeout" from="Node2D/healthbar/Timer" to="Node2D/healthbar" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="death" to="." method="_on_death_animation_finished"]
 [connection signal="timeout" from="pathfinding_Timer" to="." method="_on_pathfinding_timer_timeout"]
@@ -1342,6 +1344,6 @@ shape = SubResource("RectangleShape2D_g6v8p")
 [connection signal="tank_destroyed" from="Health" to="EnemyController" method="_on_tank_destroyed"]
 [connection signal="inputDirectionChanged" from="EnemyController" to="." method="_on_get_input_input_direction_changed"]
 [connection signal="input_rotation_changed" from="EnemyController" to="." method="_on_get_rotation_direction_changed"]
-[connection signal="shoot" from="EnemyController" to="tower" method="shoot"]
+[connection signal="shoot" from="EnemyController" to="turret/tower" method="shoot"]
 
 [editable path="enemyHealth"]

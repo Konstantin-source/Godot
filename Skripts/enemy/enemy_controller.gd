@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 
 	#Mein genereller Vorschlag: Ein Signal, ob ein Enemy, oder en spieler noch lebt. Darauf kann dann immer geprüft werden und ohne Probleme "losgelassen" werden
 
-	if is_instance_valid(player) and is_instance_valid($"../tower"):
+	if is_instance_valid(player) and get_node_or_null("../turret/tower"):
 		nav_Agent.target_position = player.global_position
 		var distance_to_player = (player.global_position - $"..".global_position).length()
 
@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 		time_since_last_shoot+=delta
 
 		if player and detection_radius >= distance_to_player:
-			var current       = $"../tower".rotation
+			var current       = $"../turret/tower".rotation
 			target_angle = (player.global_position - $"..".global_position).angle() + PI / 2
 			var target: float = lerp_angle(current, target_angle, delta * turret_rotation_speed)
 			input_rotation = Vector2.UP.rotated(target)
@@ -67,13 +67,13 @@ func _physics_process(delta: float) -> void:
 			time_since_last_change +=delta
 			if time_since_last_change >= idle_rotation_time:
 				time_since_last_change = 0.0
-				var current       = $"../tower".rotation
-				target_angle =$"../tower".rotation + randf_range(PI, -PI)
+				var current       = $"../turret/tower".rotation
+				target_angle =$"../turret/tower".rotation + randf_range(PI, -PI)
 				var target: float = lerp_angle(current, target_angle, delta * turret_rotation_speed)
 				input_rotation = Vector2.UP.rotated(target)
 				input_rotation_changed.emit(input_rotation)
 
-		$"../tower".rotation = lerp_angle($"../tower".rotation, target_angle, delta)
+		#$"../tower".rotation = lerp_angle($"../tower".rotation, target_angle, delta)
 
 
 func make_Path() -> void:
@@ -86,6 +86,8 @@ func _on_tank_destroyed() -> void:
 	if is_destroyed:
 		return
 	is_destroyed = true
+
+	inputDirectionChanged.emit(Vector2.ZERO)
 
 	player = null
 	can_shoot = false

@@ -27,7 +27,7 @@ var last_track_position_right: Vector2 = Vector2.ZERO
 signal is_dashing()
 
 func _physics_process(delta: float) -> void:
-	if (!is_instance_valid($body)):
+	if (!get_node_or_null("body")):
 		return
 
 
@@ -52,7 +52,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	var angle: float = rotation_direction.angle()
-	
 	if $turret/tower:
 		$turret/tower.rotation = angle + PI/2
 	
