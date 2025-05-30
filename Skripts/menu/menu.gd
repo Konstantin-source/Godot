@@ -9,6 +9,9 @@ func _on_play_pressed() -> void:
 
 func _on_level_select_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/menu/level_select.tscn")
+
+func _on_shop_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/menu/shop.tscn")
 	
 func _on_options_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/menu/options.tscn")

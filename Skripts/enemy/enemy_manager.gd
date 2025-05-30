@@ -19,6 +19,7 @@ func initialize_enemies() -> void:
 	
 	# Count enemies and connect signals
 	var enemy_nodes = get_tree().get_nodes_in_group("enemy")
+	var tower_nodes = get_tree().get_nodes_in_group("tower")
 	for enemy in enemy_nodes:
 		if enemy.is_in_group("enemy"):
 			total_enemies += 1
@@ -30,6 +31,18 @@ func initialize_enemies() -> void:
 				print("Connected tank_destroyed signal to: ", enemy.name)
 			else:
 				print("EnemyController not found or does not have tank_destroyed signal: ", enemy.name)
+
+	for tower in tower_nodes:
+		if tower.is_in_group("tower"):
+			total_enemies += 1
+			enemies_remaining += 1
+
+			var turret_controller = tower
+			if turret_controller and turret_controller.has_signal("turret_destroyed"):
+				turret_controller.turret_destroyed.connect(_on_enemy_destroyed)
+				print("Connected turret_destroyed signal to tower: ", tower.name)
+			else:
+				print("TurretController not found or does not have turret_destroyed signal: ", tower.name)
 	
 	print("Total enemies initialized: ", total_enemies)
 
@@ -42,8 +55,7 @@ func _on_enemy_destroyed() -> void:
 	defeated_enemies += 1
 	enemies_remaining -= 1
 
-	for i in range(1, 10):
-		CoinCounter._add_coin()
+	CoinCounter._add_coin(10)
 	
 	print("Enemy destroyed! Remaining: ", enemies_remaining, "/", total_enemies)
 	

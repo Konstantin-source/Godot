@@ -13,7 +13,9 @@ func _ready() -> void:
 
 	var l := Line2D.new()
 	l.default_color = Color(1,1,1,1)
-	l.width = 20
+	l.width = 5
+	l.z_index = 0
+	
 	for point in level_path.curve.get_baked_points():  
 		l.add_point(point + level_path.position) 
 	level_container.add_child(l)
@@ -66,19 +68,6 @@ func _setup_level_buttons() -> void:
 			level_button.level_selected.connect(_on_level_selected)
 			
 			level_container.add_child(level_button)
-	
-	if completed_levels.size() == LevelManager.levels.size():
-		var completion_container = CenterContainer.new()
-		completion_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		completion_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		level_container.add_child(completion_container)
-		
-		var completion_label = Label.new()
-		completion_label.text = "🎉 All Levels Complete! 🎉"
-		completion_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		completion_label.add_theme_font_size_override("font_size", 20)
-		completion_label.modulate = Color.GOLD
-		completion_container.add_child(completion_label)
 
 func _on_level_selected(level_index: int) -> void:
 	var level_data = LevelManager.levels[level_index]

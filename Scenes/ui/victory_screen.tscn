@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cne1lllvwpcii"]
+[gd_scene load_steps=12 format=3 uid="uid://cne1lllvwpcii"]
 
-[ext_resource type="Script" uid="uid://v4ibv5y7t7ji" path="res://Skripts/ui/victory_screen.gd" id="1_l8jv2"]
+[ext_resource type="Script" path="res://Skripts/ui/victory_screen.gd" id="1_l8jv2"]
 [ext_resource type="StyleBox" uid="uid://8kx0e2f0ijxe" path="res://Themes/ui/button_hover.tres" id="2_qhkcs"]
-[ext_resource type="Texture2D" uid="uid://cnff0314d2xp1" path="res://Sprites/UI/coin_single.png" id="2_x6ewr"]
-[ext_resource type="Script" uid="uid://dcrydoj7oluaf" path="res://Skripts/ui/coin_ui.gd" id="3_8ly6r"]
 [ext_resource type="StyleBox" uid="uid://c4l6klwn0qfpn" path="res://Themes/ui/button_pressed.tres" id="3_agm3j"]
 [ext_resource type="StyleBox" uid="uid://b810kqcntxiha" path="res://Themes/ui/button_normal.tres" id="4_m1bum"]
+[ext_resource type="PackedScene" uid="uid://b2cshmnpla3yo" path="res://Scenes/ui/coin_counter.tscn" id="5_b70lq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36krr"]
 bg_color = Color(0.141176, 0.141176, 0.141176, 0.858824)
@@ -190,46 +189,12 @@ text = "Next Level"
 wait_time = 0.5
 one_shot = true
 
-[node name="Coins" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -150.0
-offset_bottom = 50.0
-grow_horizontal = 0
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-
-[node name="CoinPanel" type="Panel" parent="Coins"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Coins/CoinPanel"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -25.0
-offset_right = 50.0
-offset_bottom = 25.0
-grow_vertical = 2
-texture = ExtResource("2_x6ewr")
-
-[node name="Label" type="Label" parent="Coins/CoinPanel"]
-custom_minimum_size = Vector2(90, 20)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = -11.5
-offset_bottom = 11.5
-grow_horizontal = 0
-grow_vertical = 2
-text = "200"
-script = ExtResource("3_8ly6r")
-coin_ui_state = 1
+[node name="Coins" parent="." instance=ExtResource("5_b70lq")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 992.0
+offset_right = 1152.0
+offset_bottom = 60.0
+grow_horizontal = 1

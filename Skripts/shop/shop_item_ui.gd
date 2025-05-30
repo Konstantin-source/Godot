@@ -1,7 +1,7 @@
 extends Control
 
-signal purchase_requested(item_name: String)
-signal equip_requested(item_name: String)
+signal purchase_requested(item_id: String)
+signal equip_requested(item_id: String)
 
 var shop_item: ShopItem
 var item_name_label: Label
@@ -24,6 +24,7 @@ func _ready():
 
 func setup(item: ShopItem):
 	shop_item = item
+	print("Setting up shop item UI for: ", item.item_name)
 	
 	item_name_label.text = item.item_name
 	item_price_label.text = "Price: " + str(item.item_price) + " coins"
@@ -45,8 +46,12 @@ func update_unlocked_status():
 		purchase_button.disabled = false
 		equip_button.visible = false
 
+func update_equipped_status(equipped_item_id: String):
+	if shop_item.item_type == "weapon" and shop_item.item_is_unlocked:
+		equip_button.disabled = (shop_item.item_id == equipped_item_id)
+
 func _on_purchase_button_pressed():
-	purchase_requested.emit(shop_item.item_name)
+	purchase_requested.emit(shop_item.item_id)
 	
 func _on_equip_button_pressed():
-	equip_requested.emit(shop_item.item_name)
+	equip_requested.emit(shop_item.item_id)

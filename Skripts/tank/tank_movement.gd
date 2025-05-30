@@ -53,7 +53,8 @@ func _physics_process(delta: float) -> void:
 	
 	var angle: float = rotation_direction.angle()
 	
-	$tower.rotation = angle + PI/2
+	if $turret/tower:
+		$turret/tower.rotation = angle + PI/2
 	
 	
 func moving(rightspeed: float):

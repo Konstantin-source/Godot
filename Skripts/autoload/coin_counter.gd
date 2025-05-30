@@ -11,8 +11,8 @@ func _ready() -> void:
 	
 	SaveManager.register_for_data(self, "_on_save_data_loaded")
 
-func _add_coin() -> void:
-	current_level_coins += 1
+func _add_coin(amount: int = 1) -> void:
+	current_level_coins += amount
 	level_coins_changed.emit(current_level_coins)
 
 func _remove_total_coins(amount: int) -> void:

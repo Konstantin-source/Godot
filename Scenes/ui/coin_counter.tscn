@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2cshmnpla3yo"]
+
+[ext_resource type="Texture2D" uid="uid://cnff0314d2xp1" path="res://Sprites/UI/coin_single.png" id="1_3rx56"]
+[ext_resource type="Script" uid="uid://dcrydoj7oluaf" path="res://Skripts/ui/coin_ui.gd" id="2_74jnq"]
+
+[node name="Coins" type="MarginContainer" node_paths=PackedStringArray("label")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_bottom = 50.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+script = ExtResource("2_74jnq")
+coin_ui_state = 1
+label = NodePath("CoinPanel/Label")
+
+[node name="CoinPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CoinPanel"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -25.0
+offset_right = 50.0
+offset_bottom = 25.0
+grow_vertical = 2
+texture = ExtResource("1_3rx56")
+
+[node name="Label" type="Label" parent="CoinPanel"]
+custom_minimum_size = Vector2(90, 20)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "200"

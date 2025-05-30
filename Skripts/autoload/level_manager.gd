@@ -5,6 +5,8 @@ signal level_loaded
 var levels: Array[LevelData] = [
 	LevelData.new("Level 1", preload("res://Scenes/Level/lvl_1.tscn"), 10),
 	LevelData.new("Level 2", preload("res://Scenes/Level/lvl_2.tscn"), 20),
+	LevelData.new("Level 3", preload("res://Scenes/Level/lvl_2.tscn"), 30),
+	LevelData.new("Level 4", preload("res://Scenes/Level/lvl_2.tscn"), 40),
 ]
 var current_level_index: int = 0
 var unlocked_levels: Array[LevelData] = []

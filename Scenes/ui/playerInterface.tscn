@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b114e77a7auee" path="res://Scenes/ui/gui_user.tscn" id="3_57c5g"]
 [ext_resource type="Script" uid="uid://kugb076ptbrv" path="res://Skripts/ui/minimap.gd" id="4_dq1gv"]
 [ext_resource type="Texture2D" uid="uid://ciwxajqxl3hv2" path="res://Sprites/Interface/PNG/Outline/Default/pointer_b_shaded.png" id="5_1s6n5"]
-[ext_resource type="Script" uid="uid://dcrydoj7oluaf" path="res://Skripts/ui/coin_ui.gd" id="5_822sk"]
+[ext_resource type="PackedScene" uid="uid://b2cshmnpla3yo" path="res://Scenes/ui/coin_counter.tscn" id="5_822sk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5hdj8"]
 
@@ -323,6 +323,7 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="gegner" type="Label" parent="CanvasLayer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Welle 1
@@ -335,17 +336,10 @@ vertical_alignment = 1
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CoinCount" type="Label" parent="CanvasLayer"]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -129.0
-offset_top = -255.815
-offset_bottom = -195.815
-grow_horizontal = 0
-grow_vertical = 2
-script = ExtResource("5_822sk")
+[node name="Coins" parent="CanvasLayer" instance=ExtResource("5_822sk")]
+offset_left = -160.0
+offset_top = 48.0
+offset_bottom = 108.0
+coin_ui_state = 0
 
 [connection signal="timeout" from="CanvasLayer/healthbar/Timer" to="CanvasLayer/healthbar" method="_on_timer_timeout"]

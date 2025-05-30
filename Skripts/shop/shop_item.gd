@@ -8,4 +8,4 @@ class_name ShopItem
 @export var item_icon: Texture2D
 @export var item_type: String
 @export var item_id: String = ""
-var item_is_unlocked: bool = false
+@export var item_is_unlocked: bool = false

@@ -6,8 +6,9 @@
 [resource]
 script = ExtResource("1_wcxid")
 item_name = "MK2 Standard Turret"
-item_price = 200
-item_description = "An upgraded standard turret with improved accuracy."
+item_price = 10
+item_description = "An upgraded standard turret with two barrels."
 item_icon = ExtResource("1_cq3ej")
 item_type = "weapon"
 item_id = "turret_01_mk2"
+item_is_unlocked = false

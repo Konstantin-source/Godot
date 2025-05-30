@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ShopItem" load_steps=3 format=3 uid="uid://cdhu6ha6dywgd"]
+
+[ext_resource type="Script" uid="uid://ncpoqarsyfoo" path="res://Skripts/shop/shop_item.gd" id="1_7re1s"]
+[ext_resource type="Texture2D" uid="uid://dfih6dk6r3tum" path="res://Sprites/shop/turret_01_mk1.png" id="1_tte0m"]
+
+[resource]
+script = ExtResource("1_7re1s")
+item_name = "Standard Turret"
+item_price = 0
+item_description = ""
+item_icon = ExtResource("1_tte0m")
+item_type = "weapon"
+item_id = "turret_01_mk1"
+item_is_unlocked = true
+metadata/_custom_type_script = "uid://ncpoqarsyfoo"

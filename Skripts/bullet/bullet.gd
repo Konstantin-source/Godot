@@ -80,16 +80,13 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	print("Body entered: ", body.name)
 	_handle_collision(body)
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var body = area.get_parent()
-	print("Area entered: ", body.name)
-	if body.is_in_group("enemy") or body.is_in_group("player"):
+	if body.is_in_group("enemy") or body.is_in_group("player") or body.is_in_group("tower"):
 		var health_node = body.get_node_or_null("Health")
 		if health_node and health_node.has_method("take_damage"):
-			print("Taking damage via health node")
 			health_node.take_damage(damage)
 	destroy_bullet()

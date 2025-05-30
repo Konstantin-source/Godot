@@ -1,4 +1,4 @@
-extends Label
+extends Control
 
 enum CoinUIState {
 	LEVEL_COINS,
@@ -6,6 +6,7 @@ enum CoinUIState {
 }
 
 @export var coin_ui_state: CoinUIState = CoinUIState.LEVEL_COINS
+@export var label: Label
 
 var previous_coin_count: int = 0
 var initial_coin_count_loaded: bool = false
@@ -29,7 +30,7 @@ func update_display() -> void:
 	if not initial_coin_count_loaded:
 		previous_coin_count = CoinCounter.get_level_coins() if coin_ui_state == CoinUIState.LEVEL_COINS else CoinCounter.get_total_coins()
 		initial_coin_count_loaded = true
-		text = str(previous_coin_count)
+		label.text = str(previous_coin_count)
 		return
 
 	var new_count = CoinCounter.get_level_coins() if coin_ui_state == CoinUIState.LEVEL_COINS else CoinCounter.get_total_coins()
@@ -39,11 +40,11 @@ func update_display() -> void:
 
 
 func animate(from: int, to: int) -> void:
-	text = str(from) + " + " + str(to - from)
+	label.text = str(from) + " + " + str(to - from)
 	await get_tree().create_timer(0.5).timeout
 
 	for i in range(from, to + 1):
 		await get_tree().create_timer(0.1).timeout
-		text = str(i) + " + " + str(to - i)
+		label.text = str(i) + " + " + str(to - i)
 
-	text = str(to)
+	label.text = str(to)

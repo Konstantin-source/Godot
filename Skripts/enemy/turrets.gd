@@ -9,6 +9,8 @@ var target_angle: float = 0.0
 
 var player: CharacterBody2D = null
 
+signal turret_destroyed()
+
 func _ready() -> void:
 	# Hole den Spieler (stelle sicher, dass der Pfad korrekt ist)
 	player = get_parent().get_node("Player")
@@ -34,6 +36,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_turret_destroyed() -> void:
+	turret_destroyed.emit()
 	$death.show()
 	$death.play("death")
 	$tower.hide()

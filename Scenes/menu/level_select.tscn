@@ -1,4 +1,4 @@
-[gd_scene load_steps=307 format=3 uid="uid://bsusc7njuwcyk"]
+[gd_scene load_steps=307 format=3 uid="uid://cyx3kh3yfuxht"]
 
 [ext_resource type="Script" uid="uid://cwyoa5njp1u84" path="res://Skripts/menu/level_select.gd" id="1_1k2v7"]
 [ext_resource type="Script" uid="uid://bohkor8xc1spb" path="res://Skripts/tank/tank_movement.gd" id="2_3trs4"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cpq64v7q5kahk" path="res://Sprites/tank_effects/trackMarkSprite.png" id="4_nnr13"]
 [ext_resource type="Texture2D" uid="uid://b27owvwhn6u13" path="res://Sprites/Smoke/dust.png" id="5_dpni2"]
 [ext_resource type="Gradient" uid="uid://dtn7c86m4eyxq" path="res://Scenes/tank/turbo.tres" id="6_kypk1"]
-[ext_resource type="Script" uid="uid://wtn25orde20a" path="res://Scenes/tank/gpu_particles_2d.gd" id="7_2xmpq"]
+[ext_resource type="Script" path="res://Scenes/tank/gpu_particles_2d.gd" id="7_2xmpq"]
 [ext_resource type="Texture2D" uid="uid://dhqiww6hke8od" path="res://Sprites/ground_shaker_asset/Desert/Weapons/turret_01_mk1.png" id="8_uda47"]
 [ext_resource type="Script" uid="uid://dmrtojvp2mml0" path="res://Skripts/tank/tank_shoot.gd" id="9_j4s7d"]
 [ext_resource type="PackedScene" uid="uid://cuf4jiqjdcs1d" path="res://Scenes/bullet/bullet.tscn" id="10_jljr0"]
@@ -294,8 +294,8 @@
 [ext_resource type="Texture2D" uid="uid://pqjmdy65hmem" path="res://Sprites/PixelSimulations/Explosion6/0202.png" id="292_oe2fs"]
 [ext_resource type="Texture2D" uid="uid://dmryavvp5jskx" path="res://Sprites/PixelSimulations/Explosion6/0203.png" id="293_4fkge"]
 [ext_resource type="Script" uid="uid://76rf80gmcbuv" path="res://Skripts/tank/tank_health.gd" id="294_negkb"]
-[ext_resource type="Script" uid="uid://d1m8smlac46ba" path="res://Skripts/player/follow_mouse_controller.gd" id="295_fdoy3"]
-[ext_resource type="Script" uid="uid://b4sm3l4wwwa0h" path="res://Skripts/player/item_manager.gd" id="296_sob7h"]
+[ext_resource type="Script" path="res://Skripts/player/follow_mouse_controller.gd" id="295_fdoy3"]
+[ext_resource type="Script" path="res://Skripts/player/item_manager.gd" id="296_sob7h"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u3x2e"]
 
@@ -1242,14 +1242,13 @@ size_flags_horizontal = 4
 text = "Back to Menu"
 
 [node name="Path2D" type="Path2D" parent="VBoxContainer"]
-z_index = 5
 material = SubResource("CanvasItemMaterial_u3x2e")
 position = Vector2(-16, 26)
 curve = SubResource("Curve2D_u3x2e")
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("track_marks_left_position", "track_marks_right_position") groups=["player"]]
 z_index = 1
-position = Vector2(402, 438)
+position = Vector2(276, 76)
 scale = Vector2(0.865, 0.865)
 collision_layer = 18
 collision_mask = 18

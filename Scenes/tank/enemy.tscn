@@ -1226,16 +1226,16 @@ position = Vector2(3.8147e-06, 34.6821)
 scale = Vector2(0.0587522, 0.0387702)
 texture = ExtResource("3_bas1u")
 
-[node name="tower" type="Sprite2D" parent="."]
+[node name="tower" type="Sprite2D" parent="." node_paths=PackedStringArray("tower", "shoot_points", "shooting_animation")]
 texture = ExtResource("3_p03pb")
 region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
 script = ExtResource("4_6jm6e")
 shot_delay = 0.5
 bulletScene = ExtResource("5_bw2vx")
-tower_path = NodePath(".")
-shoot_point_path = NodePath("rohr_Ende")
-shoot_animation_path = NodePath("Animation")
+tower = NodePath(".")
+shoot_points = [NodePath("rohr_Ende")]
+shooting_animation = NodePath("Animation")
 
 [node name="rohr_Ende" type="Marker2D" parent="tower"]
 position = Vector2(0, -61.145)
@@ -1310,13 +1310,14 @@ autostart = true
 [node name="Health" type="Node" parent="."]
 script = ExtResource("291_vy64v")
 
-[node name="EnemyController" type="Node" parent="." node_paths=PackedStringArray("death_animation", "nodes_to_remove")]
+[node name="EnemyController" type="Node" parent="." node_paths=PackedStringArray("death_animation", "nodes_to_remove", "nodes_to_disable")]
 script = ExtResource("292_ka2rn")
 detection_radius = 900
 chase_player_radius = 700
 bulletScene = ExtResource("5_bw2vx")
 death_animation = NodePath("../death")
 nodes_to_remove = [NodePath("../Area2D"), NodePath("../body"), NodePath("../tower")]
+nodes_to_disable = [NodePath("../Area2D/scanarea"), NodePath("../CollisionShape2D")]
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

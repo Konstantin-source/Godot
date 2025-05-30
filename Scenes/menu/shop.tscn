@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwconejq6tgrk"]
+[gd_scene load_steps=4 format=3 uid="uid://blxd5luralpjv"]
 
-[ext_resource type="Script" uid="uid://cy3ndpoocqlok" path="res://Skripts/shop/shop_ui.gd" id="1_bccop"]
-[ext_resource type="Script" uid="uid://dbipr7l23tdw0" path="res://Skripts/shop/shop_manager.gd" id="2_ovj2j"]
+[ext_resource type="Script" uid="uid://cy3ndpoocqlok" path="res://Skripts/shop/shop_ui.gd" id="1_ax0ds"]
+[ext_resource type="PackedScene" uid="uid://b2cshmnpla3yo" path="res://Scenes/ui/coin_counter.tscn" id="2_w6lxv"]
+[ext_resource type="Script" uid="uid://dbipr7l23tdw0" path="res://Skripts/shop/shop_manager.gd" id="3_4mq8a"]
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -10,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_bccop")
+script = ExtResource("1_ax0ds")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -49,10 +50,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Shop"
 
-[node name="CoinLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Coins" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_w6lxv")]
 layout_mode = 2
-text = "Coins: 0"
-horizontal_alignment = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -83,7 +82,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="ShopManager" type="Node" parent="."]
-script = ExtResource("2_ovj2j")
+script = ExtResource("3_4mq8a")
 
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="timeout" from="NotificationTimer" to="." method="_on_notification_timer_timeout"]

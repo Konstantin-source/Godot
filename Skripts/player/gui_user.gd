@@ -7,8 +7,9 @@ var children_array = []
 @onready var bullet_tree := $Reload_Bullets
 @onready var template := $Reload_Bullets/bullet
 
-func _ready() -> void:
-	await  get_tree().process_frame
+func init_user_ui(max_shots: int) -> void:
+	print("Initializing user UI with max shots: ", max_shots)
+	max_shoots_ui = max_shots
 	for i in range(max_shoots_ui-1):
 		var clone = template.duplicate()
 		clone.visible = true
@@ -18,7 +19,7 @@ func _ready() -> void:
 	await get_tree().create_timer(4).timeout
 	$"../VBoxContainer/Ziel".visible = false
 	$"../VBoxContainer/gegner".visible = false
-	
+
 	
 func just_shoot():
 	current_shoots +=1

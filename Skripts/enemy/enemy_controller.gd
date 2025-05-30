@@ -7,7 +7,6 @@ extends Node
 @export var death_animation: AnimatedSprite2D
 @export var nodes_to_remove: Array[Node2D] = []
 @export var nodes_to_disable: Array[CollisionShape2D] = []
-@export var scripts_to_disable: Array[Node] = []
 
 signal inputDirectionChanged(newInputDirection)
 signal input_rotation_changed(new_input_rotation)
@@ -97,8 +96,6 @@ func _on_tank_destroyed() -> void:
 		node.queue_free()
 	for node in nodes_to_disable:
 		node.disabled = true
-	for script in scripts_to_disable:
-		script.set_process(false)
 
 	$".".set_process(false)
 		
