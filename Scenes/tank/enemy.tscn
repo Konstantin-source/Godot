@@ -1,4 +1,4 @@
-[gd_scene load_steps=300 format=3 uid="uid://d4mjliv138hwl"]
+[gd_scene load_steps=299 format=3 uid="uid://d4mjliv138hwl"]
 
 [ext_resource type="Script" uid="uid://va2gxmus2ar2" path="res://Skripts/tank/tank_movement.gd" id="1_2racs"]
 [ext_resource type="Texture2D" uid="uid://kvtx63jk4bjl" path="res://Sprites/ground_shaker_asset/Purple/Bodies/body_tracks.png" id="2_yeoi8"]
@@ -293,7 +293,6 @@
 [ext_resource type="Script" uid="uid://0uird4c4m5j" path="res://Skripts/tank/tank_health.gd" id="291_vy64v"]
 [ext_resource type="Script" uid="uid://bw3adfmuxypvl" path="res://Skripts/enemy/enemy_controller.gd" id="292_ka2rn"]
 [ext_resource type="PackedScene" uid="uid://3iiqg00rtfrt" path="res://Scenes/tank/enemy_interest_rays.tscn" id="294_2012l"]
-[ext_resource type="Script" uid="uid://bvktdwf14fung" path="res://Skripts/enemy/enemy_interest_calculation.gd" id="294_u2ycg"]
 
 [sub_resource type="Curve" id="Curve_xi5ch"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
@@ -1274,8 +1273,7 @@ nodes_to_remove = [NodePath("../CollisionShape2D"), NodePath("../Area2D"), NodeP
 
 [node name="EnemyAI" parent="." instance=ExtResource("294_2012l")]
 rotation = 0.200713
-scale = Vector2(5.08, 5.08)
-script = ExtResource("294_u2ycg")
+scale = Vector2(3.915, 3.915)
 chase_player_radius = 400.0
 desired_distance = 350.0
 turret_rotation_speed = 5.0
@@ -1297,6 +1295,7 @@ wait_time = 2.0
 [connection signal="init_health" from="Health" to="enemyHealth/healthbar" method="init_health"]
 [connection signal="tank_destroyed" from="Health" to="ControlerEnemy" method="_on_tank_destroyed"]
 [connection signal="shoot" from="ControlerEnemy" to="tower" method="shoot"]
+[connection signal="change_rotation_speed" from="EnemyAI" to="." method="change_turn_speed"]
 [connection signal="change_speed" from="EnemyAI" to="." method="change_speed"]
 [connection signal="inputDirectionChanged" from="EnemyAI" to="." method="_on_get_input_input_direction_changed"]
 [connection signal="input_rotation_changed" from="EnemyAI" to="." method="_on_get_rotation_direction_changed"]

@@ -7,6 +7,7 @@ enum states { IDLE, FOLLOWING, CIRCLE, DISTANCE }
 ## Diese Variable enthält die Zeit, wie lange es dauert, bis das Enemy sich in einer bestimmten distanz wieder bewegt
 @onready var raycasts : Array[RayCast2D] = [$unten, $untenRechts, $rechts, $obenRechts, $oben, $obenLinks, $links, $untenLinks]
 @onready var original_speed = $"..".speed
+@onready var original_turn_speed = $"..".turn_speed
 var interest : Array[float] = []
 var time_since_last_change: float = 0.0
 var interest_scale_1 : Array[float] = [4]
@@ -26,6 +27,9 @@ var fov_angle : float = 120.0
 var dist_to_player :float = 0.0
 var target_angle: float = 0.0
 var input_rotation: Vector2 = Vector2.UP
+var rng := RandomNumberGenerator.new()
+var random_point : Vector2 = Vector2.ZERO
+
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var nav_Agent := $"../TracePlayer" as NavigationAgent2D
 @onready var line_of_sight := $"../tower/LineOfSight" as RayCast2D
@@ -47,12 +51,13 @@ var input_rotation: Vector2 = Vector2.UP
 
 # ---- Signale -----
 signal change_speed(new_speed)
+signal change_rotation_speed(new_speed)
 signal inputDirectionChanged(new_input_direction)
 signal input_rotation_changed(new_input_rotation)
 signal shoot
 
 func _ready() -> void:
-	randomize()
+	rng.randomize()
 	interest.resize(raycasts.size())
 	for ray in raycasts:
 		ray.collision_mask = 0b1011
@@ -61,14 +66,13 @@ func _ready() -> void:
 	change_state(states.IDLE)
 	
 	#Setzte ein Random movement Pattern
-	initial_pattern = randi_range(1,3)
+	initial_pattern = rng.randi_range(1,3)
 	
 	print(initial_pattern)
 
 	#Line of sight Init
 	line_of_sight.target_position = Vector2(0, -viewing_distance)
 	
-	print(initial_pattern)
 	change_state(initial_pattern)
 	nav_Agent.set_avoidance_layer_value(1, true)
 	nav_Agent.set_avoidance_mask_value(1, true)
@@ -91,7 +95,6 @@ func _physics_process(delta: float) -> void:
 
 	# Wenn CIRCLE: Winkel inkrementieren
 	if current_state == states.CIRCLE:
-		print((global_position- nav_Agent.target_position).length())
 		if (global_position- nav_Agent.target_position).length() < 200:
 			circle_angle += circle_dir_sign * circle_angular_speed * delta
 		
@@ -113,12 +116,14 @@ func _physics_process(delta: float) -> void:
 		await get_tree().create_timer(0.2).timeout
 		freeze_avoidance_correction = false
 	elif avoidance_vec.length() == 0.0:
-		avoidance_correction = avoidance_correction.lerp(Vector2.ZERO, delta * 5.0)
+		avoidance_correction = avoidance_correction.lerp(Vector2.ZERO, delta)
 
 	# --- NAVIGATION ZIEL ---
 	to_player = player.global_position - global_position
 
 	match current_state:
+		states.IDLE:
+			inputDirectionChanged.emit(((random_point).normalized()  + avoidance_correction).normalized())
 		states.FOLLOWING:
 			#print("Global Pos: ", player.global_position)
 			#print("Offset: ", random_offset)
@@ -147,14 +152,14 @@ func _physics_process(delta: float) -> void:
 	
 	#Enemys sollen langsam aus dem zu nahen Bereich wieder raus
 	if dist_to_player < nearest_player_radius:
-		avoidance_vec = -final_direction
+		change_speed.emit(90)
+		print("yesss")
+	elif dist_to_player > nearest_player_radius and current_state != states.IDLE:
+		change_speed.emit(original_speed)
 
 	# INPUT SIGNAL EMITTEN
 	if current_state != states.IDLE:
-		$"../randomIdleTimer".autostart = false
-		inputDirectionChanged.emit((-final_direction + 5*avoidance_correction).normalized())
-	else:
-		$"../randomIdleTimer".autostart = true
+		inputDirectionChanged.emit((-final_direction + 2*avoidance_correction).normalized())
 		
 	time_since_last_change += delta
 	# Wenn Spieler in Reichweite ist, Turm ausrichten und feuern
@@ -187,12 +192,15 @@ func change_state(new_state: int) -> void:
 func enter_state(state: int) -> void:
 	match state:
 		states.IDLE:
+			change_speed.emit(80)
+			change_rotation_speed.emit(1)
 			$"../randomIdleTimer".start(idle_movement_time)
+			$"../randomIdleTimer".autostart = true
 
 		states.CIRCLE:
 			circle_radius   = 500#(player.global_position - global_position).length()
 			circle_angle    = (global_position - player.global_position).angle()
-			circle_dir_sign = (randi() % 2) * 2 - 1
+			circle_dir_sign = (rng.randi() % 2) * 2 - 1
 
 		states.DISTANCE:
 			# Wunsch-Abstand setzen (kannst du auch dynamisch variieren)
@@ -203,7 +211,10 @@ func exit_state(state: int) -> void:
 	match state:
 		states.IDLE:
 			$"../randomIdleTimer".stop()
+			$"../randomIdleTimer".autostart = false
 			change_speed.emit(original_speed)
+			change_rotation_speed.emit(original_turn_speed)
+			
 		# FOLLOWING, CIRCLE, DISTANCE brauchen hier nichts
 
 	
@@ -234,13 +245,15 @@ func calculate_avoidance_vector(floats_from_rays: Array) -> Vector2:
 
 
 func _on_random_idle_timer_timeout() -> void:
+	randomize()
 	if current_state != states.IDLE:
 		return
-	var offset_x = randi_range(-100, 100)
-	var offset_y = randi_range(-100, 100)
-	var random_point = global_position + Vector2(offset_x, offset_y)
-	inputDirectionChanged.emit(random_point)
-	change_speed.emit(80)
+	var offset_x = rng.randi_range(-100, 100)
+	var offset_y = rng.randi_range(-100, 100)
+	random_point = Vector2(offset_x, offset_y)
+	#print("Global Position: ", global_position)
+	print("Random Point: ", random_point)
+
 
 
 		
@@ -262,16 +275,13 @@ func player_in_line_of_sight() -> bool:
 	var direction_to_player = to_player.normalized()
 	var current_view_direction = Vector2.UP.rotated($"../tower".rotation)
 	var angle_to_player = rad_to_deg(acos(current_view_direction.dot(direction_to_player)))
-	print("in Angle: ", angle_to_player <= fov_angle/2)
 	return angle_to_player <= fov_angle/2
 	
 func should_follow() -> bool:
 	var in_distance = dist_to_player < viewing_distance
-	print("In distance: ", in_distance)
 	var collider = line_of_sight.get_collider()
 	var clear_sight = (collider == player or collider == null)
 	
 	var should_follow = player_in_line_of_sight() and in_distance and clear_sight
-	print("should follow: ", should_follow)
 		
 	return should_follow

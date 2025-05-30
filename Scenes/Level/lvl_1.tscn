@@ -234,3 +234,6 @@ position = Vector2(3010, 574)
 
 [node name="enemy_2" parent="." instance=ExtResource("7_rxcmw")]
 position = Vector2(-907, 593)
+
+[node name="enemy_3" parent="." instance=ExtResource("7_rxcmw")]
+position = Vector2(-510, 821)

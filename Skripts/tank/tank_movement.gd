@@ -136,8 +136,9 @@ func make_track_marks(direction: float):
 	
 
 
-	
-
+func change_turn_speed(new_turn_speed: int) -> void:
+	turn_speed = new_turn_speed
 
 func change_speed(new_speed: Variant) -> void:
 	speed = new_speed
+	print(speed)

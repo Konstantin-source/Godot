@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://3iiqg00rtfrt"]
 
-[ext_resource type="Script" uid="uid://bhltp5mtai7lo" path="res://Scenes/tank/enemy_interest_calculation.gd" id="1_vo4ne"]
+[ext_resource type="Script" uid="uid://bvktdwf14fung" path="res://Skripts/enemy/enemy_interest_calculation.gd" id="1_vo4ne"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_vo4ne")
